@@ -1,0 +1,448 @@
+// LAYER(name,caption,swatch,legend,legendVis,labelField,vis)
+
+var toc = new TOC(' ','All Layers',true,'swatch_layers.gif');
+
+var grpInfo = toc.addGroup( new GROUP('Info',null) );
+		grpInfo.addLayer( new LAYER('Scale','Scalebar','outline_black.gif',null,null,true) );
+		grpInfo.addLayer( new LAYER('Arrow','Arrow','outline_black.gif',null,null,true) );
+
+var grpArtefact = toc.addGroup( new GROUP('Artefact Analysis',true) );
+
+	grpArtefact.addLayer( new LAYER('3','Survey Units') );
+
+	var grpPot = grpArtefact.addGroup( new GROUP('Pottery',null) );
+
+		var grpPeriods = grpPot.addGroup( new GROUP('Periods',null) );
+
+			var grpPotCircles = grpPeriods.addGroup( new GROUP('Circles',null) );
+				grpPotCircles.addLayer( new LAYER('4','All Prehistoric (PrHs)','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('5','All Iron Age (Iron)','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('6','All Hel-Roman (HeRm)','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('7','All Med-Mod (MeMo)','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('8','Prehistoric (Ph) Before 750BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('9','Chalcolithic (Chal) 3900-2600BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('10','Late Chalcolithic/Philia (LChPh) 2700-2500BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('11','Bronze Age (BA) 2600-1050BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('12','Prehistoric BA (PeB) 2600-1650BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('13','Protohistoric BA (PoB) 1650-1050BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('14','Late Bronze Age to Archaic (PoBAr) 1600-475BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('15','Cypro-Geometric to Archaic (GA) 1050-475BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('16','Geom.-Class. (GAC) 1050-312BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('17','Cypro-Archaic (Ar) 750-475BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('18','Cypro-Archaic to Classical (AC) 750-312BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('19','Cypro-Classical (Cl) 475-312BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('20','Classical Hellanistic (CLH) 475-31BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('21','Hellenistic (Hel) 312-31BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('22','Late Hellenistic (LH) 150-31BC','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('23','Hell/Roman (HR) 312BC-AD650','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('24','HER Hell. to E. Roman (HER) 312BC-AD200','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('25','Late He/E. Rm (LHER) 200BC-AD200','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('26','Early Roman (ER) 31BC-AD200','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('27','Roman (Rom) 31BC-AD650','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('28','Mid Roman (MR) 3rd-4th Cen.','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('29','Late Roman (LR) AD400-650','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('30','Roman-Modern (RM) 31BC-Present','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('31','Hist. Antiquity (HA) 750BC-AD650','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('32','Historical (His) 750BC-Present','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('33','Byzantine (Byz) AD650-1191','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('34','Medieval Ut 1 (MedUI) AD L. 12th-L. 14th/E. 15thCen','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('35','Medieval (Med) AD1191-1571','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('36','Medieval to Ottoman (MedOtt) AD1191-1878','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('37','Medieval-Modern (MM) AD1191-Present','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('38','Byz to Medieval (MedB) AD12th-13th Cen.','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('39','Med-Frankish (MedF) AD14th-15thCen.','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('40','Medieval Ut 2 (MedUII) AD15th-mid. 16th Cen.','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('41','Medieval Ut 3 (MedUIII) 15th- End 20th Cen.','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('42','Ottoman (Ott) AD1571-1878','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('43','Ott. to Mod 1 (OttModI) AD1571-begin 20;th Cen.','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('44','Med.-Ven. to E. Ott (MedVOtt) 16-17th Cen.','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('45','Ott. to Mod II (OttModII) AD18th-Mid 20th Cen.','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('46','Modern (Mod) AD1878 - Present','outline_black.gif',null,null,false) );
+				grpPotCircles.addLayer( new LAYER('47','Unknown (Un)','outline_black.gif',null,null,false) );
+
+			var grpPotFills = grpPeriods.addGroup( new GROUP('Fills',null) );
+				grpPotFills.addLayer( new LAYER('48','All Prehistoric (PrHs)','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('49','All Iron Age (Iron)','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('50','All Hel-Roman (HeRm)','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('51','All Med-Mod (MeMo)','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('52','Prehistoric (Ph) Before 750BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('53','Chalcolithic (Chal) 3900-2600BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('54','Late Chalcolithic/Philia (LChPh) 2700-2500BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('55','Bronze Age (BA) 2600-1050BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('56','Prehistoric BA (PeB) 2600-1650BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('57','Protohistoric BA (PoB) 1650-1050BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('58','Late Bronze Age to Archaic (PoBAr) 1600-475BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('59','Cypro-Geometric to Archaic (GA) 1050-475BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('60','Geom.-Class. (GAC) 1050-312BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('61','Cypro-Archaic (Ar) 750-475BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('62','Cypro-Archaic to Classical (AC) 750-312BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('63','Cypro-Classical (Cl) 475-312BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('64','Classical Hellanistic (CLH) 475-31BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('65','Hellenistic (Hel) 312-31BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('66','Late Hellenistic (LH) 150-31BC','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('67','Hell/Roman (HR) 312BC-AD650','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('68','HER Hell. to E. Roman (HER) 312BC-AD200','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('69','Late He/E. Rm (LHER) 200BC-AD200','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('70','Early Roman (ER) 31BC-AD200','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('71','Roman (Rom) 31BC-AD650','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('72','Mid Roman (MR) 3rd-4th Cen.','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('73','Late Roman (LR) AD400-650','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('74','Roman-Modern (RM) 31BC-Present','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('75','Hist. Antiquity (HA) 750BC-AD650','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('76','Historical (His) 750BC-Present','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('77','Byzantine (Byz) AD650-1191','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('78','Medieval Ut 1 (MedUI) AD L. 12th-L. 14th/E. 15thCen','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('79','Medieval (Med) AD1191-1571','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('80','Medieval to Ottoman (MedOtt) AD1191-1878','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('81','Medieval-Modern (MM) AD1191-Present','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('82','Byz to Medieval (MedB) AD12th-13th Cen.','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('83','Med-Frankish (MedF) AD14th-15th Cen.','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('84','Medieval Ut 2 (MedUII) AD15th-mid. 16th Cen.','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('85','Medieval Ut 3 (MedUIII) 15th- End 20th Cen.','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('86','Ottoman (Ott) AD1571-1878','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('87','Ott. to Mod 1 (OttModI) AD1571-begin 20th Cen.','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('88','Med.-Ven. to E. Ott (MedVOtt) 16th-17th Cen.','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('89','Ott. to Mod II (OttModII) AD18th-Mid 20th Cen.','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('90','Modern (Mod) AD1878 - Present','outline_black.gif',null,null,false) );
+				grpPotFills.addLayer( new LAYER('91','Unknown (Un)','outline_black.gif',null,null,false) );
+
+		var grpFunction = grpPot.addGroup( new GROUP('Function',null) );
+
+			var grpHellenistic = grpFunction.addGroup( new GROUP('Funciton Hellenistic',null) );
+				grpHellenistic.addLayer( new LAYER('92','Tableware','outline_black.gif',null,null,false) );
+				grpHellenistic.addLayer( new LAYER('93','Cookingware','outline_black.gif',null,null,false) );
+
+			var grpPrehistoric = grpFunction.addGroup( new GROUP('Prehistoric Function Group',null) );
+				grpPrehistoric.addLayer( new LAYER('94','Tableware','outline_black.gif',null,null,false) );
+				grpPrehistoric.addLayer( new LAYER('95','Cookingware','outline_black.gif',null,null,false) );
+				grpPrehistoric.addLayer( new LAYER('96','Light Utility','outline_black.gif',null,null,false) );
+				grpPrehistoric.addLayer( new LAYER('97','Heavy Utility','outline_black.gif',null,null,false) );
+
+			var grpIronAge = grpFunction.addGroup( new GROUP('Iron Age Function Group',null) );
+				grpIronAge.addLayer( new LAYER('98','Tableware','outline_black.gif',null,null,false) );
+				grpIronAge.addLayer( new LAYER('99','Cookingware','outline_black.gif',null,null,false) );
+				grpIronAge.addLayer( new LAYER('100','Light Utility','outline_black.gif',null,null,false) );
+				grpIronAge.addLayer( new LAYER('101','Heavy Utility','outline_black.gif',null,null,false) );
+				grpIronAge.addLayer( new LAYER('102','Transport','outline_black.gif',null,null,false) );
+				grpIronAge.addLayer( new LAYER('103','Heavy Utility','outline_black.gif',null,null,false) );
+
+			var grpHeRm = grpFunction.addGroup( new GROUP('Hellenistic to Roman Function Group',null) );
+				grpHeRm.addLayer( new LAYER('104','Tableware','outline_black.gif',null,null,false) );
+				grpHeRm.addLayer( new LAYER('105','Cookingware','outline_black.gif',null,null,false) );
+				grpHeRm.addLayer( new LAYER('106','Light Utility','outline_black.gif',null,null,false) );
+				grpHeRm.addLayer( new LAYER('107','Heavy Utility','outline_black.gif',null,null,false) );
+				grpHeRm.addLayer( new LAYER('108','Transport','outline_black.gif',null,null,false) );
+				grpHeRm.addLayer( new LAYER('109','Architectural','outline_black.gif',null,null,false) );
+				grpHeRm.addLayer( new LAYER('110','Heavy Utility','outline_black.gif',null,null,false) );
+
+			var grpMeMo = grpFunction.addGroup( new GROUP('Medieval to Modern Function Group',null) );
+				grpMeMo.addLayer( new LAYER('111','Tableware','outline_black.gif',null,null,false) );
+				grpMeMo.addLayer( new LAYER('112','Cookingware','outline_black.gif',null,null,false) );
+				grpMeMo.addLayer( new LAYER('113','Light Utility','outline_black.gif',null,null,false) );
+				grpMeMo.addLayer( new LAYER('114','Heavy Utility','outline_black.gif',null,null,false) );
+				grpMeMo.addLayer( new LAYER('115','Transport','outline_black.gif',null,null,false) );
+				grpMeMo.addLayer( new LAYER('116','Architectural','outline_black.gif',null,null,false) );
+
+			var grpAll = grpFunction.addGroup( new GROUP('Function All Periods',null) );
+				grpAll.addLayer( new LAYER('117','Tableware','outline_black.gif',null,null,false) );
+				grpAll.addLayer( new LAYER('118','Cookingware','outline_black.gif',null,null,false) );
+				grpAll.addLayer( new LAYER('119','Light Utility','outline_black.gif',null,null,false) );
+				grpAll.addLayer( new LAYER('120','Heavy Utility','outline_black.gif',null,null,false) );
+				grpAll.addLayer( new LAYER('121','Transport','outline_black.gif',null,null,false) );
+				grpAll.addLayer( new LAYER('122','Architectural','outline_black.gif',null,null,false) );
+				grpAll.addLayer( new LAYER('123','Lamps','outline_black.gif',null,null,false) );
+				grpAll.addLayer( new LAYER('124','Unknown','outline_black.gif',null,null,false) );
+				grpAll.addLayer( new LAYER('125','Utility','outline_black.gif',null,null,false) );
+				grpAll.addLayer( new LAYER('126','Personal Objects','outline_black.gif',null,null,false) );
+
+
+		var grpFabrics = grpPot.addGroup( new GROUP('Fabrics',null) );
+
+			grpFabrics.addLayer( new LAYER('337','Pie Chart','outline_black.gif',null,null,false) );
+
+			var grpFabCircles = grpFabrics.addGroup( new GROUP('Circles',null) );
+				grpFabCircles.addLayer( new LAYER('127','Calcareous','outline_black.gif',null,null,false) );
+				grpFabCircles.addLayer( new LAYER('128','Ferrous','outline_black.gif',null,null,false) );
+				grpFabCircles.addLayer( new LAYER('129','Mixed','outline_black.gif',null,null,false) );
+				grpFabCircles.addLayer( new LAYER('130','Self Slipped','outline_black.gif',null,null,false) );
+				grpFabCircles.addLayer( new LAYER('131','Kaolin','outline_black.gif',null,null,false) );
+
+			var grpFabFill = grpFabrics.addGroup( new GROUP('Fill',null) );
+				grpFabFill.addLayer( new LAYER('132','Calcareous','outline_black.gif',null,null,false) );
+				grpFabFill.addLayer( new LAYER('133','Ferrous','outline_black.gif',null,null,false) );
+				grpFabFill.addLayer( new LAYER('134','Mixed','outline_black.gif',null,null,false) );
+				grpFabFill.addLayer( new LAYER('135','Self Slipped','outline_black.gif',null,null,false) );
+				grpFabFill.addLayer( new LAYER('136','Kaolin','outline_black.gif',null,null,false) );
+
+	var grpChpStone = grpArtefact.addGroup( new GROUP('Chipped Stone',null) );
+
+		var grpCores = grpChpStone.addGroup( new GROUP('Cores, Blanks and Debris',null) );
+			grpCores.addLayer( new LAYER('137','Blank Fill','outline_black.gif',null,null,false) );
+			grpCores.addLayer( new LAYER('138','Core Fill','outline_black.gif',null,null,false) );
+			grpCores.addLayer( new LAYER('139','Debris Fill','outline_black.gif',null,null,false) );
+			grpCores.addLayer( new LAYER('140','Blank','outline_black.gif',null,null,false) );
+			grpCores.addLayer( new LAYER('141','Core','outline_black.gif',null,null,false) );
+			grpCores.addLayer( new LAYER('142','Debris','outline_black.gif',null,null,false) );
+			grpCores.addLayer( new LAYER('338','Pie Chart','outline_black.gif',null,null,false) );
+
+		var grpLithicMatCircle = grpChpStone.addGroup( new GROUP('Lithic Material Cricle',null) );
+			grpLithicMatCircle.addLayer( new LAYER('143','Basalt','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('144','Chalcedony','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('145','Chert Non-Lefkara','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('146','Diabase','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('147','Gabbro','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('148','Gypsum','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('149','Harzburgite','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('150','Jasper','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('151','Lapithos Chert','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('152','Lefkara - Basal','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('153','Lefkara - Dense Translucent','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('154','Lefkara - Translucent','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('155','Mamonina','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('156','White Marble','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('157','Micro-gabbro','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('158','Moni','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('159','Obsidian','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('160','Picrolite','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('161','Proxyine Andesite','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('162','Sandstone','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('163','Silicified Umber','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('164','Translucent','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('165','Umber','outline_black.gif',null,null,false) );
+			grpLithicMatCircle.addLayer( new LAYER('166','Vasicular Basalt','outline_black.gif',null,null,false) );
+
+		var grpLithicMatFill = grpChpStone.addGroup( new GROUP('Lithic Material Fill',null) );
+			grpLithicMatFill.addLayer( new LAYER('167','Basalt','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('168','Chalcedony','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('169','Chert Non-Lefkara','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('170','Diabase','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('171','Gabbro','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('172','Gypsum','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('173','Harzburgite','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('174','Jasper','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('175','Lapithos Chert','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('176','Lefkara - Basal','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('177','Lefkara - Dense Translucent','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('178','Lefkara - Translucent','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('179','Mamonina','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('180','White Marble','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('181','Micro-gabbro','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('182','Moni','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('183','Obsidian','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('184','Picrolite','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('185','Proxyine Andesite','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('186','Sandstone','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('187','Silicified Umber','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('188','Translucent','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('189','Umber','outline_black.gif',null,null,false) );
+			grpLithicMatFill.addLayer( new LAYER('190','Vasicular Basalt','outline_black.gif',null,null,false) );
+
+		var grpToolTypeDen = grpChpStone.addGroup( new GROUP('Tool Type Densities',null) );
+			grpToolTypeDen.addLayer( new LAYER('339','Tool Pie Chart','outline_black.gif',null,null,false) );
+			grpToolTypeDen.addLayer( new LAYER('191','Flaked Circles','outline_black.gif',null,null,false) );
+			grpToolTypeDen.addLayer( new LAYER('192','Flaked Fill','outline_black.gif',null,null,false) );
+			grpToolTypeDen.addLayer( new LAYER('193','Dhoukani Fill','outline_black.gif',null,null,false) );
+			grpToolTypeDen.addLayer( new LAYER('194','Dhoukani Circles','outline_black.gif',null,null,false) );
+			grpToolTypeDen.addLayer( new LAYER('195','Utilised Fill','outline_black.gif',null,null,false) );
+			grpToolTypeDen.addLayer( new LAYER('196','Utilised Circles','outline_black.gif',null,null,false) );
+
+		var grpToolTypeCount = grpChpStone.addGroup( new GROUP('Tool Type Counts',null) );
+			grpToolTypeCount.addLayer( new LAYER('340','Pie Chart','outline_black.gif',null,null,false) );
+			grpToolTypeCount.addLayer( new LAYER('197','Dhoukani','outline_black.gif',null,null,false) );
+			grpToolTypeCount.addLayer( new LAYER('198','Flaked','outline_black.gif',null,null,false) );
+			grpToolTypeCount.addLayer( new LAYER('199','Utilised','outline_black.gif',null,null,false) );
+
+		var grpDhoukaniVs = grpChpStone.addGroup( new GROUP('Dhoukani Vs Non Dhoukani',null) );
+			grpDhoukaniVs.addLayer( new LAYER('341','Pie Chart Count','outline_black.gif',null,null,false) );
+			grpDhoukaniVs.addLayer( new LAYER('200','Non Dhoukani Count','outline_black.gif',null,null,false) );
+			grpDhoukaniVs.addLayer( new LAYER('201','Non Dhoukani Fill','outline_black.gif',null,null,false) );
+			grpDhoukaniVs.addLayer( new LAYER('202','Non Dhoukani','outline_black.gif',null,null,false) );
+			grpDhoukaniVs.addLayer( new LAYER('342','Pie Chart Density','outline_black.gif',null,null,false) );
+
+		grpChpStone.addLayer( new LAYER('343','Dhoukani Material Pie Chart','outline_black.gif',null,null,false) );
+
+	var grpGrdStone = grpArtefact.addGroup( new GROUP('Ground Stone', null) );
+
+		var grpCutDensity = grpGrdStone.addGroup( new GROUP('Cut/Gri/Pou/Ves Density', null) );
+			grpCutDensity.addLayer( new LAYER('344','Pie Chart','outline_black.gif',null,null,false) );
+			grpCutDensity.addLayer( new LAYER('203','Cutting Fills','outline_black.gif',null,null,false) );
+			grpCutDensity.addLayer( new LAYER('204','Grinding Fills','outline_black.gif',null,null,false) );
+			grpCutDensity.addLayer( new LAYER('205','Pounding Fills','outline_black.gif',null,null,false) );
+
+		var grpCutCount = grpGrdStone.addGroup( new GROUP('Cut/Gri/Pou/Ves Count',null) );
+			grpCutCount.addLayer( new LAYER('206','Cutting','outline_black.gif',null,null,false) );
+			grpCutCount.addLayer( new LAYER('207','Pounding','outline_black.gif',null,null,false) );
+			grpCutCount.addLayer( new LAYER('208','Grinding','outline_black.gif',null,null,false) );
+			grpCutCount.addLayer( new LAYER('345','Pie Chart','outline_black.gif',null,null,false) );
+
+	var grpOtherArt = grpArtefact.addGroup( new GROUP('Other Artefacts',null) );
+		grpOtherArt.addLayer( new LAYER('209','Tile Density Cirlces','outline_black.gif',null,null,false) );
+		grpOtherArt.addLayer( new LAYER('210','Tile Density Fills','outline_black.gif',null,null,false) );
+		grpOtherArt.addLayer( new LAYER('211','Tile Count','outline_black.gif',null,null,false) );
+		grpOtherArt.addLayer( new LAYER('212','Cartridge Density','outline_black.gif',null,null,false) );
+		grpOtherArt.addLayer( new LAYER('213','Cartirdge Density Fill','outline_black.gif',null,null,false) );
+		grpOtherArt.addLayer( new LAYER('214','Cartridge Count','outline_black.gif',null,null,false) );
+		grpOtherArt.addLayer( new LAYER('215','Slag Density Cirlces','outline_black.gif',null,null,false) );
+		grpOtherArt.addLayer( new LAYER('216','Slag Density Fills','outline_black.gif',null,null,false) );
+		grpOtherArt.addLayer( new LAYER('217','Slag Count','outline_black.gif',null,null,false) );
+
+
+var grpGeomorph = toc.addGroup( new GROUP('Geomorphological',true) );
+	grpGeomorph.addLayer( new LAYER('218','Geomorphological Units','outline_black.gif',null,null,false) );
+	grpGeomorph.addLayer( new LAYER('350','Morphostrat Mining Tails','outline_black.gif',null,null,false) );
+	grpGeomorph.addLayer( new LAYER('219','Soil Texture','outline_black.gif',null,null,false) );
+	grpGeomorph.addLayer( new LAYER('220','Erosion','outline_black.gif',null,null,false) );
+	grpGeomorph.addLayer( new LAYER('221','Surface Stability','outline_black.gif',null,null,false) );
+	grpGeomorph.addLayer( new LAYER('222','Surface Cover','outline_black.gif',null,null,false) );
+	grpGeomorph.addLayer( new LAYER('223','Land Use','outline_black.gif',null,null,false) );
+	grpGeomorph.addLayer( new LAYER('224','Substratum','outline_black.gif',null,null,false) );
+
+
+toc.addLayer( new LAYER('225','SIA','outline_black.gif',null,null,false) );
+
+var grpPOSI = toc.addGroup( new GROUP('POSI',null) );
+	grpPOSI.addLayer( new LAYER('226','All POSIs','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('227','Settlement','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('228','Church','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('229','Building','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('230','Bridge','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('231','Check Dam','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('232','Threshing Floors','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('233','Tombs','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('234','Kiln','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('235','Other Structures','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('236','Rock Pile','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('237','Mine/Adit','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('238','Botany','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('239','Road/Path','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('240','Pottery Scatter','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('241','Lithics Scatter','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('242','View','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('243','Geomorphology','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('244','Prehistoric','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('245','Iron Age','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('246','Hellenistic to Roman','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('247','Medieval to Ottoman','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('248','Modern','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('249','Slag/Slag Heap','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('250','Shrine/Sanctuary','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('251','Resource Extraction','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('346','Hellenistic to Roman Settlements','outline_black.gif',null,null,false) );
+	grpPOSI.addLayer( new LAYER('347','Hellensitic to Roman Mining','outline_black.gif',null,null,false) );
+
+
+var grpBU = toc.addGroup( new GROUP('BU',null) );
+	grpBU.addLayer( new LAYER('252','All BUs','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('253','Bridge','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('254','Church','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('255','Deimma','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('256','Hammam or Bath House','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('257','Isolated House','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('258','Khan','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('259','Lime Kiln','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('260','Other Agricultural Structure','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('261','Other Structure','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('262','School','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('263','Seasonal House','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('264','Shrine','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('265','Village House','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('266','Water Channel','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('267','Water Mill','outline_black.gif',null,null,false) );
+	grpBU.addLayer( new LAYER('268','Weir','outline_black.gif',null,null,false) );
+
+toc.addLayer( new LAYER('269','VILLAGE250','outline_black.gif',null,null,false) );
+
+toc.addLayer( new LAYER('270','Panorama','outline_black.gif',null,null,false) );
+
+var grpBoundaries = toc.addGroup( new GROUP('Boundaries',true) );
+	grpBoundaries.addLayer( new LAYER('271','SurvArea','outline_black.gif',null,null,true) );
+	grpBoundaries.addLayer( new LAYER('272','ISZ','outline_black.gif',null,null,true) );
+	grpBoundaries.addLayer( new LAYER('273','greenline','outline_black.gif',null,null,true) );
+
+var grpHydro = toc.addGroup( new GROUP('Hydrology',false) );
+	grpHydro.addLayer( new LAYER('274','hydrology','outline_black.gif',null,null,false) );
+	grpHydro.addLayer( new LAYER('275','hydrology','outline_black.gif',null,null,false) );
+	grpHydro.addLayer( new LAYER('276','hydrology','outline_black.gif',null,null,false) );
+	grpHydro.addLayer( new LAYER('277','hydrology','outline_black.gif',null,null,false) );
+
+toc.addLayer( new LAYER('278','10mContour','contours.gif',null,null,false) );
+
+ toc.addLayer( new LAYER('279','TAESPaerials','outline_black.gif',null,null,false) );
+
+toc.addLayer( new LAYER('280','Transects','outline_black.gif',null,null,false) );
+
+
+var grpAerials = toc.addGroup( new GROUP('Aerials',true) );
+	var grpKoutraphas = grpAerials.addGroup( new GROUP('Koutraphas',null) );
+		grpKoutraphas.addLayer( new LAYER('281','5020b','outline_black.gif',null,null,false) );
+		grpKoutraphas.addLayer( new LAYER('282','4980b','outline_black.gif',null,null,false) );
+		grpKoutraphas.addLayer( new LAYER('283','5020c','outline_black.gif',null,null,false) );
+		grpKoutraphas.addLayer( new LAYER('284','4990b','outline_black.gif',null,null,false) );
+		grpKoutraphas.addLayer( new LAYER('285','4990c','outline_black.gif',null,null,false) );
+		grpKoutraphas.addLayer( new LAYER('286','5010c','outline_black.gif',null,null,false) );
+		grpKoutraphas.addLayer( new LAYER('287','5010b','outline_black.gif',null,null,false) );
+		grpKoutraphas.addLayer( new LAYER('288','5000c','outline_black.gif',null,null,false) );
+		grpKoutraphas.addLayer( new LAYER('289','5000b','outline_black.gif',null,null,false) );
+	var grpKarkotis = grpAerials.addGroup( new GROUP('Karkotis ISZ',null) );
+		grpKarkotis.addLayer( new LAYER('290','4900d','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('291','4900e','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('292','4900f','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('293','4900g','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('294','4900h','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('295','4910f','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('296','4900c','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('297','4910g','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('371','4890c','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('298','4890d','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('299','4890e','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('300','4890f','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('301','4890g','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('302','4890h','outline_black.gif',null,null,false) );
+		grpKarkotis.addLayer( new LAYER('303','4910h','outline_black.gif',null,null,false) );
+	var grpAtsas = grpAerials.addGroup( new GROUP('Atsas ISZ',null) );
+		grpAtsas.addLayer( new LAYER('304','4910d','outline_black.gif',null,null,false) );
+		grpAtsas.addLayer( new LAYER('305','4910e','outline_black.gif',null,null,false) );
+		grpAtsas.addLayer( new LAYER('306','4920c','outline_black.gif',null,null,false) );
+		grpAtsas.addLayer( new LAYER('307','4920d','outline_black.gif',null,null,false) );
+		grpAtsas.addLayer( new LAYER('308','4920e','outline_black.gif',null,null,false) );
+		grpAtsas.addLayer( new LAYER('309','4930d','outline_black.gif',null,null,false) );
+		grpAtsas.addLayer( new LAYER('310','4930e','outline_black.gif',null,null,false) );
+		grpAtsas.addLayer( new LAYER('311','4930f','outline_black.gif',null,null,false) );
+	var grpMandres = grpAerials.addGroup( new GROUP('Mandres ISZ',null) );
+		grpMandres.addLayer( new LAYER('312','4970d','outline_black.gif',null,null,false) );
+		grpMandres.addLayer( new LAYER('313','4970e','outline_black.gif',null,null,false) );
+		grpMandres.addLayer( new LAYER('314','4960e','outline_black.gif',null,null,false) );
+		grpMandres.addLayer( new LAYER('315','4960d','outline_black.gif',null,null,false) );
+		grpMandres.addLayer( new LAYER('316','4950e','outline_black.gif',null,null,false) );
+		grpMandres.addLayer( new LAYER('317','4950f','outline_black.gif',null,null,false) );
+	var grpLagoudhera = grpAerials.addGroup( new GROUP('Lagoudhera ISZ',null) );
+		grpLagoudhera.addLayer( new LAYER('318','5030h','outline_black.gif',null,null,false) );
+		grpLagoudhera.addLayer( new LAYER('319','5030i','outline_black.gif',null,null,false) );
+		grpLagoudhera.addLayer( new LAYER('320','5030j','outline_black.gif',null,null,false) );
+		grpLagoudhera.addLayer( new LAYER('321','5030g','outline_black.gif',null,null,false) );
+		grpLagoudhera.addLayer( new LAYER('322','5020k','outline_black.gif',null,null,false) );
+		grpLagoudhera.addLayer( new LAYER('323','5020j','outline_black.gif',null,null,false) );
+		grpLagoudhera.addLayer( new LAYER('324','5040j','outline_black.gif',null,null,false) );
+		grpLagoudhera.addLayer( new LAYER('325','5040i','outline_black.gif',null,null,false) );
+		grpLagoudhera.addLayer( new LAYER('326','5040h','outline_black.gif',null,null,false) );
+		grpLagoudhera.addLayer( new LAYER('327','5040g','outline_black.gif',null,null,false) );
+	var grpAsinou = grpAerials.addGroup( new GROUP('Asinou ISZ',null) );
+		grpAsinou.addLayer( new LAYER('328','4960i','outline_black.gif',null,null,false) );
+		grpAsinou.addLayer( new LAYER('329','4970h','outline_black.gif',null,null,false) );
+		grpAsinou.addLayer( new LAYER('330','4970i','outline_black.gif',null,null,false) );
+		grpAsinou.addLayer( new LAYER('331','4980i','outline_black.gif',null,null,false) );
+		grpAsinou.addLayer( new LAYER('332','4980h','outline_black.gif',null,null,false) );
+
+ var grpBackground = toc.addGroup( new GROUP('Background Map DEM',null) );
+//	grpBackground.addLayer( new LAYER('333','dem_20m','outline_black.gif',null,null,false) );
+//	grpBackground.addLayer( new LAYER('334','hillshade','outline_black.gif',null,null,false) );
+	grpBackground.addLayer( new LAYER('385','dem.tif','outline_black.gif',null,null,false) );
+	grpBackground.addLayer( new LAYER('384','hillshade.tif','outline_black.gif',null,null,false) );
+
+
+toc.addLayer( new LAYER('335','Above400m','outline_black.gif',null,null,false) );
+toc.addLayer( new LAYER('336','Coastline','outline_black.gif',null,null,false) );
+
+
+var iActiveLayerName = 'customers';
+var iCustomExtent = '483614.7066,3868864.3977,508172.7897,3889177.8738';

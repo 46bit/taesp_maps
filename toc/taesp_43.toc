@@ -1,0 +1,37 @@
+var toc = new TOC(' ','All Layers',true,'swatch_layers.gif');
+
+var grpInfo = toc.addGroup( new GROUP('Info',false) );
+		grpInfo.addLayer( new LAYER('Scale','Scalebar','../icon_layer.gif',null,null,null,true) );	
+		grpInfo.addLayer( new LAYER('Arrow','Arrow','../icon_layer.gif',null,null,null,true) );
+
+var grpArtefact = toc.addGroup( new GROUP('Artefact Analysis',true) );
+	grpArtefact.addLayer( new LAYER('3','Survey Units','surveyunits.gif',null,null,null,true) );
+	grpArtefact.addLayer( new LAYER('54','Late Chalcolithic/Philia 2700-2500BC (per 10m<sup>2</sup>)','showlegend.gif','LChPh-fill.gif',true,null,true) );
+
+var grpPOSI = toc.addGroup( new GROUP('POSI',true) );
+	grpPOSI.addLayer( new LAYER('244','Prehistoric','posi.gif',null,null,null,true) );
+
+var grpBoundaries = toc.addGroup( new GROUP('Boundaries',false) );
+	grpBoundaries.addLayer( new LAYER('271','SurvArea','boundary.gif',null,null,null,true) );
+	grpBoundaries.addLayer( new LAYER('272','ISZ','isz.gif',null,null,null,true) );
+	grpBoundaries.addLayer( new LAYER('273','greenline','greenline.gif',null,null,null,true) );
+
+var grpHydro = toc.addGroup( new GROUP('Hydrology',false) );
+	grpHydro.addLayer( new LAYER('274','hydrology','hydrology.gif',null,null,null,true) );
+	grpHydro.addLayer( new LAYER('275','hydrology','hydrology.gif',null,null,null,true) );
+	grpHydro.addLayer( new LAYER('276','hydrology','hydrology.gif',null,null,null,true) );
+	grpHydro.addLayer( new LAYER('277','hydrology','hydrology.gif',null,null,null,true) );
+
+var grpAerials = toc.addGroup( new GROUP('Aerial Photos',false) );
+	grpAerials.addLayer( new LAYER('293','4900g','aps.gif',null,null,null,false) );
+ 	grpAerials.addLayer( new LAYER('279','TAESPaerials','aerialGrid.gif',null,null,null,false) );
+
+ var grpBackground = toc.addGroup( new GROUP('Background Map DEM',false) );
+	grpBackground.addLayer( new LAYER('392','DEM','dem.gif',null,null,null,true) );
+	grpBackground.addLayer( new LAYER('391','Hillshade','hillshade.gif',null,null,null,true) );
+
+
+var iActiveLayerName = '54';
+var iCustomExtent = '489422.780901991,3879309.14655801,490060.021078094,3879775.01032944';
+
+// Original  489582.780901991,3879309.14655801,490060.021078094,3879775.01032944

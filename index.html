@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="deps/ol-3.6.0.css" type="text/css">
+  <link rel="stylesheet" href="deps/ol3-layerswitcher.css" type="text/css">
+  <style>
+  body {
+    background: #eee;
+  }
+  #map {
+    width: 1300px;
+    height: 900px;
+  }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="info"></div>
+  <script src="deps/polyfills.js"></script>
+  <script src="deps/jquery-1.11.3.min.js"></script>
+  <script src="deps/proj4-2.3.3.js"></script>
+  <script src="deps/ol-debug-3.6.0.js"></script>
+  <script src="deps/ol3-layerswitcher.js"></script>
+  <script src="deps/toc2json/api_openlayers.js"></script>
+  <script src="toc/taesp_155.toc" type="text/javascript"></script>
+  <script>
+  function pad(num, size) {
+    var s = "000000000" + num;
+    return s.substr(s.length-size);
+  }
+
+  var geoserver_url = "http://localhost:8080/geoserver"
+
+  var toc_source_constructor = function toc_source_constructor(layer_code) {
+    return new ol.source.ImageWMS({
+      url: geoserver_url + "/wms",
+      serverType: "geoserver",
+      crossOrigin: "",
+      params: {
+        LAYERS: "taesp_ahrc_2007:level" + pad(parseInt(layer_code, 10), 3),
+        CRS: "EPSG:900913",
+        FORMAT: "image/png"
+      }
+    })
+  }
+
+  var bounds, view, layers, group, map, layer_switcher;
+
+  $(window).ready(function () {
+    proj4.defs("EPSG:32636", "+proj=utm +zone=36 +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
+    var taesp2map_transform = proj4("EPSG:32636", "EPSG:900913")
+
+    var taesp_dimensions = [[485119.5625, 506999.5625], [3870137.5, 3887717.5]]
+    var taesp_center = taesp_dimensions.map(function (min_max) {
+      return (min_max[1] - min_max[0]) / 2 + min_max[0]
+    })
+
+    // tl, bl, br, tr
+    bounds = new ol.geom.Polygon([[
+      taesp2map_transform.forward([485119.5625, 3870137.5]),
+      taesp2map_transform.forward([485119.5625, 3887717.5]),
+      taesp2map_transform.forward([506999.5625, 3887717.5]),
+      taesp2map_transform.forward([506999.5625, 3870137.5])
+    ]])
+
+    view = new ol.View({
+      center: bounds.getInteriorPoint().flatCoordinates,
+      zoom: 12
+    })
+    layers = toc.asOpenLayers(toc_source_constructor)
+    group = new ol.layer.Group({
+      title: "Map",
+      layers: layers
+    })
+    map = new ol.Map({
+      target: 'map',
+      layers: [group],
+      view: view
+    })
+
+    layer_switcher = new ol.control.LayerSwitcher({
+      tipLabel: "Legend"
+    })
+    map.addControl(layer_switcher)
+    layer_switcher.renderPanel()
+
+    /*map.on("singleclick", function (evt) {
+      document.getElementById("info").innerHTML = "";
+      var viewResolution = view.getResolution()
+      var url = wms_source.getGetFeatureInfoUrl(
+        evt.coordinate,
+        viewResolution,
+        "EPSG:900913",
+        {"INFO_FORMAT": "text/html"}
+      )
+      if (url) {
+        document.getElementById("info").innerHTML =
+          "<iframe seamless src='" + url + "'></iframe>"
+      }
+    })*/
+  })
+  </script>
+</body>
+</html>

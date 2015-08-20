@@ -1,0 +1,39 @@
+var toc = new TOC(' ','All Layers',true,'swatch_layers.gif');
+
+var grpInfo = toc.addGroup( new GROUP('Info',false) );
+		grpInfo.addLayer( new LAYER('Scale','Scalebar','../icon_layer.gif',null,null,null,true) );	
+		grpInfo.addLayer( new LAYER('Arrow','Arrow','../icon_layer.gif',null,null,null,true) );
+
+var grpArtefact = toc.addGroup( new GROUP('Artefact Analysis',true) );
+	grpArtefact.addLayer( new LAYER('3','Survey Units','surveyunits.gif',null,null,null,true) );
+	grpArtefact.addLayer( new LAYER('26','Early Roman 31BC-AD200 (per 10m<sup>2</sup>)','showlegend.gif','ER-circle.gif',false,null,false) );
+
+var grpPOSI = toc.addGroup( new GROUP('POSI',true) );
+	grpPOSI.addLayer( new LAYER('246','Hellenistic to Roman','posi.gif',null,null,null,true) );
+
+var grpBoundaries = toc.addGroup( new GROUP('Boundaries',false) );
+	grpBoundaries.addLayer( new LAYER('271','SurvArea','boundary.gif',null,null,null,true) );
+	grpBoundaries.addLayer( new LAYER('272','ISZ','isz.gif',null,null,null,true) );
+	grpBoundaries.addLayer( new LAYER('273','greenline','greenline.gif',null,null,null,true) );
+
+var grpHydro = toc.addGroup( new GROUP('Hydrology',false) );
+	grpHydro.addLayer( new LAYER('274','hydrology','hydrology.gif',null,null,null,true) );
+	grpHydro.addLayer( new LAYER('275','hydrology','hydrology.gif',null,null,null,true) );
+	grpHydro.addLayer( new LAYER('276','hydrology','hydrology.gif',null,null,null,true) );
+	grpHydro.addLayer( new LAYER('277','hydrology','hydrology.gif',null,null,null,true) );
+
+var grpAerials = toc.addGroup( new GROUP('Aerials',false) );
+	grpAerials.addLayer( new LAYER('290','4900d','aps.gif',null,null,null,false) );	
+	grpAerials.addLayer( new LAYER('296','4900c','aps.gif',null,null,null,false) );
+	grpAerials.addLayer( new LAYER('371','4890c','aps.gif',null,null,null,false) );
+	grpAerials.addLayer( new LAYER('298','4890d','aps.gif',null,null,null,false) );
+	grpAerials.addLayer( new LAYER('304','4910d','aps.gif',null,null,null,false) );
+	grpAerials.addLayer( new LAYER('279','TAESPaerials','aerialGrid.gif',null,null,null,false) );
+
+ var grpBackground = toc.addGroup( new GROUP('Background Map DEM',false) );
+	grpBackground.addLayer( new LAYER('370','DEM','dem.gif',null,null,null,true) );
+	grpBackground.addLayer( new LAYER('369','Hillshade','hillshade.gif',null,null,null,true) );
+
+
+var iActiveLayerName = '70';
+var iCustomExtent = '488402.219110624,3882123.17559309,490820.004814771,3884483.32635793';

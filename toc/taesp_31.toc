@@ -1,0 +1,13 @@
+var toc = new TOC(' ','All Layers',true,'swatch_layers.gif');
+
+var grpInfo = toc.addGroup( new GROUP('Info',null) );
+		grpInfo.addLayer( new LAYER('Scale','Scalebar','outline_black.gif',null,null,true) );	
+		grpInfo.addLayer( new LAYER('Arrow','Arrow','outline_black.gif',null,null,true) );
+
+var grpArtefact = toc.addGroup( new GROUP('Artefact Analysis',true) );
+	grpArtefact.addLayer( new LAYER('3','Survey Units') );
+	grpArtefact.addLayer( new LAYER('4','All Prehistoric (PrHs)','outline_black.gif',null,null,false) );
+			
+
+var iActiveLayerName = '4';
+var iCustomExtent = '486840.501533665,3878321.94204552,492751.011078465,3884091.55744146';
