@@ -56,7 +56,6 @@ var GROUP = (function () {
         mapped.push(olLayerOrGroup)
       }
     }
-    mapped.reverse()
     var olGroup = new ol.layer.Group({
       title: this.name,
       layers: mapped
