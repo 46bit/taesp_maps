@@ -44,11 +44,16 @@
   for (i in query_parts) {
     var query_part_kv = query_parts[i].split("=")
     console.log(query_part_kv)
-    if (query_part_kv[0] == "footnote") {
-      footnote = query_part_kv[1]
-    }
-    if (query_part_kv[0] in ["ceminx", "ceminy", "cemaxx", "cemaxy"]) {
-      ce[query_part_kv[0]] = query_part_kv[1]
+    switch (query_part_kv[0]) {
+      case "footnote":
+        footnote = query_part_kv[1]
+        break
+      case "ceminx":
+      case "ceminy":
+      case "cemaxx":
+      case "cemaxy":
+        ce[query_part_kv[0]] = query_part_kv[1]
+        break
     }
   }
   map_load(footnote, ce)
@@ -85,7 +90,7 @@
   proj4.defs("EPSG:4038", 'PROJCS["WGS 84 / TMzn36N", GEOGCS["WGS 84", DATUM["World Geodetic System 1984", SPHEROID["WGS 84", 6378137.0, 298.257223563, AUTHORITY["EPSG","7030"]], AUTHORITY["EPSG","6326"]], PRIMEM["Greenwich", 0.0, AUTHORITY["EPSG","8901"]], UNIT["degree", 0.017453292519943295], AXIS["Geodetic longitude", EAST], AXIS["Geodetic latitude", NORTH], AUTHORITY["EPSG","4326"]], PROJECTION["Transverse Mercator", AUTHORITY["EPSG","9807"]], PARAMETER["central_meridian", 33.0], PARAMETER["latitude_of_origin", 0.0], PARAMETER["scale_factor", 0.9996], PARAMETER["false_easting", 500000.0], PARAMETER["false_northing", 0.0], UNIT["m", 1.0], AXIS["Easting", EAST], AXIS["Northing", NORTH], AUTHORITY["EPSG","4038"]]')
   var taesp2map_transform = proj4("EPSG:4038", "EPSG:900913")
 
-  var bounds, view, layers, group, map, layer_switcher;
+  var bounds, view, layers, group, map, layer_switcher, overview;
 
   function map_display(ce) {
     // tl, bl, br, tr
@@ -108,14 +113,15 @@
     map = new ol.Map({
       target: 'map',
       layers: [group],
-      view: view
+      view: view,
+      controls: ol.control.defaults().extend([
+        new ol.control.LayerSwitcher({
+          tipLabel: "Legend"
+        }),
+        new ol.control.OverviewMap()
+      ])
     })
-
-    layer_switcher = new ol.control.LayerSwitcher({
-      tipLabel: "Legend"
-    })
-    map.addControl(layer_switcher)
-    layer_switcher.renderPanel()
+    view.fitGeometry(bounds, map.getSize(), {padding: [10, 10, 10, 10]})
 
     /*map.on("singleclick", function (evt) {
       document.getElementById("info").innerHTML = "";
