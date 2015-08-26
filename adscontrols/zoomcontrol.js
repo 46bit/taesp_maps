@@ -43,8 +43,7 @@ adscontrols.Zoom = function(opt_options) {
     this.blur();
   }, false);
 
-  var cssClasses = className + ' ' + ol.css.CLASS_UNSELECTABLE + ' ' +
-      ol.css.CLASS_CONTROL;
+  var cssClasses = className + ' ' + ol.css.CLASS_UNSELECTABLE + ' control';
   var element = goog.dom.createDom(goog.dom.TagName.DIV, cssClasses, inElement,
       outElement);
 

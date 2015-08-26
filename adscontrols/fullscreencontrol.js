@@ -44,7 +44,7 @@ adscontrols.FullScreen = function(opt_options) {
       this.handleFullScreenChange_, false, this);
 
   var cssClasses = this.cssClassName_ + ' ' + ol.css.CLASS_UNSELECTABLE +
-      ' ' + ol.css.CLASS_CONTROL + ' ' +
+      ' control ' +
       (!goog.dom.fullscreen.isSupported() ? ol.css.CLASS_UNSUPPORTED : '');
   var element = goog.dom.createDom(goog.dom.TagName.DIV, cssClasses, button);
 

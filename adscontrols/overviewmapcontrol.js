@@ -100,8 +100,7 @@ adscontrols.OverviewMap = function(opt_options) {
   });
   this.ovmap_.addOverlay(this.boxOverlay_);
 
-  var cssClasses = className + ' ' + ol.css.CLASS_UNSELECTABLE + ' ' +
-      ol.css.CLASS_CONTROL +
+  var cssClasses = className + ' ' + ol.css.CLASS_UNSELECTABLE + ' control ' +
       (this.collapsed_ && this.collapsible_ ? ' ol-collapsed' : '') +
       (this.collapsible_ ? '' : ' ol-uncollapsible');
   var element = goog.dom.createDom(goog.dom.TagName.DIV,

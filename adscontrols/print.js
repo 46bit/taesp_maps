@@ -29,7 +29,7 @@ adscontrols.Print = function(opt_options) {
   goog.events.listen(button, goog.events.EventType.CLICK,
       this.handleClick_, false, this);
 
-  var element = goog.dom.createDom(goog.dom.TagName.DIV, "ol-control", button);
+  var element = goog.dom.createDom(goog.dom.TagName.DIV, "control", button);
 
   goog.base(this, {
     element: element,
