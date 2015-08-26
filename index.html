@@ -28,6 +28,8 @@
   <script>
     window.adscontrols = {}
   </script>
+  <script src="adscontrols/toolbar.js"></script>
+  <script src="adscontrols/print.js"></script>
   <script src="adscontrols/fullscreencontrol.js"></script>
   <script src="adscontrols/overviewmapcontrol.js"></script>
   <script src="adscontrols/scalelinecontrol.js"></script>
@@ -109,6 +111,8 @@
       taesp2map_transform.forward([ce["cemaxx"], ce["ceminy"]])
     ]])
 
+    var toolbar = new adscontrols.Toolbar()
+
     view = new ol.View({
       center: bounds.getInteriorPoint().flatCoordinates,
       zoom: 13
@@ -123,10 +127,12 @@
       layers: [group],
       view: view,
       controls: new ol.Collection([
-        new adscontrols.Zoom({zoomInLabel: "\uf067", zoomOutLabel: "\uf068"}),
-        new adscontrols.FullScreen({label: "\uf0b2"}),
+        toolbar,
+        new adscontrols.Zoom({target: toolbar.element, zoomInLabel: "\uf067", zoomOutLabel: "\uf068"}),
+        new adscontrols.FullScreen({target: toolbar.element, label: "\uf0b2"}),
         new ol.control.LayerSwitcher(),
-        new adscontrols.OverviewMap({label: "\uf02f"}),
+        new adscontrols.Print({target: toolbar.element, label: "\uf02f"}),
+        new adscontrols.OverviewMap(),
         new adscontrols.ScaleLine()
       ])
     })
