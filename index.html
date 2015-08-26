@@ -3,6 +3,7 @@
 <head>
   <link rel="stylesheet" href="deps/ol-3.6.0.css" type="text/css">
   <link rel="stylesheet" href="deps/ol3-layerswitcher.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <style>
   body {
     background: #ccc;
@@ -20,12 +21,18 @@
   <script src="deps/polyfills.js"></script>
   <script src="deps/jquery-1.11.3.min.js"></script>
   <script src="deps/proj4-2.3.3.js"></script>
-  <script src="deps/ol-debug-3.6.0.js"></script>
+  <script src="deps/ol-3.8.2-debug.js"></script>
   <script src="deps/ol3-layerswitcher.js"></script>
   <script src="deps/uri.min.js"></script>
   <script src="deps/toc2json/api_openlayers.js"></script>
+  <script>
+    window.adscontrols = {}
+  </script>
+  <script src="adscontrols/fullscreencontrol.js"></script>
+  <script src="adscontrols/overviewmapcontrol.js"></script>
+  <script src="adscontrols/scalelinecontrol.js"></script>
+  <script src="adscontrols/zoomcontrol.js"></script>
 
-  <script src="toc/taesp_155.toc" type="text/javascript"></script>
   <script>
   function pad(num, size) {
     var s = "000000000" + num;
@@ -71,7 +78,7 @@
       // @TODO: Check file existed, etc. Also protect against malicious toc_footnote
       //        (for sake of thoroughness). Directory traversal main issue.
       eval(toc_js)
-      map_display(ce)
+      map_display(ce, toc)
     })
   }
 
@@ -93,7 +100,7 @@
 
   var bounds, view, layers, group, map, layer_switcher, overview;
 
-  function map_display(ce) {
+  function map_display(ce, toc) {
     // tl, bl, br, tr
     bounds = new ol.geom.Polygon([[
       taesp2map_transform.forward([ce["ceminx"], ce["ceminy"]]),
@@ -115,14 +122,15 @@
       target: 'map',
       layers: [group],
       view: view,
-      controls: ol.control.defaults().extend([
-        new ol.control.LayerSwitcher({
-          tipLabel: "Legend"
-        }),
-        new ol.control.OverviewMap()
+      controls: new ol.Collection([
+        new adscontrols.Zoom({zoomInLabel: "\uf067", zoomOutLabel: "\uf068"}),
+        new adscontrols.FullScreen({label: "\uf0b2"}),
+        new ol.control.LayerSwitcher(),
+        new adscontrols.OverviewMap({label: "\uf02f"}),
+        new adscontrols.ScaleLine()
       ])
     })
-    view.fitGeometry(bounds, map.getSize(), {padding: [10, 10, 10, 10]})
+    view.fit(bounds, map.getSize(), {padding: [10, 10, 10, 10]})
 
     /*map.on("singleclick", function (evt) {
       document.getElementById("info").innerHTML = "";
