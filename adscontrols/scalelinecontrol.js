@@ -1,17 +1,7 @@
-/**
- * @enum {string}
- */
 adscontrols.ScaleLineProperty = {
   UNITS: 'units'
 };
 
-
-/**
- * Units for the scale line. Supported values are `'degrees'`, `'imperial'`,
- * `'nautical'`, `'metric'`, `'us'`.
- * @enum {string}
- * @api stable
- */
 adscontrols.ScaleLineUnits = {
   DEGREES: 'degrees',
   IMPERIAL: 'imperial',
@@ -20,71 +10,25 @@ adscontrols.ScaleLineUnits = {
   US: 'us'
 };
 
-
-adscontrols.ScaleLine = function(opt_options) {
+adscontrols.CanvasScaleLine = function(opt_options) {
 
   var options = goog.isDef(opt_options) ? opt_options : {};
 
-  var className = goog.isDef(options.className) ?
-      options.className : 'ol-scale-line';
-
-  /**
-   * @private
-   * @type {Element}
-   */
-  this.innerElement_ = goog.dom.createDom(goog.dom.TagName.DIV,
-      className + '-inner');
-
-  /**
-   * @private
-   * @type {Element}
-   */
-  this.element_ = goog.dom.createDom(goog.dom.TagName.DIV,
-      className + ' ' + ol.css.CLASS_UNSELECTABLE, this.innerElement_);
-
-  /**
-   * @private
-   * @type {?olx.ViewState}
-   */
   this.viewState_ = null;
 
-  /**
-   * @private
-   * @type {number}
-   */
   this.minWidth_ = goog.isDef(options.minWidth) ? options.minWidth : 64;
 
-  /**
-   * @private
-   * @type {boolean}
-   */
-  this.renderedVisible_ = false;
-
-  /**
-   * @private
-   * @type {number|undefined}
-   */
   this.renderedWidth_ = undefined;
 
-  /**
-   * @private
-   * @type {string}
-   */
-  this.renderedHTML_ = '';
-
-  /**
-   * @private
-   * @type {?ol.TransformFunction}
-   */
   this.toEPSG4326_ = null;
 
   var render = goog.isDef(options.render) ?
-      options.render : adscontrols.ScaleLine.render;
+      options.render : adscontrols.CanvasScaleLine.render;
 
   goog.base(this, {
-    element: this.element_,
     render: render,
-    target: options.target
+    target: null,
+    element: goog.dom.createTextNode("")
   });
 
   goog.events.listen(
@@ -95,36 +39,17 @@ adscontrols.ScaleLine = function(opt_options) {
       adscontrols.ScaleLineUnits.METRIC);
 
 };
-goog.inherits(adscontrols.ScaleLine, ol.control.Control);
+goog.inherits(adscontrols.CanvasScaleLine, ol.control.Control);
 
 
-/**
- * @const
- * @type {Array.<number>}
- */
-adscontrols.ScaleLine.LEADING_DIGITS = [1, 2, 5];
+adscontrols.CanvasScaleLine.LEADING_DIGITS = [1, 2, 5];
 
-
-/**
- * Return the units to use in the scale line.
- * @return {adscontrols.ScaleLineUnits|undefined} The units to use in the scale
- *     line.
- * @observable
- * @api stable
- */
-adscontrols.ScaleLine.prototype.getUnits = function() {
+adscontrols.CanvasScaleLine.prototype.getUnits = function() {
   return /** @type {adscontrols.ScaleLineUnits|undefined} */ (
       this.get(adscontrols.ScaleLineProperty.UNITS));
 };
 
-
-/**
- * Update the scale line element.
- * @param {ol.MapEvent} mapEvent Map event.
- * @this {adscontrols.ScaleLine}
- * @api
- */
-adscontrols.ScaleLine.render = function(mapEvent) {
+adscontrols.CanvasScaleLine.render = function(mapEvent) {
   var frameState = mapEvent.frameState;
   if (goog.isNull(frameState)) {
     this.viewState_ = null;
@@ -134,30 +59,15 @@ adscontrols.ScaleLine.render = function(mapEvent) {
   this.updateElement_();
 };
 
-
-/**
- * @private
- */
-adscontrols.ScaleLine.prototype.handleUnitsChanged_ = function() {
+adscontrols.CanvasScaleLine.prototype.handleUnitsChanged_ = function() {
   this.updateElement_();
 };
 
-
-/**
- * Set the units to use in the scale line.
- * @param {adscontrols.ScaleLineUnits} units The units to use in the scale line.
- * @observable
- * @api stable
- */
-adscontrols.ScaleLine.prototype.setUnits = function(units) {
+adscontrols.CanvasScaleLine.prototype.setUnits = function(units) {
   this.set(adscontrols.ScaleLineProperty.UNITS, units);
 };
 
-
-/**
- * @private
- */
-adscontrols.ScaleLine.prototype.updateElement_ = function() {
+adscontrols.CanvasScaleLine.prototype.updateElement_ = function() {
   var viewState = this.viewState_;
 
   if (goog.isNull(viewState)) {
@@ -273,33 +183,101 @@ adscontrols.ScaleLine.prototype.updateElement_ = function() {
       Math.log(this.minWidth_ * pointResolution) / Math.log(10));
   var count, width;
   while (true) {
-    count = adscontrols.ScaleLine.LEADING_DIGITS[i % 3] *
+    count = adscontrols.CanvasScaleLine.LEADING_DIGITS[i % 3] *
         Math.pow(10, Math.floor(i / 3));
     width = Math.round(count / pointResolution);
     if (isNaN(width)) {
-      goog.style.setElementShown(this.element_, false);
       this.renderedVisible_ = false;
-      return;
+      break;
     } else if (width >= this.minWidth_) {
+      this.renderedVisible_ = true;
       break;
     }
     ++i;
   }
 
-  var html = count + ' ' + suffix;
-  if (this.renderedHTML_ != html) {
-    this.innerElement_.innerHTML = html;
-    this.renderedHTML_ = html;
+  if (this.renderedVisible_) {
+    this.draw(count, suffix, width);
   }
-
-  if (this.renderedWidth_ != width) {
-    this.innerElement_.style.width = width + 'px';
-    this.renderedWidth_ = width;
-  }
-
-  if (!this.renderedVisible_) {
-    goog.style.setElementShown(this.element_, true);
-    this.renderedVisible_ = true;
-  }
-
 };
+
+adscontrols.CanvasScaleLine.prototype.draw = function (count, suffix, width) {
+  var map = this.getMap()
+  var canvas = map.getViewport().getElementsByTagName("canvas")[0]
+  var ctx = canvas.getContext("2d")
+
+  var label = count + ' ' + suffix;
+
+  //Scaleline thicknes
+  var line1 = 6;
+  //Offset from the left
+  var x_offset = 20;
+  //offset from the bottom
+  var y_offset = 20;
+  var fontsize1 = 15;
+  var font1 = fontsize1 + 'px Arial';
+  // how big should the scale be (original css-width multiplied)
+  var multiplier = 2;
+
+  var scalewidth = width*multiplier;
+  var scale = label
+  var scalenumber = count*multiplier
+  var scaleunit = suffix
+
+  //Scale Text
+  ctx.beginPath();
+  ctx.textAlign = "left";
+  ctx.strokeStyle = "#ffffff";
+  ctx.fillStyle = "rgba(0, 60, 136, 0.4)";
+  ctx.lineWidth = 5;
+  ctx.font = font1;
+  ctx.strokeText([scalenumber + ' ' + scaleunit], x_offset + fontsize1 / 2, canvas.height - y_offset - fontsize1 / 2);
+  ctx.fillText([scalenumber + ' ' + scaleunit], x_offset + fontsize1 / 2, canvas.height - y_offset - fontsize1 / 2);
+
+  //Scale Dimensions
+  var xzero = scalewidth + x_offset;
+  var yzero = canvas.height - y_offset;
+  var xfirst = x_offset + scalewidth * 1 / 4;
+  var xsecond = xfirst + scalewidth * 1 / 4;
+  var xthird = xsecond + scalewidth * 1 / 4;
+  var xfourth = xthird + scalewidth * 1 / 4;
+
+  // Stroke
+  ctx.beginPath();
+  ctx.lineWidth = line1 + 2;
+  ctx.strokeStyle = "rgba(0, 60, 136, 0.4)";
+  ctx.fillStyle = "#ffffff";
+  ctx.opacity = 0.6;
+  ctx.moveTo(x_offset, yzero);
+  ctx.lineTo(xzero + 1, yzero);
+  ctx.stroke();
+
+  //sections black/white
+  ctx.beginPath();
+  ctx.lineWidth = line1;
+  ctx.strokeStyle = "rgba(0, 60, 136, 0.4)";
+  ctx.moveTo(x_offset, yzero);
+  ctx.lineTo(xfirst, yzero);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.lineWidth = line1;
+  ctx.strokeStyle = "#FFFFFF";
+  ctx.moveTo(xfirst, yzero);
+  ctx.lineTo(xsecond, yzero);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.lineWidth = line1;
+  ctx.strokeStyle = "rgba(0, 60, 136, 0.4)";
+  ctx.moveTo(xsecond, yzero);
+  ctx.lineTo(xthird, yzero);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.lineWidth = line1;
+  ctx.strokeStyle = "#FFFFFF";
+  ctx.moveTo(xthird, yzero);
+  ctx.lineTo(xfourth, yzero);
+  ctx.stroke();
+}
