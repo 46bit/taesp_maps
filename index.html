@@ -8,15 +8,21 @@
   body {
     background: #ccc;
   }
-  #map {
+  .map_container {
     width: 600px;
-    height: 436px;
+    height: 450px;
+  }
+  #map {
+    width: 100%;
+    height: 100%;
     background: #fff;
   }
   </style>
 </head>
 <body>
-  <div id="map"></div>
+  <div class="map_container">
+    <div id="map"></div>
+  </div>
   <div id="info"></div>
   <script src="deps/polyfills.js"></script>
   <script src="deps/jquery-1.11.3.min.js"></script>
@@ -129,14 +135,14 @@
       controls: new ol.Collection([
         toolbar,
         new adscontrols.Zoom({target: toolbar.element, zoomInLabel: "\uf067", zoomOutLabel: "\uf068"}),
-        new adscontrols.FullScreen({target: toolbar.element, label: "\uf0b2"}),
+        new adscontrols.FullScreen({target: toolbar.element, label: "\uf065"}),
         new ol.control.LayerSwitcher(),
         new adscontrols.Print({target: toolbar.element, label: "\uf02f"}),
         new adscontrols.OverviewMap(),
         new adscontrols.ScaleLine()
       ])
     })
-    view.fit(bounds, map.getSize(), {padding: [10, 10, 10, 10]})
+    view.fit(bounds, map.getSize(), {padding: [0,0,0,0], constrainResolution: false})
 
     /*map.on("singleclick", function (evt) {
       document.getElementById("info").innerHTML = "";

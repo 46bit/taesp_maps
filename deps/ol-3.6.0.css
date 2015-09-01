@@ -263,7 +263,7 @@
   margin-bottom: 1px;
   padding: 2px;
 }
-.adscontrols-toolbar .control button {
+.adscontrols-toolbar .control .button {
   display: block;
   padding: 0.1em;
   font: 1em FontAwesome;
@@ -277,15 +277,15 @@
   border: none;
   cursor: pointer;
 }
-.adscontrols-toolbar .control button:hover,
-.adscontrols-toolbar .control button:focus {
+.adscontrols-toolbar .control .button:hover,
+.adscontrols-toolbar .control .button:focus {
   text-decoration: none;
   background-color: #aaa;
   color: #fff;
 }
-.adscontrols-toolbar .control__top button {
+.adscontrols-toolbar .control__top .button {
   border-radius: 2px 2px 0 0;
 }
-.adscontrols-toolbar .control__bottom button {
+.adscontrols-toolbar .control__bottom .button {
   border-radius: 0 0 2px 2px;
 }

@@ -58,7 +58,8 @@ adscontrols.OverviewMap = function(opt_options) {
       this.collapseLabel_ : this.label_;
   var button = goog.dom.createDom(goog.dom.TagName.BUTTON, {
     'type': 'button',
-    'title': tipLabel
+    'title': tipLabel,
+    'class': 'button'
   }, activeLabel);
 
   goog.events.listen(button, goog.events.EventType.CLICK,

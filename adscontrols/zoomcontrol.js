@@ -17,7 +17,7 @@ adscontrols.Zoom = function(opt_options) {
       options.zoomOutTipLabel : 'Zoom out';
 
   var inElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-    'class': className + '-in',
+    'class': className + '-in button',
     'type' : 'button',
     'title': zoomInTipLabel
   }, zoomInLabel);
@@ -27,7 +27,7 @@ adscontrols.Zoom = function(opt_options) {
           adscontrols.Zoom.prototype.handleClick_, delta), false, this);
 
   var outElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
-    'class': className + '-out',
+    'class': className + '-out button',
     'type' : 'button',
     'title': zoomOutTipLabel
   }, zoomOutLabel);
