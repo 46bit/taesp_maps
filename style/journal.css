@@ -1,0 +1,241 @@
+
+/* Style sheet for Internet Archaeology. Updated 14 Jan 2014 JCW */
+
+
+
+body {background-color:#ffffff; font: 100% Verdana, "Trebuchet MS", sans-serif; color:black; max-width:900px; margin: 0 auto;
+ font-size: 16px;}
+
+h1, h2, h3, h4, h5, h6 {font-family: Cambria, Perpetua, serif; color: #823047;}
+
+p, li {line-height:180%;}
+
+code {font: 110% Courier, serif}
+
+a {color: #304782;}
+
+a img {text-decoration: none; border: 0 none;}
+
+a:hover {color: #708230;}
+
+a.button:link, a.button:visited, a.button:active {color: white; text-decoration: none;}
+
+.title {font-family: Cambria, Perpetua, serif; font-weight: bold;}
+
+.orcid {text-decoration: none; font-weight:normal; font-size:90%;}
+
+.author {font-family: Cambria, Perpetua, serif;}
+
+.access {font-family: Cambria, Perpetua, serif; font-size: 90%;; margin-left:5em;}
+
+.issueno {font-family: Cambria, Perpetua, serif; background-color: #304782;}
+
+.navigation {background-color: #304782;}
+
+.ref,.copy, .address, .mininav, .tip_text, .small_caption {font-size: 0.8em;}
+
+.alert_box, .review {font-size: 0.9em; border-style:solid; border-color:#478230; padding:10px; line-height:140%;}
+
+.ack, .text-box {font-size: 0.9em; border-style:solid;border-color:#478230; margin-left:4em; margin-right:4em; padding:10px; line-height:140%;}
+
+figure, .image, .h-image  {text-align:left; font-size: 0.9em; clear:both; border-style:none; margin:0;}
+
+figcaption {font-size: 0.9em; line-height:130%;}
+
+.trans {color: #823047;}
+
+.rwrap {float: right; padding: 5px;font-size: 0.8em;}
+
+.lwrap {float: left; padding: 5px;font-size: 0.8em;}
+
+.referee {background-color:#faf2f4; padding: 1em; border-color:#823047; border-style:dotted;}
+
+.rquote  {float:right;clear:none; width:300px; font-size: 0.8em; border-style:dotted; border-color:#478230; padding:1em; margin: 1em;}
+
+.lquote {float:left;clear:none; width:300px; font-size: 0.8em; border-style:dotted;border-color:#478230; padding-top:1em; margin: 1em;}
+
+.right {text-align: right;}
+
+ul li {list-style-type: circle;}
+
+.centred {text-align: center;}
+
+.advert {text-align: center; font-size: 0.8em;}
+
+table {border-collapse:collapse;}
+
+.table td {border:1px solid gray; text-align:left; font-size: 0.8em; padding:10px; clear:both;}
+
+.table th {background-color: #478230; color: white; border: 1px solid gray; text-align: center; font-size: 0.8em;padding: 10px; clear:both;}
+
+.table caption {font-size: 0.8em; padding: 1em;}
+
+.summarybar {
+	background-color: #823047;
+	color: white;
+}
+
+
+.view_map {
+	font-variant: small-caps;
+}
+
+.mini_menu {
+	text-align:left;
+	font-size: 0.85em;
+	font-weight:400;
+	border-bottom: medium solid #823047;
+	padding-bottom:5px;
+}
+.sub_mini_menu {
+	text-align:right;
+	font-size: 0.75em;
+	font-weight:400;
+}
+
+
+table.data_table th {
+	text-align: left;
+	font-variant:small-caps;
+	font-size:0.85em;
+	font-weight:400;
+	background-color:#304782;
+	color:white;
+}
+
+/* start of styles for issue20/4/ only - TAESP article */
+
+table.taespdbt th {
+	text-align: left;
+	font-variant:small-caps;
+	font-size:0.85em;
+	font-weight:400;
+	background-color:#666699;
+	color:white;
+}
+
+.whitetext {
+	font-weight: bolder;
+	color: #ffffff;
+}
+
+.layer {
+	color: #000000;
+	background-color: #ffffcc;
+}
+
+.database {
+	color: #000000;
+	background-color: #ccffcc;
+}
+
+.taespimage {
+	color: #000000;
+	background-color: #ffcccc;
+	}
+
+.navcenter {
+	background-position: center;
+	text-align: center;
+}
+
+a.database {
+	background-color: #ccccff;
+	color: #000000;
+}
+
+a.zoom {
+	background-color: #ccffcc;
+	color: #000000;
+}
+
+a.image {
+	background-color: #ffcccc;
+	color: #000000;
+}
+
+a.layer {
+	background-color: #ffffcc;
+	color: #000000;
+}
+
+.imagecenter {
+	text-align: center;
+}
+
+.indent {
+	padding-left: 15%;
+}
+
+.taespnav {
+	float: right;
+	margin-bottom: 1em;
+	margin-left: 2.5em;
+	margin-right: .5em;
+}
+
+.taespinterface {
+	position: relative;
+	float: left;
+	width: 600px;
+	height: 450px;
+}
+
+.taesptext {
+	position: relative;
+	left: 15px;
+	height: 460px;
+	overflow: auto;
+}
+
+.iframeholder {
+	clear: both;
+}
+
+/* end of stylesheet lifted from TAESP project */
+
+.prestyle {
+    font-family : "Courier New", Courier, monospace;
+    font-size: .85em;
+}
+
+/* Styles Roskams issue 23 - image holders */
+
+.rosk {background: #304782; border: 1px solid #000000; color: white; cursor: pointer; font-weight: bold; text-align: center;}
+
+/* Style Creighton issue 25 - javascript image display text */
+
+.bibracte {font-size: .8em; cursor: pointer; color: #304782;}
+
+/* Style Merv Issue 25 - GIS holder */
+
+.mervMap {border:1px solid; margin-left:1em; width:775px;}
+
+/* VASLE */
+.refs_links {border:solid 2px #823047;
+	padding-left:2em;
+	padding-right:2em;
+	padding-top:1em;
+	padding-bottom:1em;
+	font-size:.7em;
+	margin-left: 1em;
+	margin-right:1em;
+	margin-bottom:1em;
+	float: right;
+	text-align: right;
+	width: 30%;}
+
+.mono {text-align: right;
+       font-family: serif;
+       font-size: .85em;}
+
+
+/* mini toc for big pages */
+.navtoc {float:right; margin: 1.25em 0 1em 1em; border: 1px solid #aab}
+div.navtoc p {color: #823047; font-size: 0.8em; padding: 0.25em; margin: 0; font-weight: bold}
+
+/* navtoc highlighting and border effects */
+#navbar {padding: 0; margin: 0; font-weight: bold; background: #fff}
+#navbar li {list-style: none; margin: 0; padding: 0; font-size: 0.75em}
+#navbar li a {display: block; margin: 0; padding: 0.25em; border-left: 1em solid #aab; text-decoration: none; width: 100%; color: #000; border-top: solid #ccc 1px; width: 12em}
+#navbar li a:hover, #navbar li a:focus, #navbar li a:active {border-color: #304782; color: #000; background: #eee}

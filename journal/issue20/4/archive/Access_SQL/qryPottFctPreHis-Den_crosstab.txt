@@ -1,0 +1,7 @@
+TRANSFORM Sum([SumOfNoPiece]*[DenRatio]) AS Density
+SELECT [qryPottFctPreHis-Count].SUNo
+FROM [qryPottFctPreHis-Count] INNER JOIN [qryPott-Calc] ON [qryPottFctPreHis-Count].SUNo = [qryPott-Calc].SUNo
+WHERE ((([qryPottFctPreHis-Count].SUNo) Not Like "*c*" And ([qryPottFctPreHis-Count].SUNo) Not Like "su0078" And ([qryPottFctPreHis-Count].SUNo) Not Like "su0096" And ([qryPottFctPreHis-Count].SUNo) Not Like "su0097" And ([qryPottFctPreHis-Count].SUNo) Not Like "su0101" And ([qryPottFctPreHis-Count].SUNo) Not Like "su0102" And ([qryPottFctPreHis-Count].SUNo) Not Like "su0104" And ([qryPottFctPreHis-Count].SUNo) Not Like "su1001" And ([qryPottFctPreHis-Count].SUNo) Not Like "su1099" And ([qryPottFctPreHis-Count].SUNo) Not Like "su1304" And ([qryPottFctPreHis-Count].SUNo) Not Like "su2910" And ([qryPottFctPreHis-Count].SUNo) Not Like "su2963" And ([qryPottFctPreHis-Count].SUNo) Not Like "su2965" And ([qryPottFctPreHis-Count].SUNo) Not Like "su0703" And ([qryPottFctPreHis-Count].SUNo) Not Like "su2151"))
+GROUP BY [qryPottFctPreHis-Count].ISZ, [qryPottFctPreHis-Count].SUNo
+ORDER BY [qryPottFctPreHis-Count].SUNo, [qryPottFctPreHis-Count].Func
+PIVOT [qryPottFctPreHis-Count].Func;

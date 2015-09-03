@@ -1,0 +1,7 @@
+TRANSFORM Sum([SumOfNoPieces]*[DenRatio]) AS [Density of lithics /100 square metres]
+SELECT [qryLithMat-Count].SUNo
+FROM [qryLithMat-Count] INNER JOIN [qryLith-Calc] ON [qryLithMat-Count].SUNo = [qryLith-Calc].SUNo
+WHERE ((([qryLithMat-Count].SUNo) Not Like "*c*" And ([qryLithMat-Count].SUNo) Not Like "su0078" And ([qryLithMat-Count].SUNo) Not Like "su0096" And ([qryLithMat-Count].SUNo) Not Like "su0097" And ([qryLithMat-Count].SUNo) Not Like "su0101" And ([qryLithMat-Count].SUNo) Not Like "su0102" And ([qryLithMat-Count].SUNo) Not Like "su0104" And ([qryLithMat-Count].SUNo) Not Like "su1001" And ([qryLithMat-Count].SUNo) Not Like "su1099" And ([qryLithMat-Count].SUNo) Not Like "su1304" And ([qryLithMat-Count].SUNo) Not Like "su2910" And ([qryLithMat-Count].SUNo) Not Like "su2963" And ([qryLithMat-Count].SUNo) Not Like "su2965" And ([qryLithMat-Count].SUNo) Not Like "su0703" And ([qryLithMat-Count].SUNo) Not Like "su2151"))
+GROUP BY [qryLithMat-Count].ISZ, [qryLithMat-Count].SIANo, [qryLithMat-Count].SUNo
+ORDER BY [qryLithMat-Count].SUNo, [qryLithMat-Count].Mat
+PIVOT [qryLithMat-Count].Mat;

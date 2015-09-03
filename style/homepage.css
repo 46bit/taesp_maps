@@ -1,0 +1,121 @@
+/* Style sheet for Internet Archaeology. Updated 14 Sept 2011 JCW */
+
+body {background-color : #ffffff; 
+	font-family : "Verdana", "Trebuchet MS", sans-serif;
+	font-size:0.95em;
+	color : black;
+	margin-left: 4em;
+	margin-right: 4em;
+	max-width:1000px;}	
+
+h1      {font-size:1.2em;
+}
+
+h2      {font-size:1em;
+}
+
+h3      {font-size:0.95em;
+}
+
+h4      {font-size:0.9em;
+}
+
+h5      {font-size:0.85em;
+}
+
+h6      {font-size:0.8em;
+}
+
+a:link {color : #000099;
+}
+
+a:visited {color: #990099;
+}
+
+a:active {color: #660066;
+}
+
+a.button:link, a.button:visited, a.button:active {color: #000000;
+	text-decoration: none;
+}
+
+.advert {text-align: center;
+	font-size: 0.8em; 
+}
+
+.contact {text-align:left; 
+	font-size: 0.8em; 
+	font-weight:400;
+}
+
+.copy {text-align:left; 
+	font-size: 0.8em; 
+	font-weight:400;
+}
+
+
+.nsquote {font-size :0.8em;
+}
+
+.right {text-align: right;
+}
+
+.jnav {font-size:0.9em;
+	margin-top: 3em;
+	margin-right: 2em;
+	margin-bottom: 3em;
+	float: left;
+	clear: none;
+}
+
+.main_text {font-size:0.9em;
+	text-align: justify;
+	margin-top: 6em;
+/*	margin-right: 2em;*/
+}
+
+.news {font-size:0.9em;
+	text-align: justify;
+}
+
+.clearboth {clear: both; 
+}
+
+.heading {font-size:1.5em;
+	text-align: left;
+	color: #660066;
+}
+
+.small-heading {font-size:1.2em;
+	text-align: left;
+	color: #660066;
+}
+
+.issueno {
+    background-color : #ccccff;
+}
+	
+.band {
+	background: silver;
+	font-weight: 600;
+}
+
+.title
+{
+	color: rgb(61,61,61);
+	font-variant: small-caps;
+}
+
+.alert_box {
+	border:solid 1px #cccccc;
+	background:#f0f0f0;
+	padding:.5em;
+	font-size:0.8em;
+}
+
+.alert_box_2 {
+	border:solid 1px #cccccc;
+	padding:.2em;
+	font-size:0.9em;
+
+}

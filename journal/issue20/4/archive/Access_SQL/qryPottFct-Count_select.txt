@@ -1,0 +1,4 @@
+SELECT [tblSUF].[ISZ], [tblPottFind].[SIANo], [tblPottFind].[SUNo], Sum([tblPottFind].[NoPiece]) AS SumOfNoPiece, [tblPottFind].[Func]
+FROM tblPottFind LEFT JOIN tblSUF ON [tblPottFind].[SUNo]=[tblSUF].[SUNo]
+GROUP BY [tblSUF].[ISZ], [tblPottFind].[SIANo], [tblPottFind].[SUNo], [tblPottFind].[Func]
+ORDER BY [tblPottFind].[SUNo];

@@ -1,0 +1,5 @@
+SELECT tblSUF.ISZ, tblPottFind.SIANo, tblPottFind.SUNo, Sum(tblPottFind.NoPiece) AS SumOfNoPiece, tblPottFind.Func, tblPottFind.PerGroup
+FROM tblPottFind LEFT JOIN tblSUF ON tblPottFind.SUNo = tblSUF.SUNo
+GROUP BY tblSUF.ISZ, tblPottFind.SIANo, tblPottFind.SUNo, tblPottFind.Func, tblPottFind.PerGroup
+HAVING (((tblPottFind.PerGroup)="Iron Age"))
+ORDER BY tblPottFind.SUNo;

@@ -1,0 +1,7 @@
+TRANSFORM Sum(tblLithFind.NoPieces) AS SumOfNoPieces
+SELECT tblLithFind.SUNo
+FROM tblLithFind LEFT JOIN tblSUF ON tblLithFind.SUNo = tblSUF.SUNo
+WHERE (((tblLithFind.SUNo) Like "s*" And (tblLithFind.SUNo) Not Like "*c*") AND ((tblLithFind.Class)="Gri" Or (tblLithFind.Class)="Cut" Or (tblLithFind.Class)="Ves" Or (tblLithFind.Class)="Pou"))
+GROUP BY tblSUF.ISZ, tblSUF.SIANo, tblLithFind.SUNo
+ORDER BY tblLithFind.SUNo
+PIVOT tblLithFind.Class;

@@ -1,0 +1,5 @@
+SELECT tblSUF.ISZ, tblSUF.SIANo, tblLithFind.SUNo, Sum(tblLithFind.NoPieces) AS SumOfNoPieces, tblLithFind.Mat, tblLithFind.TypeChip, IIf([Mat] Like 'Jas','Jas',IIf([Mat] Like 'Cha','Cha','Lefkara')) AS Material
+FROM tblLithFind LEFT JOIN tblSUF ON tblLithFind.SUNo = tblSUF.SUNo
+GROUP BY tblSUF.ISZ, tblSUF.SIANo, tblLithFind.SUNo, tblLithFind.Mat, tblLithFind.TypeChip, IIf([Mat] Like 'Jas','Jas',IIf([Mat] Like 'Cha','Cha','Lefkara'))
+HAVING (((tblLithFind.SUNo) Like "s*" And (tblLithFind.SUNo) Not Like "*c*") AND ((tblLithFind.Mat)="Jas" Or (tblLithFind.Mat)="cha" Or (tblLithFind.Mat) Like "l*" And (tblLithFind.Mat) Not Like 'lap') AND ((tblLithFind.TypeChip) Like "Dho"))
+ORDER BY tblLithFind.SUNo;

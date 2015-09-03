@@ -1,0 +1,7 @@
+TRANSFORM Sum([SlagCount]*100*Cos([Slope]*2*3.14159265/360)/[Area]) AS DenSlag
+SELECT tblSUF.SUNo
+FROM tblGUF RIGHT JOIN tblSUF ON tblGUF.GUNo = tblSUF.GUNo
+WHERE (((tblSUF.SUNo) Not Like "*c*") AND ((tblGUF.GUNo) Like "*") AND ((tblSUF.Area)>0) AND ((IIf([SlagCount]>0,'Slag')) Like "*"))
+GROUP BY tblSUF.ISZ, tblSUF.SIANo, tblSUF.SUNo, tblGUF.GUNo, tblGUF.Slope, tblSUF.Area
+ORDER BY tblSUF.SUNo
+PIVOT IIf([SlagCount]>0,'Slag');

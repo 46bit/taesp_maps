@@ -1,0 +1,7 @@
+TRANSFORM Sum([SumOfNoPieces]*[DenRatio]) AS [Density of lithics /100 square metres]
+SELECT [qryChipDho-Count].[SUNo]
+FROM [qryChipDho-Count] INNER JOIN [qryChip-Calc] ON [qryChipDho-Count].[SUNo]=[qryChip-Calc].[SUNo]
+WHERE ((([qryChipDho-Count].[SUNo]) Not Like "*c*" And ([qryChipDho-Count].[SUNo]) Not Like "su0078" And ([qryChipDho-Count].[SUNo]) Not Like "su0096" And ([qryChipDho-Count].[SUNo]) Not Like "su0097" And ([qryChipDho-Count].[SUNo]) Not Like "su0101" And ([qryChipDho-Count].[SUNo]) Not Like "su0102" And ([qryChipDho-Count].[SUNo]) Not Like "su0104" And ([qryChipDho-Count].[SUNo]) Not Like "su1001" And ([qryChipDho-Count].[SUNo]) Not Like "su1099" And ([qryChipDho-Count].[SUNo]) Not Like "su1304" And ([qryChipDho-Count].[SUNo]) Not Like "su2910" And ([qryChipDho-Count].[SUNo]) Not Like "su2963" And ([qryChipDho-Count].[SUNo]) Not Like "su2965" And ([qryChipDho-Count].[SUNo]) Not Like "su0703" And ([qryChipDho-Count].[SUNo]) Not Like "su2151"))
+GROUP BY [qryChipDho-Count].[ISZ], [qryChipDho-Count].[SIANo], [qryChipDho-Count].[SUNo], [qryChipDho-Count].[SumOfNoPieces]
+ORDER BY [qryChipDho-Count].[SUNo], [qryChipDho-Count].[Type]
+PIVOT [qryChipDho-Count].[Type];

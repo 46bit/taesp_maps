@@ -1,0 +1,6 @@
+TRANSFORM Sum([SumOfNoPieces]*[DenRatio]) AS [Density of lithics /100 square metres]
+SELECT [qryLithChipGrd-Count].SUNo
+FROM [qryLithChipGrd-Count] INNER JOIN [qryLith-Calc] ON [qryLithChipGrd-Count].SUNo = [qryLith-Calc].SUNo
+WHERE ((([qryLithChipGrd-Count].SUNo) Not Like "*c*" And ([qryLithChipGrd-Count].SUNo) Not Like "su0078" And ([qryLithChipGrd-Count].SUNo) Not Like "su0096" And ([qryLithChipGrd-Count].SUNo) Not Like "su0097" And ([qryLithChipGrd-Count].SUNo) Not Like "su0101" And ([qryLithChipGrd-Count].SUNo) Not Like "su0102" And ([qryLithChipGrd-Count].SUNo) Not Like "su0104" And ([qryLithChipGrd-Count].SUNo) Not Like "su1001" And ([qryLithChipGrd-Count].SUNo) Not Like "su1099" And ([qryLithChipGrd-Count].SUNo) Not Like "su1304" And ([qryLithChipGrd-Count].SUNo) Not Like "su2910" And ([qryLithChipGrd-Count].SUNo) Not Like "su2963" And ([qryLithChipGrd-Count].SUNo) Not Like "su2965" And ([qryLithChipGrd-Count].SUNo) Not Like "su0703" And ([qryLithChipGrd-Count].SUNo) Not Like "su2151"))
+GROUP BY [qryLithChipGrd-Count].SUNo
+PIVOT [qryLithChipGrd-Count].Cat;

@@ -1,0 +1,7 @@
+TRANSFORM Sum([SumOfNoPiece]*[DenRatio]) AS Density
+SELECT [qryPottFctHeRom-Count].SUNo
+FROM [qryPottFctHeRom-Count] INNER JOIN [qryPott-Calc] ON [qryPottFctHeRom-Count].SUNo = [qryPott-Calc].SUNo
+WHERE ((([qryPottFctHeRom-Count].SUNo) Not Like "*c*" And ([qryPottFctHeRom-Count].SUNo) Not Like "su0078" And ([qryPottFctHeRom-Count].SUNo) Not Like "su0096" And ([qryPottFctHeRom-Count].SUNo) Not Like "su0097" And ([qryPottFctHeRom-Count].SUNo) Not Like "su0101" And ([qryPottFctHeRom-Count].SUNo) Not Like "su0102" And ([qryPottFctHeRom-Count].SUNo) Not Like "su0104" And ([qryPottFctHeRom-Count].SUNo) Not Like "su1001" And ([qryPottFctHeRom-Count].SUNo) Not Like "su1099" And ([qryPottFctHeRom-Count].SUNo) Not Like "su1304" And ([qryPottFctHeRom-Count].SUNo) Not Like "su2910" And ([qryPottFctHeRom-Count].SUNo) Not Like "su2963" And ([qryPottFctHeRom-Count].SUNo) Not Like "su2965" And ([qryPottFctHeRom-Count].SUNo) Not Like "su0703" And ([qryPottFctHeRom-Count].SUNo) Not Like "su2151"))
+GROUP BY [qryPottFctHeRom-Count].ISZ, [qryPottFctHeRom-Count].SUNo
+ORDER BY [qryPottFctHeRom-Count].SUNo, [qryPottFctHeRom-Count].Func
+PIVOT [qryPottFctHeRom-Count].Func;

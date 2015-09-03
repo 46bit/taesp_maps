@@ -1,0 +1,7 @@
+TRANSFORM Sum([SumOfNoPieces]*[DenRatio]) AS [Density of lithics /100 square metres]
+SELECT [qryChipTool-Count].SUNo
+FROM [qryChipTool-Count] INNER JOIN [qryChip-Calc] ON [qryChipTool-Count].SUNo = [qryChip-Calc].SUNo
+WHERE ((([qryChipTool-Count].SUNo) Not Like "*c*" And ([qryChipTool-Count].SUNo) Not Like "su0078" And ([qryChipTool-Count].SUNo) Not Like "su0096" And ([qryChipTool-Count].SUNo) Not Like "su0097" And ([qryChipTool-Count].SUNo) Not Like "su0101" And ([qryChipTool-Count].SUNo) Not Like "su0102" And ([qryChipTool-Count].SUNo) Not Like "su0104" And ([qryChipTool-Count].SUNo) Not Like "su1001" And ([qryChipTool-Count].SUNo) Not Like "su1099" And ([qryChipTool-Count].SUNo) Not Like "su1304" And ([qryChipTool-Count].SUNo) Not Like "su2910" And ([qryChipTool-Count].SUNo) Not Like "su2963" And ([qryChipTool-Count].SUNo) Not Like "su2965" And ([qryChipTool-Count].SUNo) Not Like "su0703" And ([qryChipTool-Count].SUNo) Not Like "su2151"))
+GROUP BY [qryChipTool-Count].ISZ, [qryChipTool-Count].SIANo, [qryChipTool-Count].SUNo, [qryChipTool-Count].SumOfNoPieces
+ORDER BY [qryChipTool-Count].SUNo, [qryChipTool-Count].Tool
+PIVOT [qryChipTool-Count].Tool;

@@ -1,0 +1,5 @@
+SELECT [tblSUF].[ISZ], [tblSUF].[SIANo], [tblLithFind].[SUNo], [tblLithFind].[Cat], Sum([tblLithFind].[NoPieces]) AS SumOfNoPieces
+FROM tblLithFind LEFT JOIN tblSUF ON [tblLithFind].[SUNo]=[tblSUF].[SUNo]
+WHERE ((([tblLithFind].[SUNo]) Like "s*" And ([tblLithFind].[SUNo]) Not Like "*c*") And (([tblLithFind].[Cat])="Co" Or ([tblLithFind].[Cat])="Bl" Or ([tblLithFind].[Cat])="De"))
+GROUP BY [tblSUF].[ISZ], [tblSUF].[SIANo], [tblLithFind].[SUNo], [tblLithFind].[Cat]
+ORDER BY [tblLithFind].[SUNo];

@@ -1,0 +1,7 @@
+TRANSFORM Sum(tblPottFind.NoPiece) AS SumOfNoPiece
+SELECT tblPottFind.SUNo
+FROM tblPottFind LEFT JOIN tblSUF ON tblPottFind.SUNo = tblSUF.SUNo
+WHERE (((tblPottFind.SUNo) Like "SU*") AND ((tblPottFind.ChroTType)="Ti" Or (tblPottFind.ChroTType)="TiAn" Or (tblPottFind.ChroTType) Like "TiC*" Or (tblPottFind.ChroTType)="TiF" Or (tblPottFind.ChroTType)="TiGr" Or (tblPottFind.ChroTType)="TiLi" Or (tblPottFind.ChroTType)="TiMa" Or (tblPottFind.ChroTType)="TiP" Or (tblPottFind.ChroTType) Like "TiS*"))
+GROUP BY tblSUF.ISZ, tblPottFind.SIANo, tblPottFind.SUNo
+ORDER BY tblPottFind.SUNo
+PIVOT IIf([ChroTType] Like "Ti" Or [ChroTType] Like "TiAn" Or [ChroTType] Like "TiC*" Or [ChroTType] Like "TiF" Or [ChroTType] Like "TiGr" Or [ChroTType] Like "TiLi" Or [ChroTType] Like "TiMa" Or [ChroTType] Like "TiP" Or [ChroTType] Like "TiS*",'Tile');

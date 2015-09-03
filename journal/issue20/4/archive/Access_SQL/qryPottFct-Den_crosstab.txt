@@ -1,0 +1,7 @@
+TRANSFORM Sum([SumOfNoPiece]*[DenRatio]) AS Density
+SELECT [qryPottFct-Count].SUNo
+FROM [qryPottFct-Count] INNER JOIN [qryPott-Calc] ON [qryPottFct-Count].SUNo = [qryPott-Calc].SUNo
+WHERE ((([qryPottFct-Count].SUNo) Not Like "*c*" And ([qryPottFct-Count].SUNo) Not Like "su0078" And ([qryPottFct-Count].SUNo) Not Like "su0096" And ([qryPottFct-Count].SUNo) Not Like "su0097" And ([qryPottFct-Count].SUNo) Not Like "su0101" And ([qryPottFct-Count].SUNo) Not Like "su0102" And ([qryPottFct-Count].SUNo) Not Like "su0104" And ([qryPottFct-Count].SUNo) Not Like "su1001" And ([qryPottFct-Count].SUNo) Not Like "su1099" And ([qryPottFct-Count].SUNo) Not Like "su1304" And ([qryPottFct-Count].SUNo) Not Like "su2910" And ([qryPottFct-Count].SUNo) Not Like "su2963" And ([qryPottFct-Count].SUNo) Not Like "su2965" And ([qryPottFct-Count].SUNo) Not Like "su0703" And ([qryPottFct-Count].SUNo) Not Like "su2151"))
+GROUP BY [qryPottFct-Count].ISZ, [qryPottFct-Count].SUNo
+ORDER BY [qryPottFct-Count].SUNo, [qryPottFct-Count].Func
+PIVOT [qryPottFct-Count].Func;

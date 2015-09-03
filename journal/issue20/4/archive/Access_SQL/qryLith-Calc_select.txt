@@ -1,0 +1,4 @@
+SELECT tblSUF.SUNo, tblGUF.GUNo, ([NLC]*100*Cos([Slope]*2*3.14159265/360))/([CL]*[A2]) AS DenRatio, Nz([tblSUF]![ChippedStoneCount])+Nz([tblSUF]![GroundStoneCount]) AS NLC, tblGUF.Slope, Nz([tblSUF]![ChippedStoneCollected])+Nz([tblSUF]![GroundStoneCollected]) AS CL, tblSUF.Area AS A2
+FROM tblGUF RIGHT JOIN tblSUF ON tblGUF.GUNo = tblSUF.GUNo
+WHERE (((tblSUF.SUNo) Not Like "*c*") AND ((tblGUF.GUNo) Like "*") AND ((Nz([tblSUF]![ChippedStoneCollected])+Nz([tblSUF]![GroundStoneCollected]))>0))
+ORDER BY tblSUF.SUNo;

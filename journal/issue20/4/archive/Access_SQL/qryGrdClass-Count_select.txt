@@ -1,0 +1,5 @@
+SELECT tblSUF.ISZ, tblSUF.SIANo, tblLithFind.SUNo, Sum(tblLithFind.NoPieces) AS SumOfNoPieces, tblLithFind.Class
+FROM tblLithFind LEFT JOIN tblSUF ON tblLithFind.SUNo = tblSUF.SUNo
+GROUP BY tblSUF.ISZ, tblSUF.SIANo, tblLithFind.SUNo, tblLithFind.Class
+HAVING (((tblLithFind.SUNo) Like "s*" And (tblLithFind.SUNo) Not Like "*c*") AND ((tblLithFind.Class)="Gri" Or (tblLithFind.Class)="Cut" Or (tblLithFind.Class)="Ves" Or (tblLithFind.Class)="Pou"))
+ORDER BY tblLithFind.SUNo;

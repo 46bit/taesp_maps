@@ -1,0 +1,64 @@
+/* Style sheet for Internet Archaeology. Updated 14 Sept 2011 JCW */
+
+body {background-color : #ffffff; 
+	font-family: "Verdana", "Trebuchet MS", sans-serif;
+	font-size : 0.95em;
+	font-weight : 500;
+	color : black;
+	margin-left: 4em;
+	margin-right: 4em;
+}	
+
+a:link {color : #000099;
+}
+
+a:visited {color: #990099;
+}
+
+a:active {color: #660066;
+}
+
+a.button:link, a.button:visited, a.button:active {color: #000000;
+	text-decoration: none}
+
+.right {text-align: right;
+}
+
+.heading {font-size:1.5em;
+text-align: left;
+color: #660066;
+}
+
+.small-heading {font-size:1.2em;
+	text-align: left;
+	color: #660066;
+}
+
+.author_list
+{
+}
+
+.title
+{
+		font-style: italic;
+}
+
+.author
+{
+	font-style: italic;
+}
+
+.copy {text-align:left; 
+}
+
+.issueno {
+    background-color : #ccccff;
+}
+
+.theme {
+	background-color: rgb(153,153,204);
+}
+
+.theme .title {
+	color: white;
+}

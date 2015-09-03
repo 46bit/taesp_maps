@@ -1,0 +1,5 @@
+SELECT [tblSUF].[ISZ], [tblSUF].[SIANo], [tblLithFind].[SUNo], Sum([tblLithFind].[NoPieces]) AS SumOfNoPieces, [tblLithFind].[TypeChip], IIf([TypeChip] Like 'Dho',[TypeChip],'NotDho') AS Type
+FROM tblLithFind LEFT JOIN tblSUF ON [tblLithFind].[SUNo]=[tblSUF].[SUNo]
+GROUP BY [tblSUF].[ISZ], [tblSUF].[SIANo], [tblLithFind].[SUNo], [tblLithFind].[TypeChip], IIf([TypeChip] Like 'Dho',[TypeChip],'NotDho')
+HAVING (((tblLithFind.SUNo) Like "s*" And (tblLithFind.SUNo) Not Like "*c*")) OR (((tblLithFind.SUNo) Like "s*" And (tblLithFind.SUNo) Not Like "*c*"))
+ORDER BY [tblLithFind].[SUNo];

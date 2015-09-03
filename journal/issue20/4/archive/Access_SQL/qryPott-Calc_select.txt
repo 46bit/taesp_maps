@@ -1,0 +1,4 @@
+SELECT [tblSUF].[SUNo], [tblGUF].[GUNo], (([NSP]+[NST])*100*Cos([Slope]*2*3.14159265/360))/([CS]*[A2]) AS DenRatio, IIf([PotteryCount]>0,[PotteryCount],0) AS NSP, IIf([TileCount]>0,[TileCount],0) AS NST, [tblGUF].[Slope], IIf([PotteryTileCollected]>0,[PotteryTileCollected],0) AS CS, [tblSUF].[Area] AS A2
+FROM tblGUF RIGHT JOIN tblSUF ON [tblGUF].[GUNo]=[tblSUF].[GUNo]
+WHERE ((([tblSUF].[SUNo]) Not Like "*c*") And (([tblGUF].[GUNo]) Like "*") And ((IIf([PotteryTileCollected]>0,[PotteryTileCollected],0))>0) And (([tblSUF].[Area])>0))
+ORDER BY [tblSUF].[SUNo];

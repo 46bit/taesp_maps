@@ -1,0 +1,7 @@
+TRANSFORM Sum([SumOfNoPiece]*[DenRatio]) AS Density
+SELECT [qryPottFab-Count].SUNo
+FROM [qryPottFab-Count] INNER JOIN [qryPott-Calc] ON [qryPottFab-Count].SUNo = [qryPott-Calc].SUNo
+WHERE ((([qryPottFab-Count].SUNo) Not Like "*c*" And ([qryPottFab-Count].SUNo) Not Like "su0078" And ([qryPottFab-Count].SUNo) Not Like "su0096" And ([qryPottFab-Count].SUNo) Not Like "su0097" And ([qryPottFab-Count].SUNo) Not Like "su0101" And ([qryPottFab-Count].SUNo) Not Like "su0102" And ([qryPottFab-Count].SUNo) Not Like "su0104" And ([qryPottFab-Count].SUNo) Not Like "su1001" And ([qryPottFab-Count].SUNo) Not Like "su1099" And ([qryPottFab-Count].SUNo) Not Like "su1304" And ([qryPottFab-Count].SUNo) Not Like "su2910" And ([qryPottFab-Count].SUNo) Not Like "su2963" And ([qryPottFab-Count].SUNo) Not Like "su2965" And ([qryPottFab-Count].SUNo) Not Like "su0703" And ([qryPottFab-Count].SUNo) Not Like "su2151"))
+GROUP BY [qryPottFab-Count].ISZ, [qryPottFab-Count].SUNo
+ORDER BY [qryPottFab-Count].SUNo
+PIVOT [qryPottFab-Count].Clay;

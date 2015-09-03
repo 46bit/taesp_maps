@@ -1,0 +1,4 @@
+SELECT tblSUF.SUNo, tblGUF.GUNo, ([NLG]*100*Cos([Slope]*2*3.14159265/360))/([GL]*[A2]) AS DenRatio, IIf([GroundStoneCount]>0,[GroundStoneCount],0) AS NLG, tblGUF.Slope, IIf([GroundStoneCollected]>0,[GroundStoneCollected],0) AS GL, tblSUF.Area AS A2
+FROM tblGUF RIGHT JOIN tblSUF ON tblGUF.GUNo = tblSUF.GUNo
+WHERE (((tblSUF.SUNo) Not Like "*c*") AND ((tblGUF.GUNo) Like "*") AND ((IIf([GroundStoneCollected]>0,[GroundStoneCollected],0))>0))
+ORDER BY tblSUF.SUNo;

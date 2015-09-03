@@ -1,0 +1,7 @@
+TRANSFORM Sum(tblSUF.SlagCount) AS SumOfSlagCount
+SELECT tblSUF.SUNo
+FROM tblGUF RIGHT JOIN tblSUF ON tblGUF.GUNo = tblSUF.GUNo
+WHERE (((tblSUF.SUNo) Not Like "*c*") AND ((tblGUF.GUNo) Like "*") AND ((tblSUF.Area)>0) AND ((tblSUF.SlagCount)>0))
+GROUP BY tblSUF.ISZ, tblSUF.SIANo, tblSUF.SUNo, tblGUF.GUNo, tblGUF.Slope, tblSUF.Area
+ORDER BY tblSUF.SUNo
+PIVOT IIf([SlagCount]>0,'Slag');

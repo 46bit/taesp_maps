@@ -1,0 +1,7 @@
+TRANSFORM Sum([tblSUF].[ShotgunCartridgesCount]) AS SumOfShotgunCartridgesCount
+SELECT [tblSUF].[SUNo]
+FROM tblGUF RIGHT JOIN tblSUF ON [tblGUF].[GUNo]=[tblSUF].[GUNo]
+WHERE ((([tblSUF].[SUNo]) Not Like "*c*") And (([tblGUF].[GUNo]) Like "*") And (([tblSUF].[Area])>0) And (([tblSUF].[ShotgunCartridgesCount])>0))
+GROUP BY [tblSUF].[ISZ], [tblSUF].[SIANo], [tblSUF].[SUNo], [tblGUF].[GUNo], [tblGUF].[Slope], [tblSUF].[Area]
+ORDER BY [tblSUF].[SUNo]
+PIVOT IIf([ShotgunCartridgesCount]>0,'Cartridge');
