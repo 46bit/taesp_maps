@@ -271,11 +271,12 @@
   text-align: center;
   height: 1.375em;
   width: 1.375em;
-  line-height: 1.175em;
+  line-height: 1.375em;
   background-color: #ccc;
   color: #000;
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 .adscontrols-toolbar .control .button:hover,
 .adscontrols-toolbar .control .button:focus {
