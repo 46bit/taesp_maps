@@ -22,6 +22,12 @@ adscontrols.CanvasScaleLine = function(opt_options) {
 
   this.toEPSG4326_ = null;
 
+  this.labelColor_ = goog.isDef(options.labelColor) ? options.labelColor : "rgba(0, 60, 136, 0.4)"
+
+  this.outerColor_ = goog.isDef(options.outerColor) ? options.outerColor : "rgba(0, 60, 136, 0.4)"
+
+  this.innerColor_ = goog.isDef(options.innerColor) ? options.innerColor : "#ffffff"
+
   var render = goog.isDef(options.render) ?
       options.render : adscontrols.CanvasScaleLine.render;
 
@@ -228,7 +234,7 @@ adscontrols.CanvasScaleLine.prototype.draw = function (count, suffix, width) {
   ctx.beginPath();
   ctx.textAlign = "left";
   ctx.strokeStyle = "#ffffff";
-  ctx.fillStyle = "rgba(0, 60, 136, 0.4)";
+  ctx.fillStyle = this.labelColor_;
   ctx.lineWidth = 5;
   ctx.font = font1;
   ctx.strokeText([scalenumber + ' ' + scaleunit], x_offset + fontsize1 / 2, canvas.height - y_offset - fontsize1 / 2);
@@ -245,8 +251,8 @@ adscontrols.CanvasScaleLine.prototype.draw = function (count, suffix, width) {
   // Stroke
   ctx.beginPath();
   ctx.lineWidth = line1 + 2;
-  ctx.strokeStyle = "rgba(0, 60, 136, 0.4)";
-  ctx.fillStyle = "#ffffff";
+  ctx.strokeStyle = this.outerColor_;
+  ctx.fillStyle = this.innerColor_;
   ctx.opacity = 0.6;
   ctx.moveTo(x_offset, yzero);
   ctx.lineTo(xzero + 1, yzero);
@@ -255,28 +261,28 @@ adscontrols.CanvasScaleLine.prototype.draw = function (count, suffix, width) {
   //sections black/white
   ctx.beginPath();
   ctx.lineWidth = line1;
-  ctx.strokeStyle = "rgba(0, 60, 136, 0.4)";
+  ctx.strokeStyle = this.outerColor_;
   ctx.moveTo(x_offset, yzero);
   ctx.lineTo(xfirst, yzero);
   ctx.stroke();
 
   ctx.beginPath();
   ctx.lineWidth = line1;
-  ctx.strokeStyle = "#FFFFFF";
+  ctx.strokeStyle = this.innerColor_;
   ctx.moveTo(xfirst, yzero);
   ctx.lineTo(xsecond, yzero);
   ctx.stroke();
 
   ctx.beginPath();
   ctx.lineWidth = line1;
-  ctx.strokeStyle = "rgba(0, 60, 136, 0.4)";
+  ctx.strokeStyle = this.outerColor_;
   ctx.moveTo(xsecond, yzero);
   ctx.lineTo(xthird, yzero);
   ctx.stroke();
 
   ctx.beginPath();
   ctx.lineWidth = line1;
-  ctx.strokeStyle = "#FFFFFF";
+  ctx.strokeStyle = this.innerColor_;
   ctx.moveTo(xthird, yzero);
   ctx.lineTo(xfourth, yzero);
   ctx.stroke();

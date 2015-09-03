@@ -167,7 +167,7 @@
         new ol.control.LayerSwitcher(),
         new adscontrols.Print({target: toolbar.element, label: "\uf02f"}),
         new adscontrols.OverviewMap(),
-        new adscontrols.CanvasScaleLine()
+        new adscontrols.CanvasScaleLine({labelColor: "#000000", outerColor: "#000000", innerColor: "#ffffff"})
       ])
     })
     view.fit(bounds, map.getSize(), {padding: [0,0,0,0], constrainResolution: false})
