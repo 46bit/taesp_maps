@@ -28,8 +28,6 @@ adscontrols.FullScreen = function(opt_options) {
   this.labelActiveNode_ = /** @type {Node} */ (goog.isString(labelActive) ?
           goog.dom.createTextNode(labelActive) : labelActive);
 
-  this.restore_ = goog.isDef(options.restore) ? options.restore : false
-
   var tipLabel = goog.isDef(options.tipLabel) ?
       options.tipLabel : 'Toggle full-screen';
   var button = goog.dom.createDom(goog.dom.TagName.BUTTON, {
@@ -124,11 +122,6 @@ adscontrols.FullScreen.prototype.handleFullScreenChange_ = function() {
   }
   if (!goog.isNull(map)) {
     map.updateSize();
-    if (this.restore_) {
-      // @TODO: Do we really want to zoom the map back to the start point upon
-      // going in/out of fullscreen. What we actually want is to just fit the area
-      // being looked at before the change.
-      this.restore_.restore()
-    }
+    view.fit(this.bounds, map.getSize(), {constrainResolution: false})
   }
 };

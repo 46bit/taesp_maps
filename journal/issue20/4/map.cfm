@@ -166,7 +166,7 @@
       controls: new ol.Collection([
         toolbar,
         new adscontrols.Zoom({target: toolbar.element, zoomInLabel: "\uf067", zoomOutLabel: "\uf068"}),
-        new adscontrols.FullScreen({target: toolbar.element, label: "\uf065", restore: restore}),
+        new adscontrols.FullScreen({target: toolbar.element, label: "\uf065"}),
         new ol.control.LayerSwitcher(),
         new adscontrols.Print({target: toolbar.element, label: "\uf02f"}),
         restore,
