@@ -290,3 +290,27 @@
 .adscontrols-toolbar .control__bottom .button {
   border-radius: 0 0 2px 2px;
 }
+
+.adscontrols-sidebar-container {
+  position: absolute;
+  left: -200px;
+  top: 0;
+  height: 100%;
+  width: 200px;
+}
+.adscontrols-sidebar {
+  position: relative;
+  height: 100%;
+}
+.adscontrols-sidebar-tab {
+  width: 20px;
+  height: 100px;
+  background: red;
+  position: absolute;
+  top: 40px;
+  right: -20px;
+  cursor: pointer;
+}
+.adscontrols-contents {
+
+}
