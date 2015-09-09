@@ -7,6 +7,7 @@ goog.require('goog.dom.classlist');
 goog.require('goog.events');
 goog.require('goog.events.EventType');
 goog.require('goog.fx.dom.Slide');
+goog.require('goog.style');
 goog.require('ol.control.Control');
 
 archds.maps.control.Sidebar = function(opt_options) {
@@ -25,6 +26,9 @@ archds.maps.control.Sidebar = function(opt_options) {
     "class": this.cssClassName_ + "-container"
   }, this.sidebar)
 
+  goog.events.listen(this.tab, goog.events.EventType.CLICK,
+    this.handleTabClick_, false, this);
+
   goog.base(this, {
     element: this.container,
     target: options.target
@@ -32,16 +36,24 @@ archds.maps.control.Sidebar = function(opt_options) {
 };
 goog.inherits(archds.maps.control.Sidebar, ol.control.Control);
 
-// @TODO: Once Google Closure Library in, make this work.
-archds.maps.control.Sidebar.prototype.tabClicked_ = function (event) {
+archds.maps.control.Sidebar.prototype.handleTabClick_ = function (event) {
   event.preventDefault()
+
+  var sidebar_dimensions = goog.style.getSize(this.sidebar)
+
+  var from = [-sidebar_dimensions.width, 0]
+  var to = [0, 0]
+  if (parseInt(this.container.style.left) >= 0) {
+    to[0] = from[0]
+    from[0] = 0
+  }
 
   var anim = new goog.fx.dom.Slide(
     this.container,
-    [-300, 0],
-    [0, 0],
-    2,
-    goog.fx.easing.easeOut
+    from,
+    to,
+    300,
+    goog.fx.easing.easeIn
   )
   anim.play()
 }
