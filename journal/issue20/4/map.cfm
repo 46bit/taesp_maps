@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="/archds/deps/ol-3.6.0.css" type="text/css">
+  <link rel="stylesheet" href="/archds/deps/ol-3.8.2.css" type="text/css">
   <link rel="stylesheet" href="/archds/deps/ol3-layerswitcher.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <style>
@@ -50,8 +50,6 @@
   <script src="/archds/archds-deps.js"></script>
   <script src="/ol3-3.8.2/ol3-3.8.2-deps.js"></script>
 
-  <script src="/archds/deps/polyfills.js"></script>
-  <script src="/archds/deps/jquery-1.11.3.min.js"></script>
   <script src="/archds/deps/proj4-2.3.3.js"></script>
   <script src="/archds/deps/uri.min.js"></script>
 
@@ -70,6 +68,7 @@
     goog.require("archds.maps.control.Sidebar")
     goog.require("archds.maps.control.Contents")
 
+    goog.require("goog.net.jsloader")
     goog.require("ol.source.ImageWMS")
   </script>
 
@@ -103,12 +102,12 @@
   }
 
   if (footnote) {
-    $("#map").show()
-    $("#select_a_map_notice").hide()
+    document.getElementById("map").style.display = "block"
+    document.getElementById("select_a_map_notice").style.display = "none"
     map_load(footnote, ce)
   } else {
-    $("#map").hide()
-    $("#select_a_map_notice").show()
+    document.getElementById("map").style.display = "none"
+    document.getElementById("select_a_map_notice").style.display = "block"
   }
 
   function map_load(toc_footnote, ce) {
@@ -119,10 +118,14 @@
     //        Set bounding box to ceminx,ceminy,cemaxx,cemaxy
     // @TODO: Render map as below.
 
-    $.get("/journal/issue20/4/archds-maps-toc/" + toc_footnote + ".toc", function (toc_js) {
-      // @TODO: Check file existed, etc. Also protect against malicious toc_footnote
-      //        (for sake of thoroughness). Directory traversal main issue.
-      eval(toc_js)
+    var toc_url = "/journal/issue20/4/archds-maps-toc/" + toc_footnote + ".toc"
+
+    var tocloader = goog.net.jsloader.load(toc_url)
+    tocloader.addErrback(function (error_code) {
+      // @TODO: Error!
+      return
+    })
+    tocloader.addCallback(function () {
       map_display(ce, toc)
     })
   }
