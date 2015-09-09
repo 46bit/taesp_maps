@@ -1,4 +1,17 @@
-adscontrols.FullScreen = function(opt_options) {
+goog.provide('archds.maps.control.FullScreen');
+
+goog.require('goog.asserts');
+goog.require('goog.dom');
+goog.require('goog.dom.TagName');
+goog.require('goog.dom.classlist');
+goog.require('goog.dom.fullscreen');
+goog.require('goog.dom.fullscreen.EventType');
+goog.require('goog.events');
+goog.require('goog.events.EventType');
+goog.require('ol.control.Control');
+goog.require('ol.css');
+
+archds.maps.control.FullScreen = function(opt_options) {
 
   var options = goog.isDef(opt_options) ? opt_options : {};
 
@@ -43,8 +56,7 @@ adscontrols.FullScreen = function(opt_options) {
       goog.dom.fullscreen.EventType.CHANGE,
       this.handleFullScreenChange_, false, this);
 
-  var cssClasses = this.cssClassName_ + ' ' + ol.css.CLASS_UNSELECTABLE +
-      ' control ' +
+  var cssClasses = this.cssClassName_ + ' ol-unselectable control ' +
       (!goog.dom.fullscreen.isSupported() ? ol.css.CLASS_UNSUPPORTED : '');
   var element = goog.dom.createDom(goog.dom.TagName.DIV, cssClasses, button);
 
@@ -60,14 +72,14 @@ adscontrols.FullScreen = function(opt_options) {
   this.keys_ = goog.isDef(options.keys) ? options.keys : false;
 
 };
-goog.inherits(adscontrols.FullScreen, ol.control.Control);
+goog.inherits(archds.maps.control.FullScreen, ol.control.Control);
 
 
 /**
  * @param {goog.events.BrowserEvent} event The event to handle
  * @private
  */
-adscontrols.FullScreen.prototype.handleClick_ = function(event) {
+archds.maps.control.FullScreen.prototype.handleClick_ = function(event) {
   event.preventDefault();
   this.handleFullScreen_();
 };
@@ -76,7 +88,7 @@ adscontrols.FullScreen.prototype.handleClick_ = function(event) {
 /**
  * @private
  */
-adscontrols.FullScreen.prototype.handleFullScreen_ = function() {
+archds.maps.control.FullScreen.prototype.handleFullScreen_ = function() {
   if (!goog.dom.fullscreen.isSupported()) {
     return;
   }
@@ -107,7 +119,7 @@ adscontrols.FullScreen.prototype.handleFullScreen_ = function() {
 /**
  * @private
  */
-adscontrols.FullScreen.prototype.handleFullScreenChange_ = function() {
+archds.maps.control.FullScreen.prototype.handleFullScreenChange_ = function() {
   var opened = this.cssClassName_ + '-true';
   var closed = this.cssClassName_ + '-false';
   var button = goog.dom.getFirstElementChild(this.element);

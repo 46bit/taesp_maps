@@ -1,4 +1,14 @@
-adscontrols.Restore = function(opt_options) {
+goog.provide('archds.maps.control.Restore');
+
+goog.require('goog.asserts');
+goog.require('goog.dom');
+goog.require('goog.dom.TagName');
+goog.require('goog.dom.classlist');
+goog.require('goog.events');
+goog.require('goog.events.EventType');
+goog.require('ol.control.Control');
+
+archds.maps.control.Restore = function(opt_options) {
 
   var options = goog.isDef(opt_options) ? opt_options : {};
 
@@ -42,9 +52,9 @@ adscontrols.Restore = function(opt_options) {
    */
   this.keys_ = goog.isDef(options.keys) ? options.keys : false;
 };
-goog.inherits(adscontrols.Restore, ol.control.Control);
+goog.inherits(archds.maps.control.Restore, ol.control.Control);
 
-adscontrols.Restore.prototype.setRestoreBoundingBox = function(restoreBoundingBox, options) {
+archds.maps.control.Restore.prototype.setRestoreBoundingBox = function(restoreBoundingBox, options) {
   // Set a bounding box the map view should fit upon restoring.
   this.restoreBoundingBox_ = restoreBoundingBox
   this.restoreBoundingBoxOptions_ = goog.isDef(options) ? options : {}
@@ -54,19 +64,19 @@ adscontrols.Restore.prototype.setRestoreBoundingBox = function(restoreBoundingBo
  * @param {goog.events.BrowserEvent} event The event to handle
  * @private
  */
-adscontrols.Restore.prototype.handleClick_ = function(event) {
+archds.maps.control.Restore.prototype.handleClick_ = function(event) {
   event.preventDefault();
 
   this.restore()
 };
 
-adscontrols.Restore.prototype.restore = function() {
+archds.maps.control.Restore.prototype.restore = function() {
   var map = this.getMap()
   var view = map.getView()
 
   if (this.restoreBoundingBox_) {
     view.fit(this.restoreBoundingBox_, map.getSize(), this.restoreBoundingBoxOptions_)
   } else {
-    console.log("@DEBUG: adscontrols.Restore: No bounding box set to restore.")
+    console.log("@DEBUG: archds.maps.control.Restore: No bounding box set to restore.")
   }
 }

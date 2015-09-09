@@ -1,4 +1,16 @@
-adscontrols.Zoom = function(opt_options) {
+goog.provide('archds.maps.control.Zoom');
+
+goog.require('goog.dom');
+goog.require('goog.dom.TagName');
+goog.require('goog.dom.classlist');
+goog.require('goog.events');
+goog.require('goog.events.EventType');
+goog.require('ol.animation');
+goog.require('ol.control.Control');
+goog.require('ol.css');
+goog.require('ol.easing');
+
+archds.maps.control.Zoom = function(opt_options) {
 
   var options = goog.isDef(opt_options) ? opt_options : {};
 
@@ -24,7 +36,7 @@ adscontrols.Zoom = function(opt_options) {
 
   goog.events.listen(inElement,
       goog.events.EventType.CLICK, goog.partial(
-          adscontrols.Zoom.prototype.handleClick_, delta), false, this);
+          archds.maps.control.Zoom.prototype.handleClick_, delta), false, this);
 
   var outElement = goog.dom.createDom(goog.dom.TagName.BUTTON, {
     'class': className + '-out button',
@@ -34,7 +46,7 @@ adscontrols.Zoom = function(opt_options) {
 
   goog.events.listen(outElement,
       goog.events.EventType.CLICK, goog.partial(
-          adscontrols.Zoom.prototype.handleClick_, -delta), false, this);
+          archds.maps.control.Zoom.prototype.handleClick_, -delta), false, this);
 
   goog.events.listen(outElement, [
     goog.events.EventType.MOUSEOUT,
@@ -43,7 +55,7 @@ adscontrols.Zoom = function(opt_options) {
     this.blur();
   }, false);
 
-  var cssClasses = className + ' ' + ol.css.CLASS_UNSELECTABLE + ' control';
+  var cssClasses = className + ' ol-unselectable control';
   var element = goog.dom.createDom(goog.dom.TagName.DIV, cssClasses, inElement,
       outElement);
 
@@ -59,7 +71,7 @@ adscontrols.Zoom = function(opt_options) {
   this.duration_ = goog.isDef(options.duration) ? options.duration : 250;
 
 };
-goog.inherits(adscontrols.Zoom, ol.control.Control);
+goog.inherits(archds.maps.control.Zoom, ol.control.Control);
 
 
 /**
@@ -67,7 +79,7 @@ goog.inherits(adscontrols.Zoom, ol.control.Control);
  * @param {goog.events.BrowserEvent} event The event to handle
  * @private
  */
-adscontrols.Zoom.prototype.handleClick_ = function(delta, event) {
+archds.maps.control.Zoom.prototype.handleClick_ = function(delta, event) {
   event.preventDefault();
   this.zoomByDelta_(delta);
 };
@@ -77,7 +89,7 @@ adscontrols.Zoom.prototype.handleClick_ = function(delta, event) {
  * @param {number} delta Zoom delta.
  * @private
  */
-adscontrols.Zoom.prototype.zoomByDelta_ = function(delta) {
+archds.maps.control.Zoom.prototype.zoomByDelta_ = function(delta) {
   var map = this.getMap();
   var view = map.getView();
   if (goog.isNull(view)) {

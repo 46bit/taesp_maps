@@ -1,3 +1,27 @@
+goog.provide('archds.maps.control.OverviewMap');
+
+goog.require('goog.asserts');
+goog.require('goog.dom');
+goog.require('goog.dom.TagName');
+goog.require('goog.dom.classlist');
+goog.require('goog.events');
+goog.require('goog.events.EventType');
+goog.require('goog.math.Size');
+goog.require('goog.style');
+goog.require('ol.Collection');
+goog.require('ol.Map');
+goog.require('ol.MapEventType');
+goog.require('ol.Object');
+goog.require('ol.ObjectEventType');
+goog.require('ol.Overlay');
+goog.require('ol.OverlayPositioning');
+goog.require('ol.View');
+goog.require('ol.ViewProperty');
+goog.require('ol.control.Control');
+goog.require('ol.coordinate');
+goog.require('ol.css');
+goog.require('ol.extent');
+
 /**
  * Create a new control with a map acting as an overview map for an other
  * defined map.
@@ -6,7 +30,7 @@
  * @param {olx.control.OverviewMapOptions=} opt_options OverviewMap options.
  * @api
  */
-adscontrols.OverviewMap = function(opt_options) {
+archds.maps.control.OverviewMap = function(opt_options) {
 
   var options = goog.isDef(opt_options) ? opt_options : {};
 
@@ -96,19 +120,19 @@ adscontrols.OverviewMap = function(opt_options) {
    */
   this.boxOverlay_ = new ol.Overlay({
     position: [0, 0],
-    positioning: ol.OverlayPositioning.BOTTOM_LEFT,
+    positioning: "bottom-left",
     element: box
   });
   this.ovmap_.addOverlay(this.boxOverlay_);
 
-  var cssClasses = className + ' ' + ol.css.CLASS_UNSELECTABLE + ' control ' +
+  var cssClasses = className + ' ol-unselectable control ' +
       (this.collapsed_ && this.collapsible_ ? ' ol-collapsed' : '') +
       (this.collapsible_ ? '' : ' ol-uncollapsible');
   var element = goog.dom.createDom(goog.dom.TagName.DIV,
       cssClasses, ovmapDiv, button);
 
   var render = goog.isDef(options.render) ?
-      options.render : adscontrols.OverviewMap.render;
+      options.render : archds.maps.control.OverviewMap.render;
 
   goog.base(this, {
     element: element,
@@ -116,14 +140,14 @@ adscontrols.OverviewMap = function(opt_options) {
     target: options.target
   });
 };
-goog.inherits(adscontrols.OverviewMap, ol.control.Control);
+goog.inherits(archds.maps.control.OverviewMap, ol.control.Control);
 
 
 /**
  * @inheritDoc
  * @api
  */
-adscontrols.OverviewMap.prototype.setMap = function(map) {
+archds.maps.control.OverviewMap.prototype.setMap = function(map) {
   var oldMap = this.getMap();
   if (map === oldMap) {
     return;
@@ -163,7 +187,7 @@ adscontrols.OverviewMap.prototype.setMap = function(map) {
  * @param {ol.ObjectEvent} event The propertychange event.
  * @private
  */
-adscontrols.OverviewMap.prototype.handleMapPropertyChange_ = function(event) {
+archds.maps.control.OverviewMap.prototype.handleMapPropertyChange_ = function(event) {
   if (event.key === ol.MapProperty.VIEW) {
     var oldView = /** @type {ol.View} */ (event.oldValue);
     if (oldView) {
@@ -180,7 +204,7 @@ adscontrols.OverviewMap.prototype.handleMapPropertyChange_ = function(event) {
  * @param {ol.View} view The view.
  * @private
  */
-adscontrols.OverviewMap.prototype.bindView_ = function(view) {
+archds.maps.control.OverviewMap.prototype.bindView_ = function(view) {
   goog.events.listen(view,
       ol.Object.getChangeEventType(ol.ViewProperty.ROTATION),
       this.handleRotationChanged_, false, this);
@@ -192,7 +216,7 @@ adscontrols.OverviewMap.prototype.bindView_ = function(view) {
  * @param {ol.View} view The view.
  * @private
  */
-adscontrols.OverviewMap.prototype.unbindView_ = function(view) {
+archds.maps.control.OverviewMap.prototype.unbindView_ = function(view) {
   goog.events.unlisten(view,
       ol.Object.getChangeEventType(ol.ViewProperty.ROTATION),
       this.handleRotationChanged_, false, this);
@@ -205,7 +229,7 @@ adscontrols.OverviewMap.prototype.unbindView_ = function(view) {
  * overview map's view.
  * @private
  */
-adscontrols.OverviewMap.prototype.handleRotationChanged_ = function() {
+archds.maps.control.OverviewMap.prototype.handleRotationChanged_ = function() {
   this.ovmap_.getView().setRotation(this.getMap().getView().getRotation());
 };
 
@@ -213,10 +237,10 @@ adscontrols.OverviewMap.prototype.handleRotationChanged_ = function() {
 /**
  * Update the overview map element.
  * @param {ol.MapEvent} mapEvent Map event.
- * @this {adscontrols.OverviewMap}
+ * @this {archds.maps.control.OverviewMap}
  * @api
  */
-adscontrols.OverviewMap.render = function(mapEvent) {
+archds.maps.control.OverviewMap.render = function(mapEvent) {
   this.validateExtent_();
   this.updateBox_();
 };
@@ -233,7 +257,7 @@ adscontrols.OverviewMap.render = function(mapEvent) {
  * main map center location.
  * @private
  */
-adscontrols.OverviewMap.prototype.validateExtent_ = function() {
+archds.maps.control.OverviewMap.prototype.validateExtent_ = function() {
   var map = this.getMap();
   var ovmap = this.ovmap_;
 
@@ -282,7 +306,7 @@ adscontrols.OverviewMap.prototype.validateExtent_ = function() {
  * the extent of the main map.
  * @private
  */
-adscontrols.OverviewMap.prototype.resetExtent_ = function() {
+archds.maps.control.OverviewMap.prototype.resetExtent_ = function() {
   if (ol.OVERVIEWMAP_MAX_RATIO === 0 || ol.OVERVIEWMAP_MIN_RATIO === 0) {
     return;
   }
@@ -319,7 +343,7 @@ adscontrols.OverviewMap.prototype.resetExtent_ = function() {
  * resolution.
  * @private
  */
-adscontrols.OverviewMap.prototype.recenter_ = function() {
+archds.maps.control.OverviewMap.prototype.recenter_ = function() {
   var map = this.getMap();
   var ovmap = this.ovmap_;
 
@@ -337,7 +361,7 @@ adscontrols.OverviewMap.prototype.recenter_ = function() {
  * Update the box using the main map extent
  * @private
  */
-adscontrols.OverviewMap.prototype.updateBox_ = function() {
+archds.maps.control.OverviewMap.prototype.updateBox_ = function() {
   var map = this.getMap();
   var ovmap = this.ovmap_;
 
@@ -387,7 +411,7 @@ adscontrols.OverviewMap.prototype.updateBox_ = function() {
  * @return {ol.Coordinate|undefined} Coordinate for rotation and center anchor.
  * @private
  */
-adscontrols.OverviewMap.prototype.calculateCoordinateRotate_ = function(
+archds.maps.control.OverviewMap.prototype.calculateCoordinateRotate_ = function(
     rotation, coordinate) {
   var coordinateRotate;
 
@@ -413,7 +437,7 @@ adscontrols.OverviewMap.prototype.calculateCoordinateRotate_ = function(
  * @param {goog.events.BrowserEvent} event The event to handle
  * @private
  */
-adscontrols.OverviewMap.prototype.handleClick_ = function(event) {
+archds.maps.control.OverviewMap.prototype.handleClick_ = function(event) {
   event.preventDefault();
   this.handleToggle_();
 };
@@ -422,7 +446,7 @@ adscontrols.OverviewMap.prototype.handleClick_ = function(event) {
 /**
  * @private
  */
-adscontrols.OverviewMap.prototype.handleToggle_ = function() {
+archds.maps.control.OverviewMap.prototype.handleToggle_ = function() {
   goog.dom.classlist.toggle(this.element, 'ol-collapsed');
   if (this.collapsed_) {
     goog.dom.replaceNode(this.collapseLabel_, this.label_);
@@ -451,7 +475,7 @@ adscontrols.OverviewMap.prototype.handleToggle_ = function() {
  * @return {boolean} True if the widget is collapsible.
  * @api stable
  */
-adscontrols.OverviewMap.prototype.getCollapsible = function() {
+archds.maps.control.OverviewMap.prototype.getCollapsible = function() {
   return this.collapsible_;
 };
 
@@ -461,7 +485,7 @@ adscontrols.OverviewMap.prototype.getCollapsible = function() {
  * @param {boolean} collapsible True if the widget is collapsible.
  * @api stable
  */
-adscontrols.OverviewMap.prototype.setCollapsible = function(collapsible) {
+archds.maps.control.OverviewMap.prototype.setCollapsible = function(collapsible) {
   if (this.collapsible_ === collapsible) {
     return;
   }
@@ -480,7 +504,7 @@ adscontrols.OverviewMap.prototype.setCollapsible = function(collapsible) {
  * @param {boolean} collapsed True if the widget is collapsed.
  * @api stable
  */
-adscontrols.OverviewMap.prototype.setCollapsed = function(collapsed) {
+archds.maps.control.OverviewMap.prototype.setCollapsed = function(collapsed) {
   if (!this.collapsible_ || this.collapsed_ === collapsed) {
     return;
   }
@@ -492,6 +516,6 @@ adscontrols.OverviewMap.prototype.setCollapsed = function(collapsed) {
  * @return {boolean} True if the widget is collapsed.
  * @api stable
  */
-adscontrols.OverviewMap.prototype.getCollapsed = function() {
+archds.maps.control.OverviewMap.prototype.getCollapsed = function() {
   return this.collapsed_;
 };

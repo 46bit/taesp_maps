@@ -1,4 +1,14 @@
-adscontrols.Print = function(opt_options) {
+goog.provide('archds.maps.control.Print');
+
+goog.require('goog.asserts');
+goog.require('goog.dom');
+goog.require('goog.dom.TagName');
+goog.require('goog.dom.classlist');
+goog.require('goog.events');
+goog.require('goog.events.EventType');
+goog.require('ol.control.Control');
+
+archds.maps.control.Print = function(opt_options) {
 
   var options = goog.isDef(opt_options) ? opt_options : {};
 
@@ -42,13 +52,13 @@ adscontrols.Print = function(opt_options) {
    */
   this.keys_ = goog.isDef(options.keys) ? options.keys : false;
 };
-goog.inherits(adscontrols.Print, ol.control.Control);
+goog.inherits(archds.maps.control.Print, ol.control.Control);
 
 /**
  * @param {goog.events.BrowserEvent} event The event to handle
  * @private
  */
-adscontrols.Print.prototype.handleClick_ = function(event) {
+archds.maps.control.Print.prototype.handleClick_ = function(event) {
   //event.preventDefault();
   var map = this.getMap();
   var button = this.button

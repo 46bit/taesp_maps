@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="/journal/issue20/4/adsmaps/deps/ol-3.6.0.css" type="text/css">
-  <link rel="stylesheet" href="/journal/issue20/4/adsmaps/deps/ol3-layerswitcher.css" type="text/css">
+  <link rel="stylesheet" href="/archds/deps/ol-3.6.0.css" type="text/css">
+  <link rel="stylesheet" href="/archds/deps/ol3-layerswitcher.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <style>
   body {
@@ -46,25 +46,32 @@
     <p style="font-size:smaller;">This interactive map feature is best viewed with Internet Explorer or Mozilla Firefox.</p>
   </div>
 
-  <script src="/journal/issue20/4/adsmaps/deps/polyfills.js"></script>
-  <script src="/journal/issue20/4/adsmaps/deps/jquery-1.11.3.min.js"></script>
-  <script src="/journal/issue20/4/adsmaps/deps/proj4-2.3.3.js"></script>
-  <script src="/journal/issue20/4/adsmaps/deps/ol-3.8.2-debug.js"></script>
-  <script src="/journal/issue20/4/adsmaps/deps/ol3-layerswitcher.js"></script>
-  <script src="/journal/issue20/4/adsmaps/deps/uri.min.js"></script>
-  <script src="/journal/issue20/4/adsmaps/deps/toc2json/api_openlayers.js"></script>
+  <script src="/closure-library/closure/goog/base.js"></script>
+  <script src="/archds/archds-deps.js"></script>
+  <script src="/ol3-3.8.2/ol3-3.8.2-deps.js"></script>
+
+  <script src="/archds/deps/polyfills.js"></script>
+  <script src="/archds/deps/jquery-1.11.3.min.js"></script>
+  <script src="/archds/deps/proj4-2.3.3.js"></script>
+  <script src="/archds/deps/uri.min.js"></script>
+
+  <script src="/archds/deps/toc2json/api_openlayers.js"></script>
   <script>
-    window.adscontrols = {}
+    goog.require("archds.maps.control.OverviewMap")
+    goog.require("archds.maps.control.CanvasScaleLine")
+    goog.require("archds.maps.control.LayerSwitcher")
+
+    goog.require("archds.maps.control.Toolbar")
+    goog.require("archds.maps.control.Zoom")
+    goog.require("archds.maps.control.FullScreen")
+    goog.require("archds.maps.control.Restore")
+    goog.require("archds.maps.control.Print")
+
+    goog.require("archds.maps.control.Sidebar")
+    goog.require("archds.maps.control.Contents")
+
+    goog.require("ol.source.ImageWMS")
   </script>
-  <script src="/journal/issue20/4/adsmaps/adscontrols/toolbar.js"></script>
-  <script src="/journal/issue20/4/adsmaps/adscontrols/print.js"></script>
-  <script src="/journal/issue20/4/adsmaps/adscontrols/fullscreencontrol.js"></script>
-  <script src="/journal/issue20/4/adsmaps/adscontrols/overviewmapcontrol.js"></script>
-  <script src="/journal/issue20/4/adsmaps/adscontrols/scalelinecontrol.js"></script>
-  <script src="/journal/issue20/4/adsmaps/adscontrols/zoomcontrol.js"></script>
-  <script src="/journal/issue20/4/adsmaps/adscontrols/restore.js"></script>
-  <script src="/journal/issue20/4/adsmaps/adscontrols/sidebar.js"></script>
-  <script src="/journal/issue20/4/adsmaps/adscontrols/contents.js"></script>
 
   <script>
   function pad(num, size) {
@@ -112,7 +119,7 @@
     //        Set bounding box to ceminx,ceminy,cemaxx,cemaxy
     // @TODO: Render map as below.
 
-    $.get("/journal/issue20/4/adsmaps/toc/" + toc_footnote + ".toc", function (toc_js) {
+    $.get("/journal/issue20/4/archds-maps-toc/" + toc_footnote + ".toc", function (toc_js) {
       // @TODO: Check file existed, etc. Also protect against malicious toc_footnote
       //        (for sake of thoroughness). Directory traversal main issue.
       eval(toc_js)
@@ -148,10 +155,10 @@
       taesp2map_transform.forward([ce["cemaxx"], ce["ceminy"]])
     ]])
 
-    toolbar = new adscontrols.Toolbar()
-    sidebar = new adscontrols.Sidebar()
+    toolbar = new archds.maps.control.Toolbar()
+    sidebar = new archds.maps.control.Sidebar()
 
-    var restore = new adscontrols.Restore({target: toolbar.element})
+    var restore = new archds.maps.control.Restore({target: toolbar.element})
     restore.setRestoreBoundingBox(bounds, {constrainResolution: false})
 
     view = new ol.View({
@@ -169,15 +176,15 @@
       view: view,
       controls: new ol.Collection([
         toolbar,
-        new adscontrols.Zoom({target: toolbar.element, zoomInLabel: "\uf067", zoomOutLabel: "\uf068"}),
-        new adscontrols.FullScreen({target: toolbar.element, label: "\uf065"}),
-        new ol.control.LayerSwitcher(),
-        new adscontrols.Print({target: toolbar.element, label: "\uf02f"}),
+        new archds.maps.control.Zoom({target: toolbar.element, zoomInLabel: "\uf067", zoomOutLabel: "\uf068"}),
+        new archds.maps.control.FullScreen({target: toolbar.element, label: "\uf065"}),
+        new archds.maps.control.LayerSwitcher(),
+        new archds.maps.control.Print({target: toolbar.element, label: "\uf02f"}),
         restore,
-        new adscontrols.OverviewMap(),
-        new adscontrols.CanvasScaleLine({labelColor: "#000000", outerColor: "#000000", innerColor: "#ffffff"}),
+        new archds.maps.control.OverviewMap(),
+        new archds.maps.control.CanvasScaleLine({labelColor: "#000000", outerColor: "#000000", innerColor: "#ffffff"}),
         sidebar,
-        new adscontrols.Contents({target: sidebar.sidebar})
+        new archds.maps.control.Contents({target: sidebar.sidebar})
       ])
     })
     restore.restore()

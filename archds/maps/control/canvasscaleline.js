@@ -1,8 +1,28 @@
-adscontrols.ScaleLineProperty = {
+goog.provide('archds.maps.control.CanvasScaleLine');
+goog.provide('archds.maps.control.ScaleLineProperty');
+goog.provide('archds.maps.control.ScaleLineUnits');
+
+goog.require('goog.asserts');
+goog.require('goog.dom');
+goog.require('goog.dom.TagName');
+goog.require('goog.dom.classlist');
+goog.require('goog.events');
+goog.require('goog.math');
+goog.require('goog.style');
+goog.require('ol.Object');
+goog.require('ol.TransformFunction');
+goog.require('ol.control.Control');
+goog.require('ol.css');
+goog.require('ol.proj');
+goog.require('ol.proj.METERS_PER_UNIT');
+goog.require('ol.proj.Units');
+goog.require('ol.sphere.NORMAL');
+
+archds.maps.control.ScaleLineProperty = {
   UNITS: 'units'
 };
 
-adscontrols.ScaleLineUnits = {
+archds.maps.control.ScaleLineUnits = {
   DEGREES: 'degrees',
   IMPERIAL: 'imperial',
   NAUTICAL: 'nautical',
@@ -10,7 +30,7 @@ adscontrols.ScaleLineUnits = {
   US: 'us'
 };
 
-adscontrols.CanvasScaleLine = function(opt_options) {
+archds.maps.control.CanvasScaleLine = function(opt_options) {
 
   var options = goog.isDef(opt_options) ? opt_options : {};
 
@@ -29,7 +49,7 @@ adscontrols.CanvasScaleLine = function(opt_options) {
   this.innerColor_ = goog.isDef(options.innerColor) ? options.innerColor : "#ffffff"
 
   var render = goog.isDef(options.render) ?
-      options.render : adscontrols.CanvasScaleLine.render;
+      options.render : archds.maps.control.CanvasScaleLine.render;
 
   goog.base(this, {
     render: render,
@@ -38,24 +58,24 @@ adscontrols.CanvasScaleLine = function(opt_options) {
   });
 
   goog.events.listen(
-      this, ol.Object.getChangeEventType(adscontrols.ScaleLineProperty.UNITS),
+      this, ol.Object.getChangeEventType(archds.maps.control.ScaleLineProperty.UNITS),
       this.handleUnitsChanged_, false, this);
 
-  this.setUnits(/** @type {adscontrols.ScaleLineUnits} */ (options.units) ||
-      adscontrols.ScaleLineUnits.METRIC);
+  this.setUnits(/** @type {archds.maps.control.ScaleLineUnits} */ (options.units) ||
+      archds.maps.control.ScaleLineUnits.METRIC);
 
 };
-goog.inherits(adscontrols.CanvasScaleLine, ol.control.Control);
+goog.inherits(archds.maps.control.CanvasScaleLine, ol.control.Control);
 
 
-adscontrols.CanvasScaleLine.LEADING_DIGITS = [1, 2, 5];
+archds.maps.control.CanvasScaleLine.LEADING_DIGITS = [1, 2, 5];
 
-adscontrols.CanvasScaleLine.prototype.getUnits = function() {
-  return /** @type {adscontrols.ScaleLineUnits|undefined} */ (
-      this.get(adscontrols.ScaleLineProperty.UNITS));
+archds.maps.control.CanvasScaleLine.prototype.getUnits = function() {
+  return /** @type {archds.maps.control.ScaleLineUnits|undefined} */ (
+      this.get(archds.maps.control.ScaleLineProperty.UNITS));
 };
 
-adscontrols.CanvasScaleLine.render = function(mapEvent) {
+archds.maps.control.CanvasScaleLine.render = function(mapEvent) {
   var frameState = mapEvent.frameState;
   if (goog.isNull(frameState)) {
     this.viewState_ = null;
@@ -65,15 +85,15 @@ adscontrols.CanvasScaleLine.render = function(mapEvent) {
   this.updateElement_();
 };
 
-adscontrols.CanvasScaleLine.prototype.handleUnitsChanged_ = function() {
+archds.maps.control.CanvasScaleLine.prototype.handleUnitsChanged_ = function() {
   this.updateElement_();
 };
 
-adscontrols.CanvasScaleLine.prototype.setUnits = function(units) {
-  this.set(adscontrols.ScaleLineProperty.UNITS, units);
+archds.maps.control.CanvasScaleLine.prototype.setUnits = function(units) {
+  this.set(archds.maps.control.ScaleLineProperty.UNITS, units);
 };
 
-adscontrols.CanvasScaleLine.prototype.updateElement_ = function() {
+archds.maps.control.CanvasScaleLine.prototype.updateElement_ = function() {
   var viewState = this.viewState_;
 
   if (goog.isNull(viewState)) {
@@ -93,10 +113,10 @@ adscontrols.CanvasScaleLine.prototype.updateElement_ = function() {
   var cosLatitude;
   var units = this.getUnits();
   if (projectionUnits == ol.proj.Units.DEGREES &&
-      (units == adscontrols.ScaleLineUnits.METRIC ||
-       units == adscontrols.ScaleLineUnits.IMPERIAL ||
-       units == adscontrols.ScaleLineUnits.US ||
-       units == adscontrols.ScaleLineUnits.NAUTICAL)) {
+      (units == archds.maps.control.ScaleLineUnits.METRIC ||
+       units == archds.maps.control.ScaleLineUnits.IMPERIAL ||
+       units == archds.maps.control.ScaleLineUnits.US ||
+       units == archds.maps.control.ScaleLineUnits.NAUTICAL)) {
 
     // Convert pointResolution from degrees to meters
     this.toEPSG4326_ = null;
@@ -105,7 +125,7 @@ adscontrols.CanvasScaleLine.prototype.updateElement_ = function() {
     projectionUnits = ol.proj.Units.METERS;
 
   } else if (projectionUnits != ol.proj.Units.DEGREES &&
-      units == adscontrols.ScaleLineUnits.DEGREES) {
+      units == archds.maps.control.ScaleLineUnits.DEGREES) {
 
     // Convert pointResolution from other units to degrees
     if (goog.isNull(this.toEPSG4326_)) {
@@ -125,18 +145,18 @@ adscontrols.CanvasScaleLine.prototype.updateElement_ = function() {
   }
 
   goog.asserts.assert(
-      ((units == adscontrols.ScaleLineUnits.METRIC ||
-        units == adscontrols.ScaleLineUnits.IMPERIAL ||
-        units == adscontrols.ScaleLineUnits.US ||
-        units == adscontrols.ScaleLineUnits.NAUTICAL) &&
+      ((units == archds.maps.control.ScaleLineUnits.METRIC ||
+        units == archds.maps.control.ScaleLineUnits.IMPERIAL ||
+        units == archds.maps.control.ScaleLineUnits.US ||
+        units == archds.maps.control.ScaleLineUnits.NAUTICAL) &&
        projectionUnits == ol.proj.Units.METERS) ||
-      (units == adscontrols.ScaleLineUnits.DEGREES &&
+      (units == archds.maps.control.ScaleLineUnits.DEGREES &&
        projectionUnits == ol.proj.Units.DEGREES),
       'Scale line units and projection units should match');
 
   var nominalCount = this.minWidth_ * pointResolution;
   var suffix = '';
-  if (units == adscontrols.ScaleLineUnits.DEGREES) {
+  if (units == archds.maps.control.ScaleLineUnits.DEGREES) {
     if (nominalCount < 1 / 60) {
       suffix = '\u2033'; // seconds
       pointResolution *= 3600;
@@ -146,7 +166,7 @@ adscontrols.CanvasScaleLine.prototype.updateElement_ = function() {
     } else {
       suffix = '\u00b0'; // degrees
     }
-  } else if (units == adscontrols.ScaleLineUnits.IMPERIAL) {
+  } else if (units == archds.maps.control.ScaleLineUnits.IMPERIAL) {
     if (nominalCount < 0.9144) {
       suffix = 'in';
       pointResolution /= 0.0254;
@@ -157,10 +177,10 @@ adscontrols.CanvasScaleLine.prototype.updateElement_ = function() {
       suffix = 'mi';
       pointResolution /= 1609.344;
     }
-  } else if (units == adscontrols.ScaleLineUnits.NAUTICAL) {
+  } else if (units == archds.maps.control.ScaleLineUnits.NAUTICAL) {
     pointResolution /= 1852;
     suffix = 'nm';
-  } else if (units == adscontrols.ScaleLineUnits.METRIC) {
+  } else if (units == archds.maps.control.ScaleLineUnits.METRIC) {
     if (nominalCount < 1) {
       suffix = 'mm';
       pointResolution *= 1000;
@@ -170,7 +190,7 @@ adscontrols.CanvasScaleLine.prototype.updateElement_ = function() {
       suffix = 'km';
       pointResolution /= 1000;
     }
-  } else if (units == adscontrols.ScaleLineUnits.US) {
+  } else if (units == archds.maps.control.ScaleLineUnits.US) {
     if (nominalCount < 0.9144) {
       suffix = 'in';
       pointResolution *= 39.37;
@@ -189,7 +209,7 @@ adscontrols.CanvasScaleLine.prototype.updateElement_ = function() {
       Math.log(this.minWidth_ * pointResolution) / Math.log(10));
   var count, width;
   while (true) {
-    count = adscontrols.CanvasScaleLine.LEADING_DIGITS[i % 3] *
+    count = archds.maps.control.CanvasScaleLine.LEADING_DIGITS[i % 3] *
         Math.pow(10, Math.floor(i / 3));
     width = Math.round(count / pointResolution);
     if (isNaN(width)) {
@@ -207,7 +227,7 @@ adscontrols.CanvasScaleLine.prototype.updateElement_ = function() {
   }
 };
 
-adscontrols.CanvasScaleLine.prototype.draw = function (count, suffix, width) {
+archds.maps.control.CanvasScaleLine.prototype.draw = function (count, suffix, width) {
   var map = this.getMap()
   var canvas = map.getViewport().getElementsByTagName("canvas")[0]
   var ctx = canvas.getContext("2d")
