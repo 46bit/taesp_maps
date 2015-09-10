@@ -66,7 +66,7 @@
     goog.require("archds.maps.control.Print")
 
     goog.require("archds.maps.control.Sidebar")
-    goog.require("archds.maps.control.Contents")
+    goog.require("archds.maps.control.TocContents")
 
     goog.require("goog.net.jsloader")
     goog.require("ol.source.ImageWMS")
@@ -147,7 +147,7 @@
   proj4.defs("EPSG:4038", 'PROJCS["WGS 84 / TMzn36N", GEOGCS["WGS 84", DATUM["World Geodetic System 1984", SPHEROID["WGS 84", 6378137.0, 298.257223563, AUTHORITY["EPSG","7030"]], AUTHORITY["EPSG","6326"]], PRIMEM["Greenwich", 0.0, AUTHORITY["EPSG","8901"]], UNIT["degree", 0.017453292519943295], AXIS["Geodetic longitude", EAST], AXIS["Geodetic latitude", NORTH], AUTHORITY["EPSG","4326"]], PROJECTION["Transverse Mercator", AUTHORITY["EPSG","9807"]], PARAMETER["central_meridian", 33.0], PARAMETER["latitude_of_origin", 0.0], PARAMETER["scale_factor", 0.9996], PARAMETER["false_easting", 500000.0], PARAMETER["false_northing", 0.0], UNIT["m", 1.0], AXIS["Easting", EAST], AXIS["Northing", NORTH], AUTHORITY["EPSG","4038"]]')
   var taesp2map_transform = proj4("EPSG:4038", "EPSG:900913")
 
-  var bounds, view, layers, group, map, layer_switcher, overview, restore, toolbar, sidebar;
+  var bounds, view, layers, group, map, layer_switcher, overview, restore, toolbar, sidebar, contents;
 
   function map_display(ce, toc) {
     // tl, bl, br, tr
@@ -161,8 +161,13 @@
     toolbar = new archds.maps.control.Toolbar()
     sidebar = new archds.maps.control.Sidebar()
 
-    var restore = new archds.maps.control.Restore({target: toolbar.element})
+    restore = new archds.maps.control.Restore({target: toolbar.element})
     restore.setRestoreBoundingBox(bounds, {constrainResolution: false})
+
+    contents = new archds.maps.control.TocContents({
+      target: sidebar.sidebar,
+      toc: toc
+    })
 
     view = new ol.View({
       center: bounds.getInteriorPoint().flatCoordinates,
@@ -187,7 +192,7 @@
         new archds.maps.control.OverviewMap(),
         new archds.maps.control.CanvasScaleLine({labelColor: "#000000", outerColor: "#000000", innerColor: "#ffffff"}),
         sidebar,
-        new archds.maps.control.Contents({target: sidebar.sidebar})
+        contents
       ])
     })
     restore.restore()

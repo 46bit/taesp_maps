@@ -311,6 +311,29 @@
   right: -20px;
   cursor: pointer;
 }
-.adscontrols-contents {
+.adscontrols-toccontents {
   background: #fff;
+  font: 13px Arial;
+  overflow: scroll;
+  max-height: 450px;
+}
+.adscontrols-toccontents ol {
+  list-style: none;
+  padding: 0 0 0 15px;
+  margin: 0;
+}
+.adscontrols-toccontents > ol {
+  padding-left: 0;
+}
+.adscontrols-toccontents li {
+
+}
+.adscontrols-toccontents label {
+  display: block;
+}
+.adscontrols-toccontents input {
+  padding-right: 3px;
+}
+.adscontrols-toccontents span {
+
 }
