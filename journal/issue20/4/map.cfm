@@ -221,12 +221,43 @@
 
     console.log(toc.asWmsLayerList("taesp_ahrc_2007:level"))
 
-    L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
+    var layers = toc.asLeafletLayers(function (layer) {
+      var wms_layer_name = "taesp_ahrc_2007:level" + pad(parseInt(layer.code, 10), 3)
+      var wms_layer = L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
+        layers: wms_layer_name,
+        format: 'image/png',
+        transparent: true,
+        crs: L.CRS.EPSG3857
+      })
+      return [layer.name, wms_layer]
+    })
+
+    /*L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
       layers: toc.asWmsLayerList("taesp_ahrc_2007:level").join(","),
       format: 'image/png',
       transparent: true,
       crs: L.CRS.EPSG3857
-    }).addTo(map)
+    }).addTo(map)*/
+
+    /*var baseLayers = {
+      "Grayscale": grayscale,
+      "Streets": streets
+    };
+
+    var overlays = {
+      "Cities": cities
+    };*/
+    console.log(layers)
+
+    var layers_for_control = {}
+    for (var i in layers) {
+      layers_for_control[layers[i][0]] = layers[i][1]
+    }
+
+    console.log(layers_for_control)
+
+    L.control.layers({}, layers_for_control).addTo(map)
+
 
     // tl, bl, br, tr
     /*bounds = new ol.geom.Polygon([[

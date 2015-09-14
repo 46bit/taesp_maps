@@ -44,6 +44,18 @@ var TOC = (function () {
     }
     return layer_names
   }
+  TOC.prototype.asLeafletLayers = function asLeafletLayers(layer_constructor) {
+    var mapped = []
+    for (var i in this.layersAndGroups) {
+      var layerOrGroup = this.layersAndGroups[i]
+      if (!(layerOrGroup instanceof LAYER) || layerOrGroup.codeIsNumeric()) {
+        var olLayerOrGroup = layerOrGroup.asLeafletLayers(layer_constructor)
+        mapped = mapped.concat(olLayerOrGroup)
+      }
+    }
+    mapped.reverse()
+    return mapped
+  }
   return TOC
 })()
 
@@ -87,6 +99,18 @@ var GROUP = (function () {
     }
     return layer_names
   }
+  GROUP.prototype.asLeafletLayers = function asLeafletLayers(layer_constructor) {
+    var mapped = []
+    for (var i in this.layersAndGroups) {
+      var layerOrGroup = this.layersAndGroups[i]
+      if (!(layerOrGroup instanceof LAYER) || layerOrGroup.codeIsNumeric()) {
+        var olLayerOrGroup = layerOrGroup.asLeafletLayers(layer_constructor)
+        mapped = mapped.concat(olLayerOrGroup)
+      }
+    }
+    mapped.reverse()
+    return mapped
+  }
   return GROUP
 })()
 
@@ -115,6 +139,9 @@ var LAYER = (function () {
   }
   LAYER.prototype.asWmsLayerList = function asWmsLayerList(prefix) {
     return [prefix + pad(parseInt(this.code, 10), 3)]
+  }
+  LAYER.prototype.asLeafletLayers = function asLeafletLayers(source_constructor) {
+    return [source_constructor(this)]
   }
   return LAYER
 })()
