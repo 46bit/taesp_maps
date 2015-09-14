@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="/archds/deps/ol-3.8.2.css" type="text/css">
-  <link rel="stylesheet" href="/archds/deps/ol3-layerswitcher.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/archds/maps/leaflet-0.7.5/leaflet.css">
+  <link rel="stylesheet" href="/archds/maps/Leaflet.GraphicScale.min.css">
+  <link rel="stylesheet" href="/archds/maps/leaflet.toolbar.css">
   <style>
   body {
     background: #fff;
@@ -34,6 +35,9 @@
     color: #000000;
     background-color: #ffffcc;
   }
+  .leaflet-toolbar-icon {
+    color: #000 !important;
+  }
   </style>
 </head>
 <body>
@@ -46,31 +50,15 @@
     <p style="font-size:smaller;">This interactive map feature is best viewed with Internet Explorer or Mozilla Firefox.</p>
   </div>
 
-  <script src="/closure-library/closure/goog/base.js"></script>
-  <script src="/archds/archds-deps.js"></script>
-  <script src="/ol3-3.8.2/ol3-3.8.2-deps.js"></script>
-
+  <script src="/archds/maps/jquery-1.11.3.min.js"></script>
   <script src="/archds/deps/proj4-2.3.3.js"></script>
   <script src="/archds/deps/uri.min.js"></script>
-
   <script src="/archds/deps/toc2json/api_openlayers.js"></script>
-  <script>
-    goog.require("archds.maps.control.OverviewMap")
-    goog.require("archds.maps.control.CanvasScaleLine")
-    goog.require("archds.maps.control.LayerSwitcher")
-
-    goog.require("archds.maps.control.Toolbar")
-    goog.require("archds.maps.control.Zoom")
-    goog.require("archds.maps.control.FullScreen")
-    goog.require("archds.maps.control.Restore")
-    goog.require("archds.maps.control.Print")
-
-    goog.require("archds.maps.control.Sidebar")
-    goog.require("archds.maps.control.TocContents")
-
-    goog.require("goog.net.jsloader")
-    goog.require("ol.source.ImageWMS")
-  </script>
+  <script src="/archds/maps/leaflet-0.7.5/leaflet.js"></script>
+  <script src="/archds/maps/L.tileLayer.BetterWMS.js"></script>
+  <script src="/archds/maps/Leaflet.GraphicScale.min.js"></script>
+  <script src="/archds/maps/leaflet.toolbar.js"></script>
+  <script src="/archds/maps/Leaflet.fullscreen.js"></script>
 
   <script>
   function pad(num, size) {
@@ -110,6 +98,8 @@
     document.getElementById("select_a_map_notice").style.display = "block"
   }
 
+  var toc_url, toc_script, toc
+
   function map_load(toc_footnote, ce) {
     // @TODO: Create .toc script tag
     // @TODO: Wait for it to load?
@@ -118,16 +108,20 @@
     //        Set bounding box to ceminx,ceminy,cemaxx,cemaxy
     // @TODO: Render map as below.
 
-    var toc_url = "/journal/issue20/4/archds-maps-toc/" + toc_footnote + ".toc"
+    toc_url = "/journal/issue20/4/archds-maps-toc/" + toc_footnote + ".toc"
 
-    var tocloader = goog.net.jsloader.load(toc_url)
-    tocloader.addErrback(function (error_code) {
-      // @TODO: Error!
-      return
-    })
-    tocloader.addCallback(function () {
+    $.get(toc_url, function (toc_js) {
+      eval(toc_js)
       map_display(ce, toc)
     })
+
+    /*toc_script = $("<script>").attr({
+      "src": toc_url,
+      "type": "text/javascript",
+      "async": true
+    }).on("load", function () {
+      map_display(ce, toc)
+    }).appendTo(document.body)*/
   }
 
   var geoserver_url = "http://localhost:8080/geoserver"
@@ -145,13 +139,97 @@
   }
 
   proj4.defs("EPSG:4038", 'PROJCS["WGS 84 / TMzn36N", GEOGCS["WGS 84", DATUM["World Geodetic System 1984", SPHEROID["WGS 84", 6378137.0, 298.257223563, AUTHORITY["EPSG","7030"]], AUTHORITY["EPSG","6326"]], PRIMEM["Greenwich", 0.0, AUTHORITY["EPSG","8901"]], UNIT["degree", 0.017453292519943295], AXIS["Geodetic longitude", EAST], AXIS["Geodetic latitude", NORTH], AUTHORITY["EPSG","4326"]], PROJECTION["Transverse Mercator", AUTHORITY["EPSG","9807"]], PARAMETER["central_meridian", 33.0], PARAMETER["latitude_of_origin", 0.0], PARAMETER["scale_factor", 0.9996], PARAMETER["false_easting", 500000.0], PARAMETER["false_northing", 0.0], UNIT["m", 1.0], AXIS["Easting", EAST], AXIS["Northing", NORTH], AUTHORITY["EPSG","4038"]]')
-  var taesp2map_transform = proj4("EPSG:4038", "EPSG:900913")
+  var taesp2map_transform = proj4("EPSG:4038", "EPSG:4326")
 
   var bounds, view, layers, group, map, layer_switcher, overview, restore, toolbar, sidebar, contents;
 
   function map_display(ce, toc) {
+    var ce_bounds = [
+      taesp2map_transform.forward([ce["ceminx"], ce["ceminy"]]).reverse(),
+      taesp2map_transform.forward([ce["ceminx"], ce["cemaxy"]]).reverse(),
+      taesp2map_transform.forward([ce["cemaxx"], ce["cemaxy"]]).reverse(),
+      taesp2map_transform.forward([ce["cemaxx"], ce["ceminy"]]).reverse()
+    ]
+    console.log(ce_bounds)
+
+    var map = L.map('map', {
+      crs: L.CRS.EPSG3857
+    })
+    map.setView(ce_bounds[0], 11)
+    //map.setMaxBounds(L.latLngBounds(L.latLng(ce_bounds[0]), L.latLng(ce_bounds[2])))
+    map.fitBounds(L.latLngBounds(ce_bounds))
+
+    var graphicScale = L.control.graphicScale({
+      doubleLine: false,
+      fill: 'hollow',
+      showSubunits: false
+    }).addTo(map);
+
+    var home = L.ToolbarAction.extend({
+      options: {
+        toolbarIcon: {
+          html: '<i class="fa fa-home fa-fw fa-lg"></i>',
+          tooltip: "Reset to original map view"
+        }
+      },
+      addHooks: function () {
+        map.fitBounds(L.latLngBounds(ce_bounds))
+      }
+    })
+
+    var print = L.ToolbarAction.extend({
+      options: {
+        toolbarIcon: {
+          html: '<i class="fa fa-print fa-fw fa-lg"></i>',
+          tooltip: "Print the map",
+        className: 'leaflet-draw-toolbar'
+        }
+      },
+      addHooks: function () {
+        // @TODO: Use GeoServer to print current map. Make sure it has a white
+        // background(?).
+      }
+    })
+
+    var fullscreen = L.ToolbarAction.extend({
+      options: {
+        toolbarIcon: {
+          html: '<i class="fa fa-expand fa-fw fa-lg"></i>',
+          tooltip: "Make map fullscreen"
+        }
+      },
+      initialize: function (options) {
+        L.ToolbarAction.prototype.initialize.call(this, options);
+        map.on("fullscreenchange", this.handleFullscreenChange, this)
+      },
+      addHooks: function () {
+        map.toggleFullscreen()
+      },
+      handleFullscreenChange: function () {
+        if (map.isFullscreen()) {
+          this._link.children[0].className = "fa fa-compress fa-fw fa-lg"
+        } else {
+          this._link.children[0].className = "fa fa-expand fa-fw fa-lg"
+        }
+      }
+    })
+
+    var toolbar = new L.Toolbar.Control({
+      position: 'topleft',
+      actions: [home, print, fullscreen]
+    }).addTo(map);
+
+    console.log(toc.asWmsLayerList("taesp_ahrc_2007:level"))
+
+    L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
+      layers: toc.asWmsLayerList("taesp_ahrc_2007:level").join(","),
+      format: 'image/png',
+      transparent: true,
+      crs: L.CRS.EPSG3857
+    }).addTo(map)
+
     // tl, bl, br, tr
-    bounds = new ol.geom.Polygon([[
+    /*bounds = new ol.geom.Polygon([[
       taesp2map_transform.forward([ce["ceminx"], ce["ceminy"]]),
       taesp2map_transform.forward([ce["ceminx"], ce["cemaxy"]]),
       taesp2map_transform.forward([ce["cemaxx"], ce["cemaxy"]]),
@@ -197,7 +275,7 @@
     })
     restore.restore()
     //view.fit(bounds, map.getSize(), {})
-
+    */
     /*map.on("singleclick", function (evt) {
       document.getElementById("info").innerHTML = "";
       var viewResolution = view.getResolution()

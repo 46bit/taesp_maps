@@ -1,5 +1,10 @@
 "use strict"
 
+function pad(num, size) {
+  var s = "000000000" + num;
+  return s.substr(s.length-size);
+}
+
 var TOC = (function () {
   function TOC(a, name, b, gif) {
     this.element_type = "TOC"
@@ -28,6 +33,16 @@ var TOC = (function () {
     }
     mapped.reverse()
     return mapped
+  }
+  TOC.prototype.asWmsLayerList = function asWmsLayerList(prefix) {
+    var layer_names = []
+    for (var i in this.layersAndGroups) {
+      var layerOrGroup = this.layersAndGroups[i]
+      if (!(layerOrGroup instanceof LAYER) || layerOrGroup.codeIsNumeric()) {
+        layer_names = layer_names.concat(layerOrGroup.asWmsLayerList(prefix))
+      }
+    }
+    return layer_names
   }
   return TOC
 })()
@@ -62,6 +77,16 @@ var GROUP = (function () {
     })
     return olGroup
   }
+  GROUP.prototype.asWmsLayerList = function asWmsLayerList(prefix) {
+    var layer_names = []
+    for (var i in this.layersAndGroups) {
+      var layerOrGroup = this.layersAndGroups[i]
+      if (!(layerOrGroup instanceof LAYER) || layerOrGroup.codeIsNumeric()) {
+        layer_names = layer_names.concat(layerOrGroup.asWmsLayerList(prefix))
+      }
+    }
+    return layer_names
+  }
   return GROUP
 })()
 
@@ -87,6 +112,9 @@ var LAYER = (function () {
       source: olSource
     })
     return olLayer
+  }
+  LAYER.prototype.asWmsLayerList = function asWmsLayerList(prefix) {
+    return [prefix + pad(parseInt(this.code, 10), 3)]
   }
   return LAYER
 })()

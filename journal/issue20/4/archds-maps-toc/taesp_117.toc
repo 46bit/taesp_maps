@@ -1,7 +1,7 @@
 var toc = new TOC(' ','All Layers',true,'swatch_layers.gif');
 
 var grpInfo = toc.addGroup( new GROUP('Info',false) );
-		grpInfo.addLayer( new LAYER('Scale','Scalebar','../icon_layer.gif',null,null,null,true) );	
+		grpInfo.addLayer( new LAYER('Scale','Scalebar','../icon_layer.gif',null,null,null,true) );
 		grpInfo.addLayer( new LAYER('Arrow','Arrow','../icon_layer.gif',null,null,null,true) );
 
 var grpArtefact = toc.addGroup( new GROUP('Artefact Analysis',true) );
