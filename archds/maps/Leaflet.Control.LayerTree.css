@@ -57,3 +57,17 @@
 .leaflet-oldie .leaflet-control-layertree {
   border: 1px solid #999;
   }
+
+.leaflet-control-layertree-tree ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.leaflet-control-layertree-tree ol ol {
+  padding-left: 18px;
+}
+
+.leaflet-control-layertree-tree > ol > li > label {
+  font-weight: bold;
+}
