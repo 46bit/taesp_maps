@@ -250,14 +250,14 @@ L.Control.LayerTree.GroupNode = L.Class.extend({
 
   enable: function (map) {
     console.log("Enable group " + this.name)
-    for (var i in this.children) {
+    for (var i = this.children.length - 1; i >= 0; i--) {
       this.children[i].enable(map)
     }
   },
 
   disable: function (map) {
     console.log("Disable group " + this.name)
-    for (var i in this.children) {
+    for (var i = this.children.length - 1; i >= 0; i--) {
       this.children[i].disable(map)
     }
   },
@@ -270,7 +270,7 @@ L.Control.LayerTree.GroupNode = L.Class.extend({
     if (filterFunction(this)) {
       return this
     }
-    for (var i in this.children) {
+    for (var i = this.children.length - 1; i >= 0; i--) {
       if (this.children[i].find(filterFunction)) {
         return this.children[i]
       }
