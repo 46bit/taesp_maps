@@ -7,7 +7,9 @@ L.Control.LayerTree = L.Control.extend({
     collapsed: true,
     position: 'topright',
     autoZIndex: true,
-    hideTopmostNode: true // @TODO: Want to hide the 'Map' top (group) node
+    // Hide the 'Map' top (group) node
+    hideTopmostNode: true,
+    enableAllByDefault: true
   },
 
   initialize: function (layerTree, options) {
@@ -20,6 +22,9 @@ L.Control.LayerTree = L.Control.extend({
 
   onAdd: function () {
     this._initLayout()
+    if (this.options.enableAllByDefault) {
+      this._layerTree.enable(this._map)
+    }
     this.render()
 
     return this._container
@@ -88,23 +93,28 @@ L.Control.LayerTree = L.Control.extend({
     this._inputNodeIdMap = {}
 
     // Recursively render the tree.
-    var treeDomTree = this._renderNode(this._layerTree)
+    var treeDomTree = document.createElement('ol')
+    if (this.options.hideTopmostNode) {
+      for (var i in this._layerTree.children) {
+        var descendant = this._renderNode(this._layerTree.children[i])
+        treeDomTree.appendChild(descendant)
+      }
+    } else {
+      treeDomTree.appendChild(this._renderNode(this._layerTree))
+    }
     this._domTree.appendChild(treeDomTree)
 
     return this;
   },
 
   _renderNode: function (node) {
-    // DOM structure: label > holder > [input?, name, children_ol]
-    // @TODO: Need to carefully avoid putting descendants inside a <label>.
-    //        Suggest using the <li> inside _renderNode as:
-    //        li >
-    //          label >
-    //            holder >
-    //             input?
-    //             name
-    //          ol
-    //            li > ...
+    // | li >
+    // |   label >
+    // |     holder >
+    // |       input?
+    // |       name
+    // |   ol
+    // |     li > ...
 
     var item = document.createElement('li'),
         label = document.createElement('label'),
@@ -118,7 +128,6 @@ L.Control.LayerTree = L.Control.extend({
       var input = document.createElement('input')
       input.type = 'checkbox'
       input.className = 'leaflet-control-layertree-selector'
-      // @TODO: How to handle 'partially visible' groupnodes?
       input.defaultChecked = node.visible(this._map)
       // Save a unique ID on the input so I can filter the Tree and get back
       // this node upon DOM event.
