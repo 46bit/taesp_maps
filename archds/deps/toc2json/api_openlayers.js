@@ -60,6 +60,9 @@ var TOC = (function () {
     var node = new L.Control.LayerTree.GroupNode(this.name)
     for (var i in this.layersAndGroups) {
       var layerOrGroup = this.layersAndGroups[i]
+      if (layerOrGroup.name == 'Info') {
+        continue
+      }
       var layerOrGroupNode = layerOrGroup.asLeafletLayerTreeNode(layer_constructor)
       node.pushChild(layerOrGroupNode)
     }
@@ -126,6 +129,9 @@ var GROUP = (function () {
     })
     for (var i in this.layersAndGroups) {
       var layerOrGroup = this.layersAndGroups[i]
+      if (layerOrGroup.name == 'Info') {
+        continue
+      }
       var layerOrGroupNode = layerOrGroup.asLeafletLayerTreeNode(layer_constructor)
       node.pushChild(layerOrGroupNode)
     }
