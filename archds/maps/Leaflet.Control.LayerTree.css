@@ -1,0 +1,59 @@
+.leaflet-control-layertree-toggle {
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  display: block;
+  }
+
+/* layertree control */
+
+.leaflet-control-layertree {
+  box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+  background: #fff;
+  border-radius: 5px;
+  }
+.leaflet-control-layertree-toggle {
+  background-image: url(leaflet-0.7.5/images/layers.png);
+  width: 36px;
+  height: 36px;
+  }
+.leaflet-retina .leaflet-control-layertree-toggle {
+  background-image: url(leaflet-0.7.5/images/layers-2x.png);
+  background-size: 26px 26px;
+  }
+.leaflet-touch .leaflet-control-layertree-toggle {
+  width: 44px;
+  height: 44px;
+  }
+.leaflet-control-layertree .leaflet-control-layertree-list,
+.leaflet-control-layertree-expanded .leaflet-control-layertree-toggle {
+  display: none;
+  }
+.leaflet-control-layertree-expanded .leaflet-control-layertree-list {
+  display: block;
+  position: relative;
+  }
+.leaflet-control-layertree-expanded {
+  padding: 6px 10px 6px 6px;
+  color: #333;
+  background: #fff;
+  }
+.leaflet-control-layertree-selector {
+  margin-top: 2px;
+  position: relative;
+  top: 1px;
+  }
+.leaflet-control-layertree label {
+  display: block;
+  }
+
+.leaflet-touch .leaflet-control-layertree {
+  box-shadow: none;
+  }
+.leaflet-touch .leaflet-control-layertree {
+  border: 2px solid rgba(0,0,0,0.2);
+  background-clip: padding-box;
+  }
+
+.leaflet-oldie .leaflet-control-layertree {
+  border: 1px solid #999;
+  }

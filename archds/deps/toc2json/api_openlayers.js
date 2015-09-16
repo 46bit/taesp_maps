@@ -56,6 +56,15 @@ var TOC = (function () {
     mapped.reverse()
     return mapped
   }
+  TOC.prototype.asLeafletLayerTreeNode = function asLeafletLayerTreeNode(layer_constructor) {
+    var node = new L.Control.LayerTree.GroupNode(this.name)
+    for (var i in this.layersAndGroups) {
+      var layerOrGroup = this.layersAndGroups[i]
+      var layerOrGroupNode = layerOrGroup.asLeafletLayerTreeNode(layer_constructor)
+      node.pushChild(layerOrGroupNode)
+    }
+    return node
+  }
   return TOC
 })()
 
@@ -111,6 +120,17 @@ var GROUP = (function () {
     mapped.reverse()
     return mapped
   }
+  GROUP.prototype.asLeafletLayerTreeNode = function asLeafletLayerTreeNode(layer_constructor) {
+    var node = new L.Control.LayerTree.GroupNode(this.name, {
+      collapsed: !this.b
+    })
+    for (var i in this.layersAndGroups) {
+      var layerOrGroup = this.layersAndGroups[i]
+      var layerOrGroupNode = layerOrGroup.asLeafletLayerTreeNode(layer_constructor)
+      node.pushChild(layerOrGroupNode)
+    }
+    return node
+  }
   return GROUP
 })()
 
@@ -142,6 +162,13 @@ var LAYER = (function () {
   }
   LAYER.prototype.asLeafletLayers = function asLeafletLayers(source_constructor) {
     return [source_constructor(this)]
+  }
+  LAYER.prototype.asLeafletLayerTreeNode = function asLeafletLayerTreeNode(layer_constructor) {
+    var layer = layer_constructor(this)
+    var node = new L.Control.LayerTree.LayerNode(layer, this.name, {
+      controllable: !!this.visible
+    })
+    return node
   }
   return LAYER
 })()

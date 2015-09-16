@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="/archds/maps/leaflet-0.7.5/leaflet.css">
   <link rel="stylesheet" href="/archds/maps/Leaflet.GraphicScale.min.css">
   <link rel="stylesheet" href="/archds/maps/leaflet.toolbar.css">
+  <link rel="stylesheet" href="/archds/maps/Leaflet.Control.LayerTree.css">
   <style>
   body {
     background: #fff;
@@ -59,6 +60,7 @@
   <script src="/archds/maps/Leaflet.GraphicScale.min.js"></script>
   <script src="/archds/maps/leaflet.toolbar.js"></script>
   <script src="/archds/maps/Leaflet.fullscreen.js"></script>
+  <script src="/archds/maps/Leaflet.Control.LayerTree.js"></script>
 
   <script>
   function pad(num, size) {
@@ -219,7 +221,19 @@
       actions: [home, print, fullscreen]
     }).addTo(map);
 
-    console.log(toc.asWmsLayerList("taesp_ahrc_2007:level"))
+    var layerTreeRoot = toc.asLeafletLayerTreeNode(function (layer) {
+      var wms_layer_name = "taesp_ahrc_2007:level" + pad(parseInt(layer.code, 10), 3)
+      return L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
+        layers: wms_layer_name,
+        format: 'image/png',
+        transparent: true,
+        crs: L.CRS.EPSG3857
+      })
+    })
+
+    var layerTree = L.control.layerTree(layerTreeRoot).addTo(map)
+
+    /*console.log(toc.asWmsLayerList("taesp_ahrc_2007:level"))
 
     var layers = toc.asLeafletLayers(function (layer) {
       var wms_layer_name = "taesp_ahrc_2007:level" + pad(parseInt(layer.code, 10), 3)
@@ -230,7 +244,7 @@
         crs: L.CRS.EPSG3857
       })
       return [layer.name, wms_layer]
-    })
+    })*/
 
     /*L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
       layers: toc.asWmsLayerList("taesp_ahrc_2007:level").join(","),
@@ -247,7 +261,7 @@
     var overlays = {
       "Cities": cities
     };*/
-    console.log(layers)
+    /*console.log(layers)
 
     var layers_for_control = {}
     for (var i in layers) {
@@ -256,7 +270,7 @@
 
     console.log(layers_for_control)
 
-    L.control.layers({}, layers_for_control).addTo(map)
+    L.control.layers({}, layers_for_control).addTo(map)*/
 
 
     // tl, bl, br, tr
