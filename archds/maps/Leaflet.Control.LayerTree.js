@@ -8,8 +8,7 @@ L.Control.LayerTree = L.Control.extend({
     position: 'topright',
     autoZIndex: true,
     // Hide the 'Map' top (group) node
-    hideTopmostNode: true,
-    enableAllByDefault: true
+    hideTopmostNode: true
   },
 
   initialize: function (layerTree, options) {
@@ -22,9 +21,7 @@ L.Control.LayerTree = L.Control.extend({
 
   onAdd: function () {
     this._initLayout()
-    if (this.options.enableAllByDefault) {
-      this._layerTree.enable(this._map)
-    }
+    this._layerTree.addLayersTo(this._map)
     this.render()
 
     return this._container
@@ -164,8 +161,8 @@ L.Control.LayerTree = L.Control.extend({
     // acted upon.
 
     var inputs = this._form.getElementsByTagName('input'),
-        toDisable = [],
-        toEnable = []
+        hideQueue = [],
+        showQueue = []
 
     // The fix for https://github.com/Leaflet/Leaflet/issues/2318 applies less, as
     // this control doesn't expose the problematic event. However for futureproofing
@@ -177,20 +174,18 @@ L.Control.LayerTree = L.Control.extend({
       var node = this._inputNodeIdMap[input.nodeId]
 
       if (!input.checked && node.visible(this._map)) {
-        console.log("!input.checked && node.visible", node.name)
-        toDisable.push(node)
+        hideQueue.push(node)
       }
       if (input.checked && !node.visible(this._map)) {
-        console.log("input.checked && !node.visible", node.name)
-        toEnable.push(node)
+        showQueue.push(node)
       }
     }
 
-    for (var i in toDisable) {
-      toDisable[i].disable(this._map)
+    for (var i in hideQueue) {
+      hideQueue[i].hide()
     }
-    for (var i in toEnable) {
-      toEnable[i].enable(this._map)
+    for (var i in showQueue) {
+      showQueue[i].show()
     }
 
     this.render()
@@ -240,25 +235,29 @@ L.Control.LayerTree.GroupNode = L.Class.extend({
     this.children = []
   },
 
-  visible: function (map) {
+  addLayersTo: function (map) {
+    for (var i = this.children.length - 1; i >= 0; i--) {
+      this.children[i].addLayersTo(map)
+    }
+  },
+
+  visible: function () {
     var visible = true
     for (var i in this.children) {
-      visible &= this.children[i].visible(map)
+      visible &= this.children[i].visible()
     }
     return visible
   },
 
-  enable: function (map) {
-    console.log("Enable group " + this.name)
+  show: function () {
     for (var i = this.children.length - 1; i >= 0; i--) {
-      this.children[i].enable(map)
+      this.children[i].show()
     }
   },
 
-  disable: function (map) {
-    console.log("Disable group " + this.name)
+  hide: function () {
     for (var i = this.children.length - 1; i >= 0; i--) {
-      this.children[i].disable(map)
+      this.children[i].hide()
     }
   },
 
@@ -292,18 +291,20 @@ L.Control.LayerTree.LayerNode = L.Class.extend({
     this.name = name
   },
 
-  visible: function (map) {
-    return map.hasLayer(this.layer)
-  },
-
-  enable: function (map) {
-    console.log("Enable layer " + this.name)
+  addLayersTo: function (map) {
     map.addLayer(this.layer)
   },
 
-  disable: function (map) {
-    console.log("Disable layer " + this.name)
-    map.removeLayer(this.layer)
+  visible: function () {
+    return this.layer.options.opacity > 0
+  },
+
+  show: function () {
+    this.layer.setOpacity(1)
+  },
+
+  hide: function () {
+    this.layer.setOpacity(0)
   },
 
   find: function (filterFunction) {
