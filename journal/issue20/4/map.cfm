@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/archds/maps/Leaflet.GraphicScale.min.css">
   <link rel="stylesheet" href="/archds/maps/leaflet.toolbar.css">
   <link rel="stylesheet" href="/archds/maps/Leaflet.Control.LayerTree.css">
+  <link rel="stylesheet" href="/archds/maps/leaflet.contextmenu.css">
   <style>
   body {
     background: #fff;
@@ -61,6 +62,7 @@
   <script src="/archds/maps/leaflet.toolbar.js"></script>
   <script src="/archds/maps/Leaflet.fullscreen.js"></script>
   <script src="/archds/maps/Leaflet.Control.LayerTree.js"></script>
+  <script src="/archds/maps/leaflet.contextmenu.js"></script>
 
   <script>
   function pad(num, size) {
@@ -143,7 +145,7 @@
   proj4.defs("EPSG:4038", 'PROJCS["WGS 84 / TMzn36N", GEOGCS["WGS 84", DATUM["World Geodetic System 1984", SPHEROID["WGS 84", 6378137.0, 298.257223563, AUTHORITY["EPSG","7030"]], AUTHORITY["EPSG","6326"]], PRIMEM["Greenwich", 0.0, AUTHORITY["EPSG","8901"]], UNIT["degree", 0.017453292519943295], AXIS["Geodetic longitude", EAST], AXIS["Geodetic latitude", NORTH], AUTHORITY["EPSG","4326"]], PROJECTION["Transverse Mercator", AUTHORITY["EPSG","9807"]], PARAMETER["central_meridian", 33.0], PARAMETER["latitude_of_origin", 0.0], PARAMETER["scale_factor", 0.9996], PARAMETER["false_easting", 500000.0], PARAMETER["false_northing", 0.0], UNIT["m", 1.0], AXIS["Easting", EAST], AXIS["Northing", NORTH], AUTHORITY["EPSG","4038"]]')
   var taesp2map_transform = proj4("EPSG:4038", "EPSG:4326")
 
-  var bounds, view, layers, group, map, layer_switcher, overview, restore, toolbar, sidebar, contents;
+  var bounds, view, layers, group, map, layer_switcher, overview, restore, toolbar, sidebar, contents, layerTree;
 
   function map_display(ce, toc) {
     var ce_bounds = [
@@ -154,11 +156,66 @@
     ]
     console.log(ce_bounds)
 
-    var map = L.map('map', {
-      crs: L.CRS.EPSG3857
+    function showCoordinates (e) {
+      L.popup()
+        .setLatLng(e.latlng)
+        .setContent(e.latlng + "")
+        .openOn(map)
+    }
+    function centerMap (e) {
+      map.panTo(e.latlng);
+    }
+    function zoomIn (e) {
+      map.zoomIn();
+    }
+    function zoomOut (e) {
+      map.zoomOut();
+    }
+
+    var layerTreeWmsLayerNames = []
+    var layerTreeRoot = toc.asLeafletLayerTreeNode(function (layer) {
+      var wms_layer_name = "taesp_ahrc_2007:level" + pad(parseInt(layer.code, 10), 3)
+      layerTreeWmsLayerNames.push(wms_layer_name)
+      return L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
+        layers: wms_layer_name,
+        format: 'image/png',
+        transparent: true,
+        crs: L.CRS.EPSG3857
+      })
     })
-    map.setView(ce_bounds[0], 11)
-    //map.setMaxBounds(L.latLngBounds(L.latLng(ce_bounds[0]), L.latLng(ce_bounds[2])))
+    layerTree = L.control.layerTree(layerTreeRoot, {
+      wmsUrl: geoserver_url + "/wms"
+    })
+    layerTree.options.wmsLayers = layerTreeWmsLayerNames.join(",")
+
+    map = L.map('map', {
+      crs: L.CRS.EPSG3857,
+      contextmenu: true,
+      contextmenuWidth: 140,
+      contextmenuItems: [{
+        text: 'Show coordinates',
+        callback: showCoordinates
+      }, {
+        text: 'Center map here',
+        callback: centerMap
+      }, {
+        text: 'Zoom in',
+        icon: '/archds/maps/Leaflet.contextmenu/examples/images/zoom-in.png',
+        callback: zoomIn
+      }, {
+        text: 'Zoom out',
+        icon: '/archds/maps/Leaflet.contextmenu/examples/images/zoom-out.png',
+        callback: zoomOut
+      }, {
+        text: 'What\'s here?',
+        callback: function (e) {
+          layerTree.showFeatureInfoAt(e.latlng)
+        }
+      }]
+    })
+
+    layerTree.addTo(map)
+
     map.fitBounds(L.latLngBounds(ce_bounds))
 
     var graphicScale = L.control.graphicScale({
@@ -221,106 +278,6 @@
       actions: [home, print, fullscreen]
     }).addTo(map);
 
-    var layerTreeRoot = toc.asLeafletLayerTreeNode(function (layer) {
-      var wms_layer_name = "taesp_ahrc_2007:level" + pad(parseInt(layer.code, 10), 3)
-      return L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
-        layers: wms_layer_name,
-        format: 'image/png',
-        transparent: true,
-        crs: L.CRS.EPSG3857
-      })
-    })
-
-    var layerTree = L.control.layerTree(layerTreeRoot).addTo(map)
-
-    /*console.log(toc.asWmsLayerList("taesp_ahrc_2007:level"))
-
-    var layers = toc.asLeafletLayers(function (layer) {
-      var wms_layer_name = "taesp_ahrc_2007:level" + pad(parseInt(layer.code, 10), 3)
-      var wms_layer = L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
-        layers: wms_layer_name,
-        format: 'image/png',
-        transparent: true,
-        crs: L.CRS.EPSG3857
-      })
-      return [layer.name, wms_layer]
-    })*/
-
-    /*L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
-      layers: toc.asWmsLayerList("taesp_ahrc_2007:level").join(","),
-      format: 'image/png',
-      transparent: true,
-      crs: L.CRS.EPSG3857
-    }).addTo(map)*/
-
-    /*var baseLayers = {
-      "Grayscale": grayscale,
-      "Streets": streets
-    };
-
-    var overlays = {
-      "Cities": cities
-    };*/
-    /*console.log(layers)
-
-    var layers_for_control = {}
-    for (var i in layers) {
-      layers_for_control[layers[i][0]] = layers[i][1]
-    }
-
-    console.log(layers_for_control)
-
-    L.control.layers({}, layers_for_control).addTo(map)*/
-
-
-    // tl, bl, br, tr
-    /*bounds = new ol.geom.Polygon([[
-      taesp2map_transform.forward([ce["ceminx"], ce["ceminy"]]),
-      taesp2map_transform.forward([ce["ceminx"], ce["cemaxy"]]),
-      taesp2map_transform.forward([ce["cemaxx"], ce["cemaxy"]]),
-      taesp2map_transform.forward([ce["cemaxx"], ce["ceminy"]])
-    ]])
-
-    toolbar = new archds.maps.control.Toolbar()
-    sidebar = new archds.maps.control.Sidebar()
-
-    restore = new archds.maps.control.Restore({target: toolbar.element})
-    restore.setRestoreBoundingBox(bounds, {constrainResolution: false})
-
-    contents = new archds.maps.control.TocContents({
-      target: sidebar.sidebar,
-      toc: toc
-    })
-
-    view = new ol.View({
-      center: bounds.getInteriorPoint().flatCoordinates,
-      zoom: 13
-    })
-    layers = toc.asOpenLayers(toc_source_constructor)
-    group = new ol.layer.Group({
-      title: "Map",
-      layers: layers
-    })
-    map = new ol.Map({
-      target: 'map',
-      layers: [group],
-      view: view,
-      controls: new ol.Collection([
-        toolbar,
-        new archds.maps.control.Zoom({target: toolbar.element, zoomInLabel: "\uf067", zoomOutLabel: "\uf068"}),
-        new archds.maps.control.FullScreen({target: toolbar.element, label: "\uf065"}),
-        new archds.maps.control.LayerSwitcher(),
-        new archds.maps.control.Print({target: toolbar.element, label: "\uf02f"}),
-        restore,
-        new archds.maps.control.OverviewMap(),
-        new archds.maps.control.CanvasScaleLine({labelColor: "#000000", outerColor: "#000000", innerColor: "#ffffff"}),
-        sidebar,
-        contents
-      ])
-    })
-    restore.restore()
-    //view.fit(bounds, map.getSize(), {})
-    */
     /*map.on("singleclick", function (evt) {
       document.getElementById("info").innerHTML = "";
       var viewResolution = view.getResolution()

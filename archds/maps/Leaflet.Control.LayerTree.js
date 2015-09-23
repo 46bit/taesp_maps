@@ -8,7 +8,11 @@ L.Control.LayerTree = L.Control.extend({
     position: 'topright',
     autoZIndex: true,
     // Hide the 'Map' top (group) node
-    hideTopmostNode: true
+    hideTopmostNode: true,
+    // @TODO: tidy up how LayerTree deals with WMS layers
+    wmsUrl: "",
+    // @TODO: Compute wmsLayers
+    wmsLayers: ""
   },
 
   initialize: function (layerTree, options) {
@@ -203,6 +207,45 @@ L.Control.LayerTree = L.Control.extend({
 
   _collapse: function () {
     L.DomUtil.removeClass(this._container, 'leaflet-control-layertree-expanded');
+  },
+
+  showFeatureInfoAt: function (latlng) {
+    var map = this._map
+    $.ajax({
+      url: this.getFeatureInfoUrl(latlng),
+      success: function (data, status, xhr) {
+        var data = typeof data === 'string' ? data : "ERROR"
+        L.popup({ maxWidth: 800})
+          .setLatLng(latlng)
+          .setContent(data)
+          .openOn(map)
+      },
+      error: function (xhr, status, error) {
+        console.log("ERROR, " + status + ", " + error + "")
+      }
+    })
+  },
+
+  getFeatureInfoUrl: function (latlng) {
+    var point = this._map.latLngToContainerPoint(latlng, this._map.getZoom()),
+        size = this._map.getSize(),
+        params = {
+          request: 'GetFeatureInfo',
+          service: 'WMS',
+          srs: 'EPSG:4326', //this._map.options.crs.code,
+          bbox: this._map.getBounds().toBBoxString(),
+          height: size.y,
+          width: size.x,
+          layers: this.options.wmsLayers,
+          query_layers: this.options.wmsLayers,
+          info_format: 'text/html',
+          x: point.x,
+          y: point.y,
+          i: point.x,
+          j: point.y
+        }
+
+    return this.options.wmsUrl + L.Util.getParamString(params, this.options.wmsUrl, true)
   }
 });
 
