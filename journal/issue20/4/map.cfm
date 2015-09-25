@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/archds/maps/leaflet.toolbar.css">
   <link rel="stylesheet" href="/archds/maps/Leaflet.Control.LayerTree.css">
   <link rel="stylesheet" href="/archds/maps/leaflet.contextmenu.css">
+  <link rel="stylesheet" href="/archds/maps/Leaflet-MiniMap/dist/Control.MiniMap.min.css">
   <style>
   body {
     background: #fff;
@@ -64,6 +65,7 @@
   <script src="/archds/maps/Leaflet.Control.LayerTree.js"></script>
   <script src="/archds/maps/Leaflet.Control.TocWmsLayerTree.js"></script>
   <script src="/archds/maps/leaflet.contextmenu.js"></script>
+  <script src="/archds/maps/Leaflet-MiniMap/dist/Control.MiniMap.min.js"></script>
 
   <script>
   function pad(num, size) {
@@ -263,6 +265,20 @@
     var toolbar = new L.Toolbar.Control({
       position: 'topleft',
       actions: [home, print, fullscreen]
+    }).addTo(map)
+
+    var contourWmsLayer = L.tileLayer.wms(geoserver_url + "/wms", {
+      layers: "taesp_ahrc_2007:level336,taesp_ahrc_2007:level278,taesp_ahrc_2007:level274,taesp_ahrc_2007:level275",
+      format: "image/png",
+      transparent: true,
+      crs: L.CRS.EPSG3857
+    })
+    var minimap = new L.Control.MiniMap(contourWmsLayer, {
+      zoomLevelOffset: -3,
+      toggleDisplay: true,
+      aimingRectOptions: {
+        color: "#ffeedd"
+      }
     }).addTo(map)
   }
   </script>

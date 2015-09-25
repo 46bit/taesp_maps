@@ -76,3 +76,21 @@
 .leaflet-popup-content {
   overflow: scroll;
 }
+
+.leaflet-control-layertree-closearrow {
+  display: none;
+}
+.leaflet-control-layertree-expanded .leaflet-control-layertree-closearrow {
+  display: block;
+  background-image:url(Leaflet-MiniMap/dist/images/toggle.svg);
+  background-size:cover;
+  position:absolute;
+  border-radius:3px 0 0;
+  top: 2px;
+  right: 2px;
+  width: 19px;
+  height: 19px;
+  -webkit-transform:rotate(270deg);
+  transform:rotate(270deg);
+  cursor: pointer;
+}

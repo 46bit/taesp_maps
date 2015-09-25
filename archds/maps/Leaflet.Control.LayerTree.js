@@ -78,6 +78,12 @@ L.Control.LayerTree = L.Control.extend({
     this._domTree = L.DomUtil.create('div', className + '-tree', form)
 
     container.appendChild(form)
+
+    var closearrow = $("<div>").addClass("leaflet-control-layertree-closearrow").get(0)
+    container.appendChild(closearrow)
+    L.DomEvent
+      .on(closearrow, 'click', L.DomEvent.stop)
+      .on(closearrow, 'click', this._collapse, this);
   },
 
   // Unlike with the original L.Control.Layers._update, render is public.
