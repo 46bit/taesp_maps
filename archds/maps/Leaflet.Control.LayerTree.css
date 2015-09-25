@@ -71,3 +71,8 @@
 .leaflet-control-layertree-tree > ol > li > label {
   font-weight: bold;
 }
+
+/* To fit large tables into L.popups */
+.leaflet-popup-content {
+  overflow: scroll;
+}

@@ -62,6 +62,7 @@
   <script src="/archds/maps/leaflet.toolbar.js"></script>
   <script src="/archds/maps/Leaflet.fullscreen.js"></script>
   <script src="/archds/maps/Leaflet.Control.LayerTree.js"></script>
+  <script src="/archds/maps/Leaflet.Control.TocWmsLayerTree.js"></script>
   <script src="/archds/maps/leaflet.contextmenu.js"></script>
 
   <script>
@@ -129,18 +130,6 @@
   }
 
   var geoserver_url = "http://localhost:8080/geoserver"
-  var toc_source_constructor = function toc_source_constructor(layer_code) {
-    return new ol.source.ImageWMS({
-      url: geoserver_url + "/wms",
-      serverType: "geoserver",
-      crossOrigin: "",
-      params: {
-        LAYERS: "taesp_ahrc_2007:level" + pad(parseInt(layer_code, 10), 3),
-        CRS: "EPSG:900913",
-        FORMAT: "image/png"
-      }
-    })
-  }
 
   proj4.defs("EPSG:4038", 'PROJCS["WGS 84 / TMzn36N", GEOGCS["WGS 84", DATUM["World Geodetic System 1984", SPHEROID["WGS 84", 6378137.0, 298.257223563, AUTHORITY["EPSG","7030"]], AUTHORITY["EPSG","6326"]], PRIMEM["Greenwich", 0.0, AUTHORITY["EPSG","8901"]], UNIT["degree", 0.017453292519943295], AXIS["Geodetic longitude", EAST], AXIS["Geodetic latitude", NORTH], AUTHORITY["EPSG","4326"]], PROJECTION["Transverse Mercator", AUTHORITY["EPSG","9807"]], PARAMETER["central_meridian", 33.0], PARAMETER["latitude_of_origin", 0.0], PARAMETER["scale_factor", 0.9996], PARAMETER["false_easting", 500000.0], PARAMETER["false_northing", 0.0], UNIT["m", 1.0], AXIS["Easting", EAST], AXIS["Northing", NORTH], AUTHORITY["EPSG","4038"]]')
   var taesp2map_transform = proj4("EPSG:4038", "EPSG:4326")
@@ -172,21 +161,19 @@
       map.zoomOut();
     }
 
-    var layerTreeWmsLayerNames = []
-    var layerTreeRoot = toc.asLeafletLayerTreeNode(function (layer) {
-      var wms_layer_name = "taesp_ahrc_2007:level" + pad(parseInt(layer.code, 10), 3)
-      layerTreeWmsLayerNames.push(wms_layer_name)
-      return L.tileLayer.wms('http://localhost:8080/geoserver/wms', {
-        layers: wms_layer_name,
+    layerTree = L.control.tocWmsLayerTree(toc, {
+      tocNameBlacklist: {
+        "Info": true,
+        "Background Map DEM": true
+      },
+      wmsUrl: geoserver_url + "/wms",
+      wmsLayerNamePrefix: "taesp_ahrc_2007:",
+      wmsParams: {
         format: 'image/png',
         transparent: true,
         crs: L.CRS.EPSG3857
-      })
+      }
     })
-    layerTree = L.control.layerTree(layerTreeRoot, {
-      wmsUrl: geoserver_url + "/wms"
-    })
-    layerTree.options.wmsLayers = layerTreeWmsLayerNames.join(",")
 
     map = L.map('map', {
       crs: L.CRS.EPSG3857,
@@ -196,6 +183,11 @@
         text: 'Show coordinates',
         callback: showCoordinates
       }, {
+        text: 'What\'s here?',
+        callback: function (e) {
+          layerTree.showFeatureInfoAt(e.latlng)
+        }
+      }, "-", {
         text: 'Center map here',
         callback: centerMap
       }, {
@@ -206,11 +198,6 @@
         text: 'Zoom out',
         icon: '/archds/maps/Leaflet.contextmenu/examples/images/zoom-out.png',
         callback: zoomOut
-      }, {
-        text: 'What\'s here?',
-        callback: function (e) {
-          layerTree.showFeatureInfoAt(e.latlng)
-        }
       }]
     })
 
@@ -276,22 +263,7 @@
     var toolbar = new L.Toolbar.Control({
       position: 'topleft',
       actions: [home, print, fullscreen]
-    }).addTo(map);
-
-    /*map.on("singleclick", function (evt) {
-      document.getElementById("info").innerHTML = "";
-      var viewResolution = view.getResolution()
-      var url = wms_source.getGetFeatureInfoUrl(
-        evt.coordinate,
-        viewResolution,
-        "EPSG:900913",
-        {"INFO_FORMAT": "text/html"}
-      )
-      if (url) {
-        document.getElementById("info").innerHTML =
-          "<iframe seamless src='" + url + "'></iframe>"
-      }
-    })*/
+    }).addTo(map)
   }
   </script>
 </body>

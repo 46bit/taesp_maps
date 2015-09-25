@@ -1,10 +1,5 @@
 "use strict"
 
-function pad(num, size) {
-  var s = "000000000" + num;
-  return s.substr(s.length-size);
-}
-
 var TOC = (function () {
   function TOC(a, name, b, gif) {
     this.element_type = "TOC"
@@ -13,6 +8,7 @@ var TOC = (function () {
     this.b = b
     this.gif = gif
     this.layersAndGroups = []
+    this.expanded = true
   }
   TOC.prototype.addLayer = function addLayer(layer) {
     this.layersAndGroups.push(layer)
@@ -22,60 +18,14 @@ var TOC = (function () {
     this.layersAndGroups.push(group)
     return group
   }
-  TOC.prototype.asOpenLayers = function asOpenLayers(source_constructor) {
-    var mapped = []
-    for (var i in this.layersAndGroups) {
-      var layerOrGroup = this.layersAndGroups[i]
-      if (!(layerOrGroup instanceof LAYER) || layerOrGroup.codeIsNumeric()) {
-        var olLayerOrGroup = layerOrGroup.asOpenLayers(source_constructor)
-        mapped.push(olLayerOrGroup)
-      }
-    }
-    mapped.reverse()
-    return mapped
-  }
-  TOC.prototype.asWmsLayerList = function asWmsLayerList(prefix) {
-    var layer_names = []
-    for (var i in this.layersAndGroups) {
-      var layerOrGroup = this.layersAndGroups[i]
-      if (!(layerOrGroup instanceof LAYER) || layerOrGroup.codeIsNumeric()) {
-        layer_names = layer_names.concat(layerOrGroup.asWmsLayerList(prefix))
-      }
-    }
-    return layer_names
-  }
-  TOC.prototype.asLeafletLayers = function asLeafletLayers(layer_constructor) {
-    var mapped = []
-    for (var i in this.layersAndGroups) {
-      var layerOrGroup = this.layersAndGroups[i]
-      if (!(layerOrGroup instanceof LAYER) || layerOrGroup.codeIsNumeric()) {
-        var olLayerOrGroup = layerOrGroup.asLeafletLayers(layer_constructor)
-        mapped = mapped.concat(olLayerOrGroup)
-      }
-    }
-    mapped.reverse()
-    return mapped
-  }
-  TOC.prototype.asLeafletLayerTreeNode = function asLeafletLayerTreeNode(layer_constructor) {
-    var node = new L.Control.LayerTree.GroupNode(this.name)
-    for (var i in this.layersAndGroups) {
-      var layerOrGroup = this.layersAndGroups[i]
-      if (layerOrGroup.name == 'Info') {
-        continue
-      }
-      var layerOrGroupNode = layerOrGroup.asLeafletLayerTreeNode(layer_constructor)
-      node.pushChild(layerOrGroupNode)
-    }
-    return node
-  }
   return TOC
 })()
 
 var GROUP = (function () {
-  function GROUP(name, b) {
+  function GROUP(name, expanded) {
     this.element_type = "GROUP"
     this.name = name
-    this.b = b
+    this.expanded = expanded
     this.layersAndGroups = []
   }
   GROUP.prototype.addLayer = function addLayer(layer) {
@@ -85,57 +35,6 @@ var GROUP = (function () {
   GROUP.prototype.addGroup = function addGroup(group) {
     this.layersAndGroups.push(group)
     return group
-  }
-  GROUP.prototype.asOpenLayers = function asOpenLayers(source_constructor) {
-    var mapped = []
-    for (var i in this.layersAndGroups) {
-      var layerOrGroup = this.layersAndGroups[i]
-      if (!(layerOrGroup instanceof LAYER) || layerOrGroup.codeIsNumeric()) {
-        var olLayerOrGroup = layerOrGroup.asOpenLayers(source_constructor)
-        mapped.push(olLayerOrGroup)
-      }
-    }
-    var olGroup = new ol.layer.Group({
-      title: this.name,
-      layers: mapped
-    })
-    return olGroup
-  }
-  GROUP.prototype.asWmsLayerList = function asWmsLayerList(prefix) {
-    var layer_names = []
-    for (var i in this.layersAndGroups) {
-      var layerOrGroup = this.layersAndGroups[i]
-      if (!(layerOrGroup instanceof LAYER) || layerOrGroup.codeIsNumeric()) {
-        layer_names = layer_names.concat(layerOrGroup.asWmsLayerList(prefix))
-      }
-    }
-    return layer_names
-  }
-  GROUP.prototype.asLeafletLayers = function asLeafletLayers(layer_constructor) {
-    var mapped = []
-    for (var i in this.layersAndGroups) {
-      var layerOrGroup = this.layersAndGroups[i]
-      if (!(layerOrGroup instanceof LAYER) || layerOrGroup.codeIsNumeric()) {
-        var olLayerOrGroup = layerOrGroup.asLeafletLayers(layer_constructor)
-        mapped = mapped.concat(olLayerOrGroup)
-      }
-    }
-    mapped.reverse()
-    return mapped
-  }
-  GROUP.prototype.asLeafletLayerTreeNode = function asLeafletLayerTreeNode(layer_constructor) {
-    var node = new L.Control.LayerTree.GroupNode(this.name, {
-      collapsed: !this.b
-    })
-    for (var i in this.layersAndGroups) {
-      var layerOrGroup = this.layersAndGroups[i]
-      if (layerOrGroup.name == 'Info') {
-        continue
-      }
-      var layerOrGroupNode = layerOrGroup.asLeafletLayerTreeNode(layer_constructor)
-      node.pushChild(layerOrGroupNode)
-    }
-    return node
   }
   return GROUP
 })()
@@ -154,27 +53,16 @@ var LAYER = (function () {
   LAYER.prototype.codeIsNumeric = function codeIsNumeric() {
     return String(parseInt(this.code, 10)) == this.code
   }
-  LAYER.prototype.asOpenLayers = function asOpenLayers(source_constructor) {
-    var olSource = source_constructor(this.code)
-    var olLayer = new ol.layer.Image({
-      title: this.name,
-      visible: !!this.visible,
-      source: olSource
-    })
-    return olLayer
-  }
-  LAYER.prototype.asWmsLayerList = function asWmsLayerList(prefix) {
-    return [prefix + pad(parseInt(this.code, 10), 3)]
-  }
-  LAYER.prototype.asLeafletLayers = function asLeafletLayers(source_constructor) {
-    return [source_constructor(this)]
-  }
-  LAYER.prototype.asLeafletLayerTreeNode = function asLeafletLayerTreeNode(layer_constructor) {
-    var layer = layer_constructor(this)
-    var node = new L.Control.LayerTree.LayerNode(layer, this.name, {
-      controllable: !!this.visible
-    })
-    return node
+  LAYER.prototype.asWmsLayerName = function asWmsLayerName() {
+    function pad(num, size) {
+      var s = "000000000" + num;
+      return s.substr(s.length-size);
+    }
+    if (this.codeIsNumeric()) {
+      return "level" + pad(parseInt(this.code, 10), 3)
+    } else {
+      return this.code
+    }
   }
   return LAYER
 })()

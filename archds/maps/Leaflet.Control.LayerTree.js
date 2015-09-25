@@ -8,11 +8,7 @@ L.Control.LayerTree = L.Control.extend({
     position: 'topright',
     autoZIndex: true,
     // Hide the 'Map' top (group) node
-    hideTopmostNode: true,
-    // @TODO: tidy up how LayerTree deals with WMS layers
-    wmsUrl: "",
-    // @TODO: Compute wmsLayers
-    wmsLayers: ""
+    hideTopmostNode: true
   },
 
   initialize: function (layerTree, options) {
@@ -207,51 +203,12 @@ L.Control.LayerTree = L.Control.extend({
 
   _collapse: function () {
     L.DomUtil.removeClass(this._container, 'leaflet-control-layertree-expanded');
-  },
-
-  showFeatureInfoAt: function (latlng) {
-    var map = this._map
-    $.ajax({
-      url: this.getFeatureInfoUrl(latlng),
-      success: function (data, status, xhr) {
-        var data = typeof data === 'string' ? data : "ERROR"
-        L.popup({ maxWidth: 800})
-          .setLatLng(latlng)
-          .setContent(data)
-          .openOn(map)
-      },
-      error: function (xhr, status, error) {
-        console.log("ERROR, " + status + ", " + error + "")
-      }
-    })
-  },
-
-  getFeatureInfoUrl: function (latlng) {
-    var point = this._map.latLngToContainerPoint(latlng, this._map.getZoom()),
-        size = this._map.getSize(),
-        params = {
-          request: 'GetFeatureInfo',
-          service: 'WMS',
-          srs: 'EPSG:4326', //this._map.options.crs.code,
-          bbox: this._map.getBounds().toBBoxString(),
-          height: size.y,
-          width: size.x,
-          layers: this.options.wmsLayers,
-          query_layers: this.options.wmsLayers,
-          info_format: 'text/html',
-          x: point.x,
-          y: point.y,
-          i: point.x,
-          j: point.y
-        }
-
-    return this.options.wmsUrl + L.Util.getParamString(params, this.options.wmsUrl, true)
   }
-});
+})
 
-L.control.layerTree = function (baseLayers, overlays, options) {
-  return new L.Control.LayerTree(baseLayers, overlays, options);
-};
+L.control.layerTree = function (layerTree, options) {
+  return new L.Control.LayerTree(layerTree, options)
+}
 
 // LayerTree GroupNode and LayerNode options
 //
@@ -318,6 +275,16 @@ L.Control.LayerTree.GroupNode = L.Class.extend({
       }
     }
     return false
+  },
+
+  accumulate: function (callback) {
+    var accumulatee = callback(this)
+    var accumulator = (typeof accumulatee !== "undefined") ? [accumulatee] : []
+    for (var i = this.children.length - 1; i >= 0; i--) {
+      var child_accumulator = this.children[i].accumulate(callback)
+      accumulator = accumulator.concat(child_accumulator)
+    }
+    return accumulator
   }
 })
 
@@ -352,5 +319,10 @@ L.Control.LayerTree.LayerNode = L.Class.extend({
 
   find: function (filterFunction) {
     return filterFunction(this) ? this : false
+  },
+
+  accumulate: function (callback) {
+    var accumulatee = callback(this)
+    return (typeof accumulatee !== "undefined") ? [accumulatee] : []
   }
 })
