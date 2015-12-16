@@ -1,0 +1,218 @@
+var toc = new TOC(' ','All Layers',true,'swatch_layers.gif');
+
+var grpMap1 = toc.addGroup( new GROUP('Map 1 - Modern Parishes',false) );
+	grpMap1.addLayer( new LAYER('1','Akeley','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('2','Deanshanger','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('3','Leckhampstead','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('4','Lillingstone Dayrell','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('5','Lillingstone Lovell','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('6','Luffield Abbey','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('7','Old Stratford','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('8','Potterspury','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('9','Silverstone','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('10','Stowe','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('11','Whittlebury','outline_red.gif',null,null,true) );
+	grpMap1.addLayer( new LAYER('12','Wicken','outline_red.gif',null,null,true) );
+	
+	var grp1stOS = grpMap1.addGroup( new GROUP('1st ed OS',false) );
+		grp1stOS.addLayer( new LAYER('13','03sp63ne',null,null,null,true) );
+		grp1stOS.addLayer( new LAYER('14','25sp73ne',null,null,null,true) );
+		grp1stOS.addLayer( new LAYER('15','25sp74sw',null,null,null,true) );
+		grp1stOS.addLayer( new LAYER('16','03sp73ne',null,null,null,true) );
+		grp1stOS.addLayer( new LAYER('17','25sp73nw',null,null,null,true) );
+		grp1stOS.addLayer( new LAYER('18','03sp73nw',null,null,null,true) );
+		grp1stOS.addLayer( new LAYER('19','03sp74sw',null,null,null,true) );
+		grp1stOS.addLayer( new LAYER('20','25sp64ne',null,null,null,true) );
+		grp1stOS.addLayer( new LAYER('21','25sp64se',null,null,null,true) );
+		grp1stOS.addLayer( new LAYER('22','25sp74nw',null,null,null,true) );
+		grp1stOS.addLayer( new LAYER('23','25sp74se',null,null,null,true) );
+
+var grpMap2 = toc.addGroup( new GROUP('Map 2 - Geology and Hydrology',false) );
+	grpMap2.addLayer( new LAYER('24','WP outline','outline_black.gif') );
+	grpMap2.addLayer( new LAYER('25','Water Courses','outline_plain_blue.gif') );
+	grpMap2.addLayer( new LAYER('26','geo alluvium','outline_black_cyan.gif') );
+	grpMap2.addLayer( new LAYER('27','geo boulder','outline_black_blue.gif') );
+	grpMap2.addLayer( new LAYER('28','geo limestone','outline_black_sand.gif') );
+	grpMap2.addLayer( new LAYER('29','geo sand and gravel','outline_black_orange.gif') );
+
+var grpMap3 = toc.addGroup( new GROUP('Map 3 - Virtual Tour',false) );
+	grpMap3.addLayer( new LAYER('30','Photographs','symbol_smallcircle_yellow_black.gif') );
+
+	var grpModernParishes3 = grpMap3.addGroup( new GROUP('Modern Parishes',false) );
+		grpModernParishes3.addLayer( new LAYER('31','Akeley','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('32','Deanshanger','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('33','Leckhampstead','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('34','Lillingstone Dayrell','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('35','Lillingstone Lovell','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('36','Luffield Abbey','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('37','Old Stratford','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('38','Potterspury','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('39','Silverstone','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('40','Stowe','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('41','Whittlebury','outline_red.gif') );
+		grpModernParishes3.addLayer( new LAYER('42','Wicken','outline_red.gif') );
+
+var grpMap4 = toc.addGroup( new GROUP('Map 4 - Whittlewood Forest 1299',false) );
+	grpMap4.addLayer( new LAYER('43','WP outline','outline_black_sand.gif') );
+	grpMap4.addLayer( new LAYER('44','1299 Forest','plain_khaki.gif') );
+
+	  	
+var grpMap5 = toc.addGroup( new GROUP('Map 5 - Modern Settlement',false) );
+
+	grpMap5.addLayer( new LAYER('45','Modern Settlement','symbol_smallsquare_black.gif') );
+
+	var grpModernParishes5 = grpMap5.addGroup( new GROUP('Modern Parishes',false) );
+		grpModernParishes5.addLayer( new LAYER('46','Akeley','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('47','Deanshanger','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('48','Leckhampstead','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('49','Lillingstone Dayrell','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('50','Lillingstone Lovell','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('51','Luffield Abbey','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('52','Old Stratford','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('53','Potterspury','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('54','Silverstone','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('55','Stowe','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('56','Whittlebury','outline_red.gif') );
+		grpModernParishes5.addLayer( new LAYER('57','Wicken','outline_red.gif') );
+
+	grpMap5.addLayer( new LAYER('58','WP outline','outline_black.gif') );
+	grpMap5.addLayer( new LAYER('59','Water Courses','outline_plain_blue.gif') );
+	grpMap5.addLayer( new LAYER('60','geo alluvium','outline_black_cyan.gif') );
+	grpMap5.addLayer( new LAYER('61','geo boulder','outline_black_blue.gif') );
+	grpMap5.addLayer( new LAYER('62','geo limestone','outline_black_sand.gif') );
+	grpMap5.addLayer( new LAYER('63','geo sand and gravel','outline_black_orange.gif') );
+
+	  	
+var grpMap6 = toc.addGroup( new GROUP('Map 6 - Fieldwork',false) );
+
+	var grpOtherFieldwork = grpMap6.addGroup( new GROUP('Other Fieldwork',false) );
+		grpOtherFieldwork.addLayer( new LAYER('64','thp fields','outline_black_pink.gif') );
+		grpOtherFieldwork.addLayer( new LAYER('65','evaluations','symbol_smallcircle_rose_black.gif') );
+		grpOtherFieldwork.addLayer( new LAYER('66','rc ew','outline_black_pink.gif') );		
+		grpOtherFieldwork.addLayer( new LAYER('67','oau wakefield','outline_black_pink.gif') );		
+		grpOtherFieldwork.addLayer( new LAYER('68','fe woodland survey','outline_black_pink.gif') );		
+		grpOtherFieldwork.addLayer( new LAYER('69','eh stowe','outline_black_pink.gif') );		
+		
+	var grpWhittlewoodFieldwork = grpMap6.addGroup( new GROUP('Whittlewood Fieldwork and AP Evidence',false) );
+		grpWhittlewoodFieldwork.addLayer( new LAYER('70','churches','symbol_smalltriangle_darkgreen_black.gif') );
+		grpWhittlewoodFieldwork.addLayer( new LAYER('71','Trial Trenches','symbol_square_darkgreen_black.gif') );
+		grpWhittlewoodFieldwork.addLayer( new LAYER('72','Environmental Samples','symbol_smallcircle_darkgreen_black.gif') );		
+		grpWhittlewoodFieldwork.addLayer( new LAYER('73','Test Pits','symbol_bigcircle_brightgreen_black.gif') );		
+		grpWhittlewoodFieldwork.addLayer( new LAYER('74','Fieldwalking','outline_black_lightgreen.gif') );		
+		grpWhittlewoodFieldwork.addLayer( new LAYER('75','wp aps','plain_greyblue_grey.gif') );		
+		grpWhittlewoodFieldwork.addLayer( new LAYER('76','Woodland Survey','plain_green.gif') );		
+		
+		var grpModernParishes6 = grpWhittlewoodFieldwork.addGroup( new GROUP('Modern Parishes',false) );
+			grpModernParishes6.addLayer( new LAYER('77','Akeley','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('78','Deanshanger','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('79','Leckhampstead','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('80','Lillingstone Dayrell','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('81','Lillingstone Lovell','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('82','Luffield Abbey','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('83','Old Stratford','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('84','Potterspury','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('85','Silverstone','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('86','Stowe','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('87','Whittlebury','outline_red.gif') );
+			grpModernParishes6.addLayer( new LAYER('88','Wicken','outline_red.gif') );
+	  	
+	  	
+var grpMap7 = toc.addGroup( new GROUP('Map 7 - Parishes 1500',false) );
+
+	var grpParishes1500 = grpMap7.addGroup( new GROUP('Parishes 1500',false) );
+		grpParishes1500.addLayer( new LAYER('89','ak parish ii','outline_black_cyan.gif') );
+		grpParishes1500.addLayer( new LAYER('90','ld parish ii','outline_black_cyan.gif') );
+		grpParishes1500.addLayer( new LAYER('91','lu parish ii','outline_black_cyan.gif') );		
+		grpParishes1500.addLayer( new LAYER('92','wh parish ii','outline_black_pinkblue.gif') );		
+		grpParishes1500.addLayer( new LAYER('93','po parish ii','outline_black_pinkblue.gif') );
+		grpParishes1500.addLayer( new LAYER('94','pa parish ii','outline_black_pinkblue.gif') );		
+		grpParishes1500.addLayer( new LAYER('95','fu parish ii','outline_black_pinkblue.gif') );		
+		grpParishes1500.addLayer( new LAYER('96','ld detached parish ii','outline_black_cyan.gif') );
+		grpParishes1500.addLayer( new LAYER('97','ll parish ii','outline_black_sand.gif') );
+		grpParishes1500.addLayer( new LAYER('98','bo vill','outline_black_sand.gif') );		
+		grpParishes1500.addLayer( new LAYER('99','le parish ii','outline_black_cyan.gif') );		
+		grpParishes1500.addLayer( new LAYER('100','si parish ii','outline_black_pinkblue.gif') );		
+		grpParishes1500.addLayer( new LAYER('101','st parish ii','outline_black_cyan.gif') );	  	
+		grpParishes1500.addLayer( new LAYER('102','wyh parish ii','outline_black_pinkblue.gif') );		
+		grpParishes1500.addLayer( new LAYER('103','wyd parish ii','outline_black_pinkblue.gif') );		
+ 	  	
+var grpMap8 = toc.addGroup( new GROUP('Map 8 - Whittlewood 1608',false) );
+
+	
+	grpMap8.addLayer( new LAYER('104','de parish 1610','showlegened.gif','de_parish.gif') );
+	grpMap8.addLayer( new LAYER('105','pa parish 1610','showlegened.gif','pa_parish.gif') );
+	grpMap8.addLayer( new LAYER('106','po parish 1610','showlegened.gif','po_parish.gif') );		
+	grpMap8.addLayer( new LAYER('107','si parish 1610','showlegened.gif','si_parish.gif') );		
+	grpMap8.addLayer( new LAYER('108','wh parish 1610','showlegened.gif','wh_parish.gif') );
+	grpMap8.addLayer( new LAYER('109','yg parish 1610','showlegened.gif','yg_parish.gif') );		
+	  	
+var grpMap9 = toc.addGroup( new GROUP('Map 9 - Enclosure',false) );
+
+	var grpModernParishes9 = grpMap9.addGroup( new GROUP('Modern Parishes',false) );
+		grpModernParishes9.addLayer( new LAYER('110','Akeley','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('111','Deanshanger','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('112','Leckhampstead','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('113','Lillingstone Dayrell','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('114','Lillingstone Lovell','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('115','Luffield Abbey','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('116','Old Stratford','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('117','Potterspury','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('118','Silverstone','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('119','Stowe','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('120','Whittlebury','outline_red.gif') );
+		grpModernParishes9.addLayer( new LAYER('121','Wicken','outline_red.gif') );
+	  	
+	var grpEnclosedLandscape9 = grpMap9.addGroup( new GROUP('Enclosed Landscape',false) );
+		grpEnclosedLandscape9.addLayer( new LAYER('122','ak parish 1794','outline_black.gif') );
+		grpEnclosedLandscape9.addLayer( new LAYER('123','ld 1611 ll','outline_black.gif') );
+		grpEnclosedLandscape9.addLayer( new LAYER('124','Le hist parish','outline_black.gif') );
+		grpEnclosedLandscape9.addLayer( new LAYER('125','Ll hist parish','outline_black.gif') );
+		grpEnclosedLandscape9.addLayer( new LAYER('126','po parish 1727','outline_black.gif') );
+		grpEnclosedLandscape9.addLayer( new LAYER('127','st parish tithe','outline_black.gif') );
+		grpEnclosedLandscape9.addLayer( new LAYER('128','wi parish 1717','outline_black.gif') );
+ 	
+	var grpAncientEnclosure9 = grpMap9.addGroup( new GROUP('Ancient Enclosure',false) );
+		grpAncientEnclosure9.addLayer( new LAYER('129','ak anc encl ll','outline_black_pink.gif') );
+		grpAncientEnclosure9.addLayer( new LAYER('130','ld 1611 ll','outline_black_pink.gif') );
+		grpAncientEnclosure9.addLayer( new LAYER('131','st parish tithe','outline_black_pink.gif') );
+		grpAncientEnclosure9.addLayer( new LAYER('132','po parish 1727','outline_black_pink.gif') );
+		grpAncientEnclosure9.addLayer( new LAYER('133','si parish 1610','outline_black_pink.gif') );
+		grpAncientEnclosure9.addLayer( new LAYER('134','wh parish 1610','outline_black_pink.gif') );
+		grpAncientEnclosure9.addLayer( new LAYER('135','wi parish 1717','outline_black_pink.gif') );
+	  	
+	var grpParlimentaryEnclosure9 = grpMap9.addGroup( new GROUP('Parlimentary Enclosure',false) );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('136','ak parl enc ll','outline_black_greyblue.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('137','de parish enclosure 1787','outline_black_greyblue.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('138','pa parish enclosure 1787','outline_black_greyblue.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('139','pa parish tithe','outline_black_greyblue.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('140','Le hist parish','outline_black_greyblue.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('141','Ll hist parish','outline_black_greyblue.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('142','wi parl enc ll','outline_black_greyblue.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('143','wi parish 1717','showlegened.gif','wi_parish2.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('144','de parish 1610','showlegened.gif','de_parish2.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('145','pa parish 1610','showlegened.gif','pa_parish2.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('146','po parish 1610','showlegened.gif','po_parish2.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('147','si parish 1610','showlegened.gif','si_parish2.gif') );
+		grpParlimentaryEnclosure9.addLayer( new LAYER('148','wh parish 1610','showlegened.gif','wh_parish2.gif') );
+
+	  	
+var grpMap10 = toc.addGroup( new GROUP('Map 10 - Place-names',false) );
+
+	var grpTopographicNames10 = grpMap10.addGroup( new GROUP('Topographic names',false) );
+		grpTopographicNames10.addLayer( new LAYER('149','feld','symbol_square_lightblue_black.gif') );
+		grpTopographicNames10.addLayer( new LAYER('150','leah','symbol_square_purple_black.gif') );
+		grpTopographicNames10.addLayer( new LAYER('151','tun','symbol_square_yellow_black.gif') );
+	  	
+	var grpPersonalNames10 = grpMap10.addGroup( new GROUP('Personal/non-personal names',false) );
+		grpPersonalNames10.addLayer( new LAYER('152','non-personal names','symbol_bigsquare_blackspot_red_black.gif') );
+		grpPersonalNames10.addLayer( new LAYER('153','personal names','symbol_bigcircle_blackspot_darkgreen_black.gif') );
+
+	grpMap10.addLayer( new LAYER('154','WP outline','outline_black_lightgreen.gif') );
+	  	
+	  	
+var grpInfo = toc.addGroup( new GROUP('Info',null) );
+		grpInfo.addLayer( new LAYER('Scale','Scalebar',null) );	
+		grpInfo.addLayer( new LAYER('Arrow','Arrow',null) );
+
+
+var iActiveLayerName = '1';

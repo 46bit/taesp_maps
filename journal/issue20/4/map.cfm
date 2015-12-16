@@ -2,12 +2,13 @@
 <html>
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/archds/maps/leaflet-0.7.5/leaflet.css">
-  <link rel="stylesheet" href="/archds/maps/Leaflet.GraphicScale.min.css">
-  <link rel="stylesheet" href="/archds/maps/leaflet.toolbar.css">
-  <link rel="stylesheet" href="/archds/maps/Leaflet.Control.LayerTree.css">
-  <link rel="stylesheet" href="/archds/maps/leaflet.contextmenu.css">
-  <link rel="stylesheet" href="/archds/maps/Leaflet-MiniMap/dist/Control.MiniMap.min.css">
+  <link rel="stylesheet" href="archds-leaflet-mapping/libs/leaflet-0.7.5/leaflet.css">
+  <link rel="stylesheet" href="archds-leaflet-mapping/libs/Leaflet.GraphicScale.min.css">
+  <link rel="stylesheet" href="archds-leaflet-mapping/libs/leaflet.toolbar.css">
+  <link rel="stylesheet" href="archds-leaflet-mapping/libs/Leaflet.Control.LayerTree.css">
+  <link rel="stylesheet" href="archds-leaflet-mapping/libs/leaflet.contextmenu.css">
+  <link rel="stylesheet" href="archds-leaflet-mapping/libs/Leaflet-MiniMap/dist/Control.MiniMap.min.css">
+  <link rel="stylesheet" href="archds-leaflet-mapping/libs/Leaflet.print/dist/leaflet.print.css">
   <style>
   body {
     background: #fff;
@@ -53,19 +54,20 @@
     <p style="font-size:smaller;">This interactive map feature is best viewed with Internet Explorer or Mozilla Firefox.</p>
   </div>
 
-  <script src="/archds/maps/jquery-1.11.3.min.js"></script>
-  <script src="/archds/deps/proj4-2.3.3.js"></script>
-  <script src="/archds/deps/uri.min.js"></script>
-  <script src="/archds/deps/toc2json/api_openlayers.js"></script>
-  <script src="/archds/maps/leaflet-0.7.5/leaflet.js"></script>
-  <script src="/archds/maps/L.tileLayer.BetterWMS.js"></script>
-  <script src="/archds/maps/Leaflet.GraphicScale.min.js"></script>
-  <script src="/archds/maps/leaflet.toolbar.js"></script>
-  <script src="/archds/maps/Leaflet.fullscreen.js"></script>
-  <script src="/archds/maps/Leaflet.Control.LayerTree.js"></script>
-  <script src="/archds/maps/Leaflet.Control.TocWmsLayerTree.js"></script>
-  <script src="/archds/maps/leaflet.contextmenu.js"></script>
-  <script src="/archds/maps/Leaflet-MiniMap/dist/Control.MiniMap.min.js"></script>
+  <script src="archds-leaflet-mapping/libs/jquery-1.11.3.min.js"></script>
+  <script src="archds-leaflet-mapping/libs/proj4-2.3.3.js"></script>
+  <script src="archds-leaflet-mapping/libs/uri.min.js"></script>
+  <script src="archds-leaflet-mapping/libs/toc.js"></script>
+  <script src="archds-leaflet-mapping/libs/leaflet-0.7.5/leaflet.js"></script>
+  <script src="archds-leaflet-mapping/libs/L.tileLayer.BetterWMS.js"></script>
+  <script src="archds-leaflet-mapping/libs/Leaflet.GraphicScale.min.js"></script>
+  <script src="archds-leaflet-mapping/libs/leaflet.toolbar.js"></script>
+  <script src="archds-leaflet-mapping/libs/Leaflet.fullscreen.js"></script>
+  <script src="archds-leaflet-mapping/libs/Leaflet.Control.LayerTree.js"></script>
+  <script src="archds-leaflet-mapping/libs/Leaflet.Control.TocWmsLayerTree.js"></script>
+  <script src="archds-leaflet-mapping/libs/leaflet.contextmenu.js"></script>
+  <script src="archds-leaflet-mapping/libs/Leaflet-MiniMap/dist/Control.MiniMap.min.js"></script>
+  <script src="archds-leaflet-mapping/libs/Leaflet.print/dist/leaflet.print.js"></script>
 
   <script>
   function pad(num, size) {
@@ -115,7 +117,7 @@
     //        Set bounding box to ceminx,ceminy,cemaxx,cemaxy
     // @TODO: Render map as below.
 
-    toc_url = "/journal/issue20/4/archds-maps-toc/" + toc_footnote + ".toc"
+    toc_url = "/journal/issue20/4/archds-leaflet-mapping/tocs/" + toc_footnote + ".toc"
 
     $.get(toc_url, function (toc_js) {
       eval(toc_js)
@@ -164,7 +166,7 @@
     }
 
     layerTree = L.control.tocWmsLayerTree(toc, {
-      tocNameBlacklist: {
+      tocCaptionBlacklist: {
         "Info": true,
         "Background Map DEM": true
       },
@@ -194,11 +196,11 @@
         callback: centerMap
       }, {
         text: 'Zoom in',
-        icon: '/archds/maps/Leaflet.contextmenu/examples/images/zoom-in.png',
+        icon: 'archds-leaflet-mapping/libs/Leaflet.contextmenu/examples/images/zoom-in.png',
         callback: zoomIn
       }, {
         text: 'Zoom out',
-        icon: '/archds/maps/Leaflet.contextmenu/examples/images/zoom-out.png',
+        icon: 'archds-leaflet-mapping/libs/Leaflet.contextmenu/examples/images/zoom-out.png',
         callback: zoomOut
       }]
     })
@@ -225,19 +227,16 @@
       }
     })
 
-    var print = L.ToolbarAction.extend({
-      options: {
-        toolbarIcon: {
-          html: '<i class="fa fa-print fa-fw fa-lg"></i>',
-          tooltip: "Print the map",
-        className: 'leaflet-draw-toolbar'
-        }
-      },
-      addHooks: function () {
-        // @TODO: Use GeoServer to print current map. Make sure it has a white
-        // background(?).
-      }
-    })
+    var printProvider = L.print.provider({
+       method: 'POST',
+       url: 'http://localhost:8080/geoserver/pdf',
+       autoLoad: true,
+       dpi: 150
+    });
+    var printControl = L.control.print({
+       provider: printProvider
+    });
+    map.addControl(printControl)
 
     var fullscreen = L.ToolbarAction.extend({
       options: {
@@ -262,19 +261,35 @@
       }
     })
 
+    var key = L.ToolbarAction.extend({
+      options: {
+        toolbarIcon: {
+          html: '<i class="fa fa-info fa-fw fa-lg"></i>',
+          tooltip: "Map key",
+        className: 'leaflet-draw-toolbar'
+        }
+      },
+      addHooks: function () {
+        L.popup()
+          .setLatLng(map.getCenter())
+          .setContent("<a href='/journal/issue20/4/user_guide.htm' target='_blank'>User Guide</a><br><a href='/journal/issue20/4/bldgcodes.htm' target='_blank'>Building codes</a><br><a href='/journal/issue20/4/codeslist.htm' target='_blank'>Geomorphology codes</a><br><a href='/journal/issue20/4/lithcodes.htm' target='_blank'>Lithic codes</a><br><a href='/journal/issue20/4/metalcodes.htm' target='_blank'>Archaeometallurgy codes</a><br><a href='/journal/issue20/4/potcodes.htm' target='_blank'>Pottery codes</a><br><a href='/journal/issue20/4/speccodes.htm' target='_blank'>Special Finds codes</a><br><a href='/journal/issue20/4/sucodes.htm' target='_blank'>Survey Unit codes</a><br><a href='/journal/issue20/4/help.html' target='_blank'>Interface help</a>")
+          .openOn(map)
+      }
+    })
+
     var toolbar = new L.Toolbar.Control({
       position: 'topleft',
-      actions: [home, print, fullscreen]
+      actions: [home, key, fullscreen]
     }).addTo(map)
 
-    var contourWmsLayer = L.tileLayer.wms(geoserver_url + "/wms", {
-      layers: "taesp_ahrc_2007:level336,taesp_ahrc_2007:level278,taesp_ahrc_2007:level274,taesp_ahrc_2007:level275",
+    var minimapWmsLayer = L.tileLayer.wms(geoserver_url + "/wms", {
+      layers: "taesp_ahrc_2007:336,taesp_ahrc_2007:278,taesp_ahrc_2007:274,taesp_ahrc_2007:275",
       format: "image/png",
       transparent: true,
       crs: L.CRS.EPSG3857
     })
-    var minimap = new L.Control.MiniMap(contourWmsLayer, {
-      zoomLevelOffset: -3,
+    var minimap = new L.Control.MiniMap(minimapWmsLayer, {
+      zoomLevelOffset: -5,
       toggleDisplay: true,
       aimingRectOptions: {
         color: "#ffeedd"

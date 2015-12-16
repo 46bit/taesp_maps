@@ -1,0 +1,59 @@
+var toc = new TOC(' ','Map 11 - 400-850',true,'swatch_layers.gif');
+
+var grpMap11 = toc.addGroup( new GROUP('400-850',true) );
+	grpMap11.addLayer( new LAYER('155','ak tp','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('156','le tp pottery','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('157','si tp pottery','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('158','wh tp','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('159','ak14 pottery no','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('160','le1 pottery','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('161','le3 pottery no','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('162','le5 pottery no','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('163','le7 pottery no','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('164','le9 pottery no','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('165','le11 pottery','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('166','le12 pottery no','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('167','le14 pottery','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('168','le18 pottery ll','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('169','ld1 pottery no','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('170','st3 pottery no','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('171','wi6 pottery no','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('172','wi11 pottery','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('173','wi21 pottery','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('174','wi22 pottery','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('175','wi24 pottery','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('176','wi25 pottery no','null.gif',null,null,true) );
+	grpMap11.addLayer( new LAYER('177','wi26 pottery ll','null.gif',null,null,true) );
+
+var grpModernParishes = toc.addGroup( new GROUP('Modern Parishes',false) );
+	grpModernParishes.addLayer( new LAYER('1','Akeley','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('2','Deanshanger','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('3','Leckhampstead','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('4','Lillingstone Dayrell','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('5','Lillingstone Lovell','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('6','Luffield Abbey','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('7','Old Stratford','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('8','Potterspury','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('9','Silverstone','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('10','Stowe','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('11','Whittlebury','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('12','Wicken','outline_red.gif',null,null,true) );
+
+
+var grpOSMaps = toc.addGroup( new GROUP('1st Edition OS',false) );
+	grpOSMaps.addLayer( new LAYER('13','03sp63ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('14','25sp73ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('15','25sp74sw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('16','03sp73ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('17','25sp73nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('18','03sp73nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('19','03sp74sw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('20','25sp64ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('21','25sp64se',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('22','25sp74nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('23','25sp74se',null,null,null) );
+
+var grpInfo = toc.addGroup( new GROUP('Info',null) );
+		grpInfo.addLayer( new LAYER('Scale','Scalebar',null,null,null,true) );
+		grpInfo.addLayer( new LAYER('Arrow','Arrow',null,null,null,true) );
+

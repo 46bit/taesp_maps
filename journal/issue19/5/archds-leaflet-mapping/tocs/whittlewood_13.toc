@@ -1,0 +1,85 @@
+var toc = new TOC(' ','Map 13 - Pre-village nuclei',true,'swatch_layers.gif');
+
+var grpMap13 = toc.addGroup( new GROUP('Pre-village nuclei',true) );
+	var grp950_1100 = grpMap13.addGroup( new GROUP('950-1100',false) );
+		grp950_1100.addLayer( new LAYER('202','le3 pottery no','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('203','le5 pottery no','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('204','le15 pottery no','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('205','ld1 pottery no','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('206','st3 pottery no','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('207','wi27 pottery ll','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('208','ak tp','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('209','da tp pottery','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('210','le tp pottery','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('211','ll tp pottery','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('212','si tp pottery','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('213','wi tp pottery','null.gif',null,null,false) );
+		grp950_1100.addLayer( new LAYER('214','wh tp','null.gif',null,null,false) );
+
+	var grp800_950 = grpMap13.addGroup( new GROUP('800-950',false) );
+		grp800_950.addLayer( new LAYER('215','wi21 pottery','null.gif',null,null,false) );
+		grp800_950.addLayer( new LAYER('216','le tp pottery','null.gif',null,null,false) );
+		grp800_950.addLayer( new LAYER('217','si tp pottery','null.gif',null,null,false) );
+		grp800_950.addLayer( new LAYER('218','wi tp pottery','null.gif',null,null,false) );
+		grp800_950.addLayer( new LAYER('219','wh tp','null.gif',null,null,false) );
+		grp800_950.addLayer( new LAYER('220','le5 pottery no','null.gif',null,null,false) );
+		grp800_950.addLayer( new LAYER('221','le9 pottery no','null.gif',null,null,false) );
+		grp800_950.addLayer( new LAYER('222','ld1 pottery no','null.gif',null,null,false) );
+		grp800_950.addLayer( new LAYER('223','ll7 pottery no','null.gif',null,null,false) );
+
+	var grpPre850 = grpMap13.addGroup( new GROUP('Pre-850',false) );
+		grpPre850.addLayer( new LAYER('224','ak tp','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('225','le tp pottery','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('226','si tp pottery','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('227','wh tp','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('228','ak14 pottery no','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('229','le1 pottery','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('230','le3 pottery no','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('231','le5 pottery no','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('232','le7 pottery no','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('233','le9 pottery no','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('234','le11 pottery','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('235','le12 pottery no','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('236','le14 pottery','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('237','le18 pottery ll','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('238','ld1 pottery no','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('239','st3 pottery no','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('240','wi6 pottery no','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('241','wi11 pottery','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('242','wi21 pottery','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('243','wi22 pottery','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('244','wi24 pottery','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('245','wi25 pottery','null.gif',null,null,false) );
+		grpPre850.addLayer( new LAYER('246','wi26 pottery ll','null.gif',null,null,false) );
+
+var grpModernParishes = toc.addGroup( new GROUP('Modern Parishes',false) );
+	grpModernParishes.addLayer( new LAYER('1','Akeley','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('2','Deanshanger','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('3','Leckhampstead','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('4','Lillingstone Dayrell','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('5','Lillingstone Lovell','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('6','Luffield Abbey','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('7','Old Stratford','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('8','Potterspury','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('9','Silverstone','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('10','Stowe','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('11','Whittlebury','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('12','Wicken','outline_red.gif',null,null,true) );
+
+var grpOSMaps = toc.addGroup( new GROUP('1st Edition OS',false) );
+	grpOSMaps.addLayer( new LAYER('13','03sp63ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('14','25sp73ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('15','25sp74sw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('16','03sp73ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('17','25sp73nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('18','03sp73nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('19','03sp74sw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('20','25sp64ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('21','25sp64se',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('22','25sp74nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('23','25sp74se',null,null,null) );
+
+var grpInfo = toc.addGroup( new GROUP('Info',null) );
+		grpInfo.addLayer( new LAYER('Scale','Scalebar',null,null,null,true) );
+		grpInfo.addLayer( new LAYER('Arrow','Arrow',null,null,null,true) );
+

@@ -1,0 +1,51 @@
+var toc = new TOC(' ','Map 19 - 1400-1550',true,'swatch_layers.gif');
+
+var grpMap19 = toc.addGroup( new GROUP('1400-1550',true) );
+	grpMap19.addLayer( new LAYER('828','ak tp','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('829','da tp pottery','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('830','le tp pottery','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('831','ll tp pottery','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('832','po tp pottery','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('833','si tp pottery','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('834','wi tp pottery','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('835','wh tp','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('836','ld1 pottery no','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('837','le3 pottery no','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('838','le5 pottery no','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('839','le9 pottery no','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('840','wi13 pottery','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('841','wi14 pottery','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('842','wi15 pottery','null.gif',null,null,true) );
+	grpMap19.addLayer( new LAYER('843','wi19 pottery','null.gif',null,null,true) );
+
+var grpModernParishes = toc.addGroup( new GROUP('Modern Parishes',false) );
+	grpModernParishes.addLayer( new LAYER('1','Akeley','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('2','Deanshanger','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('3','Leckhampstead','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('4','Lillingstone Dayrell','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('5','Lillingstone Lovell','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('6','Luffield Abbey','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('7','Old Stratford','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('8','Potterspury','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('9','Silverstone','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('10','Stowe','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('11','Whittlebury','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('12','Wicken','outline_red.gif',null,null,true) );
+
+var grpOSMaps = toc.addGroup( new GROUP('1st Edition OS',false) );
+	grpOSMaps.addLayer( new LAYER('13','03sp63ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('14','25sp73ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('15','25sp74sw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('16','03sp73ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('17','25sp73nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('18','03sp73nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('19','03sp74sw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('20','25sp64ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('21','25sp64se',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('22','25sp74nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('23','25sp74se',null,null,null) );
+
+var grpInfo = toc.addGroup( new GROUP('Info',null) );
+		grpInfo.addLayer( new LAYER('Scale','Scalebar',null,null,null,true) );
+		grpInfo.addLayer( new LAYER('Arrow','Arrow',null,null,null,true) );
+

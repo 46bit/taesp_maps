@@ -103,7 +103,7 @@ L.Control.TocWmsLayerTree = L.Control.LayerTree.extend({
         }
 
         var popupContent = $("<div>")
-        $("<h2>").text("Features in the vicinity of " + latlng).appendTo(popupContent)
+        $("<h2>").text("Features near " + latlng).appendTo(popupContent)
         var layersContainer = $("<div>").appendTo(popupContent)
 
         for (var featureInfoLayerWmsName in featuresBinnedByLayer) {
@@ -113,7 +113,7 @@ L.Control.TocWmsLayerTree = L.Control.LayerTree.extend({
           // Prepend to make the uppermost layers appear on top.
           var layerContainer = $("<div>").prependTo(layersContainer)
 
-          $("<h3>").html(layerTreeLayer.name + " (" + featureInfoLayerWmsName + ")").appendTo(layerContainer)
+          $("<h3>").css({margin: "10px 0 0 0"}).html(layerTreeLayer.name + " (layer " + featureInfoLayerWmsName + ")").appendTo(layerContainer)
 
           var headings = []
           for (var i in layerFeatures) {

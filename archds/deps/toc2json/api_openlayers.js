@@ -54,15 +54,7 @@ var LAYER = (function () {
     return String(parseInt(this.code, 10)) == this.code
   }
   LAYER.prototype.asWmsLayerName = function asWmsLayerName() {
-    function pad(num, size) {
-      var s = "000000000" + num;
-      return s.substr(s.length-size);
-    }
-    if (this.codeIsNumeric()) {
-      return "level" + pad(parseInt(this.code, 10), 3)
-    } else {
-      return this.code
-    }
+    return this.code
   }
   return LAYER
 })()

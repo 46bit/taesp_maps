@@ -1,0 +1,52 @@
+var toc = new TOC(' ','Map 6 - Fieldwork',true,'swatch_layers.gif');
+
+var grpMap6 = toc.addGroup( new GROUP('Fieldwork',true) );
+	grpMap6.addLayer( new LAYER('Other Fieldwork','Other Fieldwork','outline_black_pink.gif',null,null,null,true));
+	/*var grpOtherFieldwork = grpMap6.addGroup( new GROUP('Other Fieldwork',true) );
+		grpOtherFieldwork.addLayer( new LAYER('64','thp fields','outline_black_pink.gif',null,null,true) );
+		grpOtherFieldwork.addLayer( new LAYER('65','evaluations','symbol_smallcircle_rose_black.gif',null,null,true) );
+		grpOtherFieldwork.addLayer( new LAYER('66','rc ew','outline_black_pink.gif',null,null,true) );
+		grpOtherFieldwork.addLayer( new LAYER('67','oau wakefield','outline_black_pink.gif',null,null,true) );
+		grpOtherFieldwork.addLayer( new LAYER('68','fe woodland survey','outline_black_pink.gif',null,null,true) );
+		grpOtherFieldwork.addLayer( new LAYER('69','eh stowe','outline_black_pink.gif',null,null,true) );*/
+
+	var grpWhittlewoodFieldwork = grpMap6.addGroup( new GROUP('Whittlewood Fieldwork and AP Evidence',true) );
+		grpWhittlewoodFieldwork.addLayer( new LAYER('70','churches','symbol_smalltriangle_darkgreen_black.gif',null,null,true) );
+		grpWhittlewoodFieldwork.addLayer( new LAYER('71','Trial Trenches','symbol_square_darkgreen_black.gif',null,null,true) );
+		grpWhittlewoodFieldwork.addLayer( new LAYER('72','Environmental Samples','symbol_smallcircle_darkgreen_black.gif',null,null,true) );
+		grpWhittlewoodFieldwork.addLayer( new LAYER('73','Test Pits','symbol_bigcircle_brightgreen_black.gif',null,null,true) );
+		grpWhittlewoodFieldwork.addLayer( new LAYER('74','Fieldwalking','outline_black_lightgreen.gif',null,null,true) );
+		grpWhittlewoodFieldwork.addLayer( new LAYER('75','wp aps','plain_greyblue_grey.gif',null,null,true) );
+		grpWhittlewoodFieldwork.addLayer( new LAYER('76','Woodland Survey','plain_green.gif',null,null,true) );
+
+var grpModernParishes = toc.addGroup( new GROUP('Modern Parishes',false) );
+	grpModernParishes.addLayer( new LAYER('1','Akeley','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('2','Deanshanger','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('3','Leckhampstead','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('4','Lillingstone Dayrell','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('5','Lillingstone Lovell','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('6','Luffield Abbey','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('7','Old Stratford','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('8','Potterspury','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('9','Silverstone','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('10','Stowe','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('11','Whittlebury','outline_red.gif',null,null,true) );
+	grpModernParishes.addLayer( new LAYER('12','Wicken','outline_red.gif',null,null,true) );
+
+var grpOSMaps = toc.addGroup( new GROUP('1st Edition OS',false) );
+	grpOSMaps.addLayer( new LAYER('13','03sp63ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('14','25sp73ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('15','25sp74sw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('16','03sp73ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('17','25sp73nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('18','03sp73nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('19','03sp74sw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('20','25sp64ne',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('21','25sp64se',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('22','25sp74nw',null,null,null) );
+	grpOSMaps.addLayer( new LAYER('23','25sp74se',null,null,null) );
+
+var grpInfo = toc.addGroup( new GROUP('Info',null) );
+		grpInfo.addLayer( new LAYER('Scale','Scalebar',null,null,null,true) );
+		grpInfo.addLayer( new LAYER('Arrow','Arrow',null,null,null,true) );
+
